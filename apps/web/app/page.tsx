@@ -39,7 +39,7 @@ export default function Home() {
     </section>
 
     <section aria-labelledby="moment" className="mt-24 rounded-[28px] bg-paper-deep/70 p-6 md:p-12">
-      <Reveal><p className="micro text-brass">Fictional seafarer. Real mechanism.</p>
+      <Reveal><p className="micro text-brass-ink">Fictional seafarer. Real mechanism.</p>
         <h2 id="moment" className="display h2 mt-2">Seven months into a nine-month contract.</h2>
         <blockquote className="serif mt-6 max-w-3xl text-4xl leading-tight text-deep-water">His phone slipped out of his coverall pocket and went over the side. His savings were on it.</blockquote></Reveal>
       <div className="mt-8 grid gap-6 md:grid-cols-3">
@@ -52,7 +52,7 @@ export default function Home() {
       <h2 id="how" className="display h2">How a rescue works</h2>
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {[[LifeboatCard, '1', 'Lifeboat Card', 'Ramon names his crew once and prints a wallet-size card. The card alone cannot move a cent.'], [SignalFlagK, '2', 'The call phrase', 'Guardians hear four words on a call and type them before approving. A scam link shows different words.'], [HourglassAnchor, '3', 'The safety delay', 'Two guardians approve, then the chain makes everyone wait. Ramon can stop any attempt he did not start.'], [AnchorRope, '4', 'Bring it home', 'One signature from the new phone moves everything to the new key.']].map(([Icon, n, t, b]: any) => (
-          <Reveal key={t}><GlowCard className="h-full p-6"><Icon className="mx-auto h-24 w-24" /><p className="micro mt-3 text-brass">Step {n}</p><h3 className="display h3 mt-1">{t}</h3><p className="mt-2 text-sm text-ink/90">{b}</p></GlowCard></Reveal>))}
+          <Reveal key={t}><GlowCard className="h-full p-6"><Icon className="mx-auto h-24 w-24" /><p className="micro mt-3 text-brass-ink">Step {n}</p><h3 className="display h3 mt-1">{t}</h3><p className="mt-2 text-sm text-ink/90">{b}</p></GlowCard></Reveal>))}
       </div>
     </section>
 
@@ -60,7 +60,7 @@ export default function Home() {
       <h2 id="home" className="display h2">What comes home</h2>
       <p className="mt-2 max-w-2xl text-ink/90">One signature, three kinds of savings, from three different parts of Portaldot.</p>
       <div className="relative mt-8 grid gap-5 md:grid-cols-3">
-        {[['tPOT', 'Native coin', 'Moved by the balances pallet.'], ['kUSD', 'Native asset', 'Moved by the assets pallet. Our test dollar (asset 20261104).'], ['Allotment savings', 'Solidity contract', 'Paid out by the vault, which sees the old address as the sender.']].map(([t, k, d]) => (<Reveal key={t}><GlowCard className="h-full p-6"><Lifebuoy className="h-14 w-14" /><h3 className="display h3 mt-3">{t}</h3><p className="micro text-brass">{k}</p><p className="mt-2 text-sm">{d}</p></GlowCard></Reveal>))}
+        {[['tPOT', 'Native coin', 'Moved by the balances pallet.'], ['kUSD', 'Native asset', 'Moved by the assets pallet. Our test dollar (asset 20261104).'], ['Allotment savings', 'Solidity contract', 'Paid out by the vault, which sees the old address as the sender.']].map(([t, k, d]) => (<Reveal key={t}><GlowCard className="h-full p-6"><Lifebuoy className="h-14 w-14" /><h3 className="display h3 mt-3">{t}</h3><p className="micro text-brass-ink">{k}</p><p className="mt-2 text-sm">{d}</p></GlowCard></Reveal>))}
       </div>
       <p className="mt-5 text-sm text-ink/80">Moved in one transaction with <code className="mono">utility.force_batch</code>, so one stuck item never blocks the rest.</p>
     </section>
@@ -68,21 +68,21 @@ export default function Home() {
     <section aria-labelledby="why" className="mt-24 rounded-[28px] bg-deep-water p-6 text-paper md:p-12">
       <h2 id="why" className="display h2">Why only Portaldot</h2>
       <div className="mt-6 grid gap-6 md:grid-cols-2">
-        <div className="rounded-2xl border border-white/20 p-5"><p className="micro text-brass">Other EVM chains</p><p className="mt-2">A MetaMask address is the key. No key, no wallet. Funds sit at an address nobody can sign for.</p></div>
-        <div className="rounded-2xl border border-lifejacket/60 p-5"><p className="micro text-lifejacket">Portaldot V3</p><p className="mt-2">Every MetaMask address has a native twin account. The twin can use the chain&apos;s own Recovery pallet, so the people it trusts can act as it after a delay. We measured this on testnet; <Link className="underline underline-offset-4" href="/proof">verify it yourself</Link>.</p></div>
+        <div className="rounded-2xl border border-white/20 p-5"><p className="micro text-brass-light">Other EVM chains</p><p className="mt-2">A MetaMask address is the key. No key, no wallet. Funds sit at an address nobody can sign for.</p></div>
+        <div className="rounded-2xl border border-lifejacket/60 p-5"><p className="micro text-lifejacket-light">Portaldot V3</p><p className="mt-2">Every MetaMask address has a native twin account. The twin can use the chain&apos;s own Recovery pallet, so the people it trusts can act as it after a delay. We measured this on testnet; <Link className="underline underline-offset-4" href="/proof">verify it yourself</Link>.</p></div>
       </div>
-      <p className="mt-6 text-sm text-paper/80">Delete Portaldot and step 5 fails: there is nothing for the guardians to approve.</p>
+      <p className="mt-6 text-sm text-paper">Delete Portaldot and step 5 fails: there is nothing for the guardians to approve.</p>
     </section>
 
     <section aria-labelledby="stop" className="mt-24 grid items-center gap-8 md:grid-cols-2">
       <div><h2 id="stop" className="display h2">Stop a thief</h2><p className="mt-3">Ramon gets one message when someone starts an attempt on his wallet. If it was not his crew, he can stop it or punish the starter before the delay ends.</p>
         <p className="mt-2 text-sm text-ink/80">Honest limit: on this testnet the security deposit is zero, so a bad starter risks only fees. The chain still requires two guardians and the delay.</p></div>
-      <GlowCard className="mx-auto w-full max-w-sm p-5"><PhoneOverboard className="mx-auto h-20 w-20" /><p className="mt-2 text-sm">An attempt started on your wallet by 5Hf3...gh. Finishable in about 60 seconds.</p><div className="mt-3 flex gap-2"><span className="rounded-lg bg-lifejacket px-3 py-2 text-sm font-semibold text-white">Stop</span><span className="rounded-lg border border-ink/30 px-3 py-2 text-sm">Slash</span></div></GlowCard>
+      <GlowCard className="mx-auto w-full max-w-sm p-5"><PhoneOverboard className="mx-auto h-20 w-20" /><p className="mt-2 text-sm">An attempt started on your wallet by 5Hf3...gh. Finishable in about 60 seconds.</p><div className="mt-3 flex gap-2"><span className="rounded-lg bg-lifejacket px-3 py-2 text-sm font-semibold text-ink">Stop</span><span className="rounded-lg border border-ink/30 px-3 py-2 text-sm">Slash</span></div></GlowCard>
     </section>
 
     <section aria-labelledby="proof" className="mt-24">
       <h2 id="proof" className="display h2">Proof</h2>
-      <div className="mt-6 overflow-x-auto rounded-2xl border border-fog bg-white/60"><table className="w-full min-w-[560px] text-left text-sm"><caption className="sr-only">Campaign results generated from testnet receipts</caption>
+      <div className="relative mt-6 overflow-x-auto rounded-2xl border border-fog bg-white/60"><table className="w-full min-w-[560px] text-left text-sm"><caption className="sr-only">Campaign results generated from testnet receipts</caption>
         <thead><tr className="border-b border-fog"><th scope="col" className="p-3">Scenario</th><th scope="col" className="p-3">Result</th><th scope="col" className="p-3">Block</th></tr></thead>
         <tbody>{facts.scenarios.map((s) => (<tr key={s.id} className="border-b border-fog/60 align-top"><th scope="row" className="p-3 font-medium">{s.id}: {s.title}</th><td className="p-3">{s.pass ? 'As expected' : 'Missed'}{s.observed ? <span className="mono ml-2 text-ink/70">{String(s.observed)}</span> : null}</td><td className="p-3">{s.proofTx ? <a className="underline underline-offset-4" href={s.proofTx.explorer} target="_blank" rel="noreferrer">{s.proofTx.block}<span className="sr-only"> (opens in a new tab)</span></a> : 'n/a'}</td></tr>))}</tbody></table></div>
       <div className="mt-5"><LinkButton href="/proof">Verify it yourself</LinkButton></div>

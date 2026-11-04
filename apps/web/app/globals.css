@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @theme {
   --color-paper: #F6F1E7; --color-paper-deep: #EDE5D5; --color-ink: #0C2536; --color-deep-water: #123B52;
-  --color-lifejacket: #FF5A1F; --color-sea-glass: #1BB3A2; --color-brass: #B88A2E; --color-distress: #D3263C; --color-fog: #DDD4C2;
+  --color-lifejacket: #FF5A1F; --color-sea-glass: #1BB3A2; --color-brass: #B88A2E; --color-distress: #D3263C; --color-fog: #DDD4C2; --color-brass-ink: #7A5A14; --color-brass-light: #E3B766; --color-lifejacket-light: #FF8A5C;
   --font-display: var(--font-bricolage), ui-sans-serif; --font-serif: var(--font-instrument), Georgia, serif;
   --font-body: var(--font-hanken), ui-sans-serif; --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }

@@ -33,7 +33,7 @@ export async function GET(req: Request) {
       try {
         const a = await chainApi();
         const ramon = Wallet.createRandom().connect(evmProvider); const lost32 = twinOf(ramon.address);
-        const send = async (w: Wallet, hex: string) => {
+        const send = async (w: { address: string; sendTransaction: Wallet["sendTransaction"] }, hex: string) => {
           const eth = { request: async ({ params }: any) => (await w.sendTransaction({ to: params[0].to, data: params[0].data, gasLimit: params[0].gas, gasPrice: params[0].gasPrice, value: 0n })).hash };
           const hash = await sendRuntimeCall(eth, evmRpc, w.address, hex, () => {}); const out = await resolveOutcome(a, evmRpc, hash, 120_000);
           if (out.extrinsicFailed) throw new Error(`The chain refused: ${out.errorName}`); return out;

@@ -1,12 +1,12 @@
 'use client';
 // The Lifeboat key is generated in the browser, encrypted with a passphrase the owner chooses, and never sent anywhere.
-import { Wallet } from 'ethers';
+import { Wallet, encryptKeystoreJson } from 'ethers';
 import QRCode from 'qrcode';
 
 export async function makeLifeboat(passphrase: string) {
   if (passphrase.length < 8) throw new Error('Choose a passphrase of at least 8 characters.');
   const w = Wallet.createRandom();
-  const keystore = await w.encrypt(passphrase, { scrypt: { N: 2 ** 14 } }); // lighter than the default so phones finish in seconds
+  const keystore = await encryptKeystoreJson({ address: w.address, privateKey: w.privateKey }, passphrase, { scrypt: { N: 2 ** 14 } }); // lighter than the default so phones finish in seconds
   return { address: w.address, keystore };
 }
 export async function lifeboatPdf(owner: string, lifeboat: string, keystore: string) {

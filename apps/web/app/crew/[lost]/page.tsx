@@ -28,7 +28,7 @@ export default function CrewDoor() {
   const paste = (e: React.ClipboardEvent) => { const t = e.clipboardData.getData('text').trim().split(/\s+/); if (t.length === 4) { e.preventDefault(); setWords(t); } };
   if (!isAddress(lost)) return <Notice tone="refusal">That is not a wallet address. Ask your friend to send it again.</Notice>;
   return (<div className="space-y-6">
-    <header><p className="micro text-brass">Guardian</p><h1 className="display h1">Crew door</h1><p className="mt-2">You are being asked to help bring back <span className="mono">{getAddress(lost)}</span>.</p></header>
+    <header><p className="micro text-brass-ink">Guardian</p><h1 className="display h1">Crew door</h1><p className="mt-2">You are being asked to help bring back <span className="mono">{getAddress(lost)}</span>.</p></header>
     {!group && view && <Notice tone="refusal">This wallet has no crew set up. Nothing can be done from here, and Kedge will not guess.</Notice>}
     {refusal && <Notice tone="refusal"><strong>Stop.</strong> {refusal}</Notice>}
     {me && group && !isGuardian && <Notice tone="refusal">Your wallet <span className="mono">{short(me)}</span> is not one of this crew&apos;s guardians. The chain would refuse you (NotFriend).</Notice>}

@@ -11,11 +11,11 @@ export default function Nav() {
   return (<>
     <header className="fixed left-1/2 top-3 z-50 w-[min(1120px,calc(100%-24px))] -translate-x-1/2">
       <nav aria-label="Main" className={`flex items-center justify-between gap-2 rounded-[14px] border border-brass/60 bg-deep-water/95 px-3 text-paper backdrop-blur transition-all ${small ? 'h-12' : 'h-14'}`}>
-        <Link href="/" className="flex items-center gap-2 font-display font-extrabold tracking-[0.02em]" aria-label="Kedge home"><KedgeMark width={28} height={28} /><span className={small ? 'hidden' : 'hidden sm:inline'}>KEDGE</span></Link>
+        <Link href="/" className="flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 font-display font-extrabold tracking-[0.02em]" aria-label="Kedge home"><KedgeMark width={28} height={28} /><span className={small ? 'hidden' : 'hidden sm:inline'}>KEDGE</span></Link>
         <ul className="hidden items-center gap-1 md:flex">{links.map(([t, h]) => (<li key={h}><Link href={h} aria-current={path.startsWith(h) ? 'page' : undefined} className={`rounded-lg px-3 py-2 text-sm font-medium hover:bg-white/10 ${path.startsWith(h) ? 'bg-white/15' : ''}`}>{t}</Link></li>))}</ul>
         <div className="flex items-center gap-2">
           <Link href="/judge?tour=1" className="hidden rounded-lg px-3 py-2 text-sm hover:bg-white/10 sm:inline">Guided tour</Link>
-          <Link href="/harbour" className="rounded-lg bg-lifejacket px-3 py-2 text-sm font-semibold text-white hover:shadow-[0_0_24px_rgba(255,90,31,.45)]">Connect wallet</Link>
+          <Link href="/harbour" className="rounded-lg bg-lifejacket px-3 py-2 text-sm font-semibold text-ink hover:shadow-[0_0_24px_rgba(255,90,31,.45)]">Connect wallet</Link>
         </div>
       </nav>
     </header>

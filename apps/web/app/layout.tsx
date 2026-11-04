@@ -3,6 +3,8 @@ import { Bricolage_Grotesque, Instrument_Serif, Hanken_Grotesk, JetBrains_Mono }
 import './globals.css';
 import Nav from '@/components/Nav';
 import { RopeDivider } from '@/components/art';
+import { Suspense } from 'react';
+import Tour from '@/components/Tour';
 
 const display = Bricolage_Grotesque({ subsets: ['latin'], weight: ['700', '800'], variable: '--font-bricolage', display: 'swap' });
 const serif = Instrument_Serif({ subsets: ['latin'], weight: '400', style: ['normal', 'italic'], variable: '--font-instrument', display: 'swap' });
@@ -19,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a className="skip" href="#main">Skip to content</a>
         <Nav />
+        <Suspense fallback={null}><Tour /></Suspense>
         <main id="main" className="mx-auto w-full max-w-[1120px] px-4 pb-28 pt-24 md:pb-16">{children}</main>
         <footer className="mx-auto w-full max-w-[1120px] px-4 pb-28 md:pb-10">
           <RopeDivider className="mb-6 h-6 w-full max-w-[480px]" />

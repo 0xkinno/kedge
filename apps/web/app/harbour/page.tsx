@@ -42,7 +42,7 @@ export default function Harbour() {
     setMsg({ tone: r.ok ? 'info' : 'refusal', text: r.ok ? 'Alerts on. You will get one message per attempt on your wallet.' : j.error }); } catch (e: any) { setMsg({ tone: 'refusal', text: e.message }); } };
   const attempts = view?.attempts ?? [];
   return (<div className="space-y-8">
-    <header><p className="micro text-brass">Owner</p><h1 className="display h1">Harbour</h1><p className="mt-2 max-w-2xl">Name your crew once, print the card, keep your phone. Your own wallet signs everything.</p></header>
+    <header><p className="micro text-brass-ink">Owner</p><h1 className="display h1">Harbour</h1><p className="mt-2 max-w-2xl">Name your crew once, print the card, keep your phone. Your own wallet signs everything.</p></header>
     <GlowCard className="p-6"><div className="flex flex-wrap items-center justify-between gap-4"><StatusRing state={state} />
       {me ? <p className="mono" aria-label="Connected wallet">{me}</p> : <PrimaryButton onClick={doConnect}>Connect wallet</PrimaryButton>}</div></GlowCard>
     {msg && <Notice tone={msg.tone}>{msg.text}</Notice>}

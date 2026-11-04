@@ -18,11 +18,11 @@ export const Reveal = ({ children, delay = 0, className = '' }: { children: Reac
 );
 const btn = 'inline-flex min-h-[44px] items-center justify-center rounded-xl px-5 py-2.5 font-semibold transition focus-visible:outline-offset-4';
 export const PrimaryButton = ({ className = '', ready, ...p }: ButtonHTMLAttributes<HTMLButtonElement> & { ready?: boolean }) =>
-  <button {...p} className={`${btn} bg-lifejacket text-white shadow-[0_0_24px_rgba(255,90,31,.45)] hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none ${ready ? 'ready' : ''} ${className}`} />;
+  <button {...p} className={`${btn} bg-lifejacket text-ink shadow-[0_0_24px_rgba(255,90,31,.45)] hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none ${ready ? 'ready' : ''} ${className}`} />;
 export const GhostButton = ({ className = '', ...p }: ButtonHTMLAttributes<HTMLButtonElement>) =>
   <button {...p} className={`${btn} border border-ink/30 bg-transparent text-ink hover:bg-ink/5 disabled:opacity-40 ${className}`} />;
 export const LinkButton = ({ href, children, primary }: { href: string; children: ReactNode; primary?: boolean }) =>
-  <Link href={href} className={`${btn} ${primary ? 'bg-lifejacket text-white shadow-[0_0_24px_rgba(255,90,31,.45)] hover:brightness-105' : 'border border-ink/30 hover:bg-ink/5'}`}>{children}</Link>;
+  <Link href={href} className={`${btn} ${primary ? 'bg-lifejacket text-ink shadow-[0_0_24px_rgba(255,90,31,.45)] hover:brightness-105' : 'border border-ink/30 hover:bg-ink/5'}`}>{children}</Link>;
 export const Mono = ({ children }: { children: ReactNode }) => <span className="mono">{children}</span>;
 export function StatusRing({ state }: { state: 'protected' | 'not' | 'unknown' }) {
   const c = state === 'protected' ? '#1BB3A2' : state === 'not' ? '#D3263C' : '#B88A2E';
