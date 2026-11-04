@@ -1,0 +1,15 @@
+{
+  "at": "2026-11-04T22:50:04.482Z",
+  "owner": "0x3D907067Ea352694cA1840CdEa1217bC52ed83c3",
+  "chatIdSet": true,
+  "subscriptionStatus": 200,
+  "cursorWhenAttemptStarted": "326451",
+  "attemptBlock": 326458,
+  "attemptExplorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/326458?tab=events",
+  "alertDedupeKeys": [
+    "kedge:sent:326458:4:initiated"
+  ],
+  "jobDispatch": "workflow_dispatch of .github/workflows/watchkeeper.yml (HTTP 204)",
+  "delivered": true,
+  "note": "The dedupe key is written just before the Telegram call. Delivery itself is confirmed by the screenshot docs/demo/telegram-alert.png from the receiving phone."
+}
