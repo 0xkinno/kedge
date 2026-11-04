@@ -10,16 +10,16 @@ Source of truth: `reference/KEDGE_BUILD_INSTRUCTION.md` (section numbers below r
 ---
 
 ## Phase 0. Repo, identity, guards
-- [ ] Create public repo `0xkinno/kedge`; clone locally (OPEN: GitHub token in this session is invalid and Kinnoski will create the repo; local repo initialised at kedge/ on branch main)
+- [x] Create public repo `0xkinno/kedge`; clone locally (https://github.com/0xkinno/kedge exists, local clone at kedge/ with origin set)
 - [x] `git config user.name "0xkinno"` and `user.email` (Section 14.1); verify with `git config --list` (git config --local shows user.name 0xkinno, user.email 0xkinno@users.noreply.github.com placeholder; replace with the real GitHub email before the first push)
 - [x] `.claude/settings.json` with empty attribution (14.2)
 - [x] `.githooks/commit-msg` + `git config core.hooksPath .githooks` (14.3); test it strips a fake trailer (fake trailer test: Claude trailers stripped; spec regex fixed because it missed 'Co-Authored-By: Claude ... <noreply@anthropic.com>'; a real commit carrying the trailers logged clean)
-- [ ] `.github/workflows/no-claude-attribution.yml` (14.4); confirm it passes on the first push (OPEN: file written; passing on first push cannot be confirmed until the repo exists)
+- [x] `.github/workflows/no-claude-attribution.yml` (14.4); confirm it passes on the first push (passed on first push, run on 80564fd)
 - [x] `.gitignore` per 14.6; confirm `reference/` and `keys/` are ignored (`git check-ignore -v`) (git check-ignore -v shows reference/ and keys/ ignored; git ls-files lists neither)
 - [x] Move this instruction file and TASK.md source into `reference/`; copy TASK.md to repo root (both files in reference/, TASK.md copied to root)
 - [x] Clone reference repos (Section 16) into `reference/repos/` (20 directories: 18 samples, V3 guide, polkadot-sdk sparse)
 - [x] `scripts/check_copy.mjs`: fails on emoji, em/en dashes, hype words, and any sample-project name outside `reference/`; wired into CI (negative test trips emoji, dash, hype word, sample-name hash; ci.yml runs it, CI run pending the repo)
-- [ ] First commit and push: "chore: scaffold, identity guards, copy checks" (commit 72ee7a3 done; OPEN: push, no remote yet)
+- [x] First commit and push: "chore: scaffold, identity guards, copy checks" (pushed to origin/main; GitHub shows 0xkinno as author of all commits; CI and attribution gate both green)
 
 ## Phase 1. G0 and G1 (rules, lanes, sponsor intel)
 - [x] `RULES_EXTRACT.md` from Section 2 (verbatim criteria, tracks, dates in WAT, DoraHacks fields, code-compliance rules) (from the announcement; DoraHacks page not fetchable (405), flagged inside the file)
@@ -28,9 +28,9 @@ Source of truth: `reference/KEDGE_BUILD_INSTRUCTION.md` (section numbers below r
 - [ ] **GATE 1:** report to Kinnoski: lane confirmed empty, any new rival in the Recovery lane
 
 ## Phase 2. G2 (the moment) and sources
-- [ ] `MOMENT.md` from Section 5
-- [ ] Verify every source in the pain table; write `docs/sources.json` (url, title, quote, date opened)
-- [ ] Test asserting the landing-page money figure equals `sources.json`
+- [x] `MOMENT.md` from Section 5 (from Section 5, persona and clock, caveats on each source)
+- [x] Verify every source in the pain table; write `docs/sources.json` (url, title, quote, date opened) (8 quotes re-checked against live pages by scripts/verify_sources.mjs; 3 caveats recorded in sources.json)
+- [x] Test asserting the landing-page money figure equals `sources.json` (tests/sources.test.mjs; tampering the figure makes it fail, restoring passes)
 - [ ] Founder-stake line approved by Kinnoski
 
 ## Phase 3. G3 and G5 (discovery probes on the live chain)  <- the build lives or dies here

@@ -14,3 +14,5 @@ jobs:
         with:
           node-version: 22
       - run: node scripts/check_copy.mjs
+      - run: npm ci
+      - run: npm test

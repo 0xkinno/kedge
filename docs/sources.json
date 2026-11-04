@@ -1,0 +1,101 @@
+{
+  "generated_for": "Kedge",
+  "opened": "2026-11-04",
+  "sources": [
+    {
+      "id": "seafarers-1-89m",
+      "claim": "About 1.89 million seafarers serve the world merchant fleet.",
+      "url": "https://www.marinelog.com/news/world-shipping-faces-looming-officer-shortage/",
+      "title": "World shipping faces looming officer shortage (Marine Log, 28 July 2021)",
+      "quote": "The report estimates that 1.89 million seafarers currently serve the world merchant fleet, operating over 74,000 vessels",
+      "primary_url": "https://www.bimco.org/news/priority-news/20210728---bimco-ics-seafarer-workforce-report",
+      "published": "2021-07-28",
+      "date_opened": "2026-11-04",
+      "status": "verified",
+      "note": "The 1.89 million figure is from the 2021 BIMCO/ICS report, read here through press coverage. BIMCO's own page now describes a 2026 edition (25 June 2026) whose figures were not readable from this environment. Do not call this the latest estimate."
+    },
+    {
+      "id": "sea-remittances",
+      "claim": "Sea-based Filipino workers sent home 7.139 billion US dollars in 2025.",
+      "url": "https://bworldonline.com/top-stories/2026/02/17/730931/ofw-remittances-hit-record-35-6b/",
+      "title": "OFW remittances hit record $35.6B (BusinessWorld, reporting Bangko Sentral ng Pilipinas data)",
+      "quote": "remittances from sea-based OFWs rose by 2.9% to $7.139 billion in 2025 from $6.941 billion in 2024",
+      "published": "2026-02-17",
+      "date_opened": "2026-11-04",
+      "status": "verified",
+      "figure": {
+        "value": 7.139,
+        "unit": "billion USD",
+        "year": 2025,
+        "display": "$7.139 billion"
+      },
+      "note": "Secondary report of BSP data. The BSP page itself returned 403 to this environment."
+    },
+    {
+      "id": "lost-bitcoin",
+      "claim": "About 3.7 million bitcoin, around 20 percent of supply, had not moved for at least five years in June 2020. Dormancy is a proxy for lost, not proof of lost keys.",
+      "url": "https://decrypt.co/37171/lost-bitcoin-3-7-million-bitcoin-are-probably-gone-forever",
+      "title": "Lost Bitcoin: 3.7 million Bitcoin are probably gone forever (Decrypt)",
+      "quote": "According to a June 2020 report by blockchain analytics firm Chainalysis, around 3.7 million BTC",
+      "published": "2020 (exact article date not shown in page text)",
+      "date_opened": "2026-11-04",
+      "status": "verified-secondary",
+      "note": "Chainalysis blog post itself not located (guessed URLs returned 404). Press coverage only. Describe as dormant for five years, never as confirmed lost keys."
+    },
+    {
+      "id": "lost-bitcoin-share",
+      "claim": "The same coverage puts this at around 20 percent of minted bitcoin.",
+      "url": "https://decrypt.co/37171/lost-bitcoin-3-7-million-bitcoin-are-probably-gone-forever",
+      "title": "Lost Bitcoin: 3.7 million Bitcoin are probably gone forever (Decrypt)",
+      "quote": "Around 20% of currently minted Bitcoin",
+      "published": "2020",
+      "date_opened": "2026-11-04",
+      "status": "verified-secondary",
+      "note": ""
+    },
+    {
+      "id": "ledger-recover",
+      "claim": "A hardware-wallet vendor's seed backup service split the phrase among three custodians and drew public backlash in 2023.",
+      "url": "https://decrypt.co/140692/so-much-anger-so-much-hate-says-ledger-co-founder-amid-botched-recover-service-launch",
+      "title": "So Much Anger, So Much Hate, Says Ledger Co-Founder Amid Botched Recover Service Launch (Decrypt)",
+      "quote": "your recovery phrase is split into three encrypted fragments",
+      "published": "2023-05-19",
+      "date_opened": "2026-11-04",
+      "status": "verified",
+      "note": "Quote of the co-founder: So much anger, so much hate, and also so much insanity."
+    },
+    {
+      "id": "quadriga",
+      "claim": "An exchange founder died and roughly 190 million Canadian dollars in customer crypto became inaccessible (2019).",
+      "url": "https://www.vice.com/en/article/customers-out-dollar190m-after-founder-dies-cryptocurrency-exchange-says/",
+      "title": "Customers Out $190M After Founder Dies, Cryptocurrency Exchange Says (Vice)",
+      "quote": "leaving roughly $190 million CAD in digital tokens owed to customers inaccessible",
+      "published": "2019-02-04",
+      "date_opened": "2026-11-04",
+      "status": "verified",
+      "note": "Later reporting alleged misappropriation. Cite only as: reported at the time as inaccessible."
+    },
+    {
+      "id": "adoption-philippines",
+      "claim": "The Philippines ranks 9th overall in the 2025 Chainalysis Global Crypto Adoption Index.",
+      "url": "https://www.chainalysis.com/blog/2025-global-crypto-adoption-index/",
+      "title": "The 2025 Global Adoption Index: India and the United States Lead Cryptocurrency Adoption (Chainalysis)",
+      "quote": "Philippines 9 6 9 13 10",
+      "published": "2025-09-02",
+      "date_opened": "2026-11-04",
+      "status": "verified",
+      "note": "Quote is the table row text (overall rank first)."
+    },
+    {
+      "id": "adoption-nigeria",
+      "claim": "Nigeria ranks 6th overall in the same index.",
+      "url": "https://www.chainalysis.com/blog/2025-global-crypto-adoption-index/",
+      "title": "The 2025 Global Adoption Index: India and the United States Lead Cryptocurrency Adoption (Chainalysis)",
+      "quote": "Nigeria 6 7 8 3 8",
+      "published": "2025-09-02",
+      "date_opened": "2026-11-04",
+      "status": "verified",
+      "note": "Quote is the table row text (overall rank first)."
+    }
+  ]
+}
