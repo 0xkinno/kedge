@@ -1,0 +1,223 @@
+{
+  "id": "ATTACK_RUN",
+  "at": "2026-11-04T07:42:32.757Z",
+  "network": "portaldot-v3 testnet",
+  "title": "A1 to A6 full transaction log",
+  "lost": "0xbC246Dda27b4a1B8707402c6f09b97c1A8e2c2Cf",
+  "totalFeesTPOT": 0.18227264921765995,
+  "txs": [
+    {
+      "label": "set_friend_groups",
+      "signer": "0xbC246Dda27b4a1B8707402c6f09b97c1A8e2c2Cf",
+      "hash": "0x917716b9b3b5ea7105ac183a9822869f216ce3258a7c94f67c97be9d3d54853c",
+      "block": 317444,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317444?tab=events",
+      "ok": true,
+      "fee": "0.02700572744941",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.FriendGroupsChanged",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "A1 stranger initiate_attempt",
+      "signer": "0x27B9E53F3248e4a4676841B958DcD5CebE0EcC7c",
+      "hash": "0x51134300c2dc641bf6d3428662bf64f9da60cd37fd2baec001291178478b47c8",
+      "block": 317445,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317445?tab=events",
+      "ok": false,
+      "error": "recovery.NotFriend",
+      "fee": "0.01590663983714",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.NotFriend",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "NotFriend"
+    },
+    {
+      "label": "lorna initiate_attempt (legitimate)",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+      "hash": "0x82dc5a9ffe81e9669bf354e14482c5295ea270aad9e3226cedab9eec46c17066",
+      "block": 317446,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317446?tab=events",
+      "ok": true,
+      "fee": "0.01580663974263",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Held",
+        "recovery.AttemptInitiated",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "A2 finish with 1 of 2 approvals",
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08",
+      "hash": "0x1bb1cd56ea7c9995e4bb3787d064ffc44d31fe85938beac4f1c2d6250e9c928b",
+      "block": 317447,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317447?tab=events",
+      "ok": false,
+      "error": "recovery.NotApproved",
+      "fee": "0.01590752288619",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.NotApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "NotApproved"
+    },
+    {
+      "label": "ben approve_attempt (legitimate)",
+      "signer": "0x225B5e89825c49CC7CEc3d53a29748E28019bd6F",
+      "hash": "0xf8e8afe3c198d80b60e3d86c671c5b2bc7be9b6ea672d74b66bf8416173e1c77",
+      "block": 317448,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317448?tab=events",
+      "ok": true,
+      "fee": "0.01580566708881",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "A4 ben approves twice",
+      "signer": "0x225B5e89825c49CC7CEc3d53a29748E28019bd6F",
+      "hash": "0x44303d0f6dbde41b13070e2fd0d1883c61bf962e5659101c26a87b88d083f71d",
+      "block": 317449,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317449?tab=events",
+      "ok": false,
+      "error": "recovery.AlreadyApproved",
+      "fee": "0.01590566715802",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.AlreadyApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "AlreadyApproved"
+    },
+    {
+      "label": "A3 finish before the delay",
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08",
+      "hash": "0x6ae75662dd54472cf79ea4647d8b9b49d6d7ec5605e520ba548c0f5698883685",
+      "block": 317450,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317450?tab=events",
+      "ok": false,
+      "error": "recovery.NotYetInheritable",
+      "fee": "0.01590752283801",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.NotYetInheritable",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "NotYetInheritable"
+    },
+    {
+      "label": "A5 owner slash_attempt (owner still holds key)",
+      "signer": "0xbC246Dda27b4a1B8707402c6f09b97c1A8e2c2Cf",
+      "hash": "0xdf3de0b07ca84837e53dc5cee26aa5676a2eddeeb4831941c6e196958f25a214",
+      "block": 317451,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317451?tab=events",
+      "ok": true,
+      "fee": "0.01250676268716",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.AttemptSlashed",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "malicious initiate again (lorna)",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+      "hash": "0x362db585051c80c67e0a764e9f1d20c17f0281748fd9c993a517432d03cda1c5",
+      "block": 317452,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317452?tab=events",
+      "ok": true,
+      "fee": "0.0158066396595",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Held",
+        "recovery.AttemptInitiated",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "A6 initiator tries cancel_attempt inside the cancel delay",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+      "hash": "0x0702ccd3a267b2c7a00d0725359b6a5f3e46344d058617511658de565571a842",
+      "block": 317453,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317453?tab=events",
+      "ok": false,
+      "error": "recovery.NotYetCancelable",
+      "fee": "0.01590693001225",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.NotYetCancelable",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "NotYetCancelable"
+    },
+    {
+      "label": "initiator cancel after the delay (legitimate)",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+      "hash": "0x2ee9e2927c6a4b67efa12d8958bbcd603092480ff1944cd7c9c9293df3c85031",
+      "block": 317458,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317458?tab=events",
+      "ok": true,
+      "fee": "0.01580692985854",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Released",
+        "recovery.AttemptCanceled",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    }
+  ]
+}

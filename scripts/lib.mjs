@@ -57,7 +57,7 @@ export async function resolve(api, hash, rc) {
 export function decodeEvent(api, e) {
   const { section, method } = e.event; const data = e.event.data.toHuman();
   let out = { event: `${section}.${method}`, data };
-  if (section === 'system' && method === 'ExtrinsicFailed') {
+  if ((section === 'system' && method === 'ExtrinsicFailed') || (section === 'revive' && method === 'EthExtrinsicRevert')) {
     const de = e.event.data[0]; if (de.isModule) { const m = api.registry.findMetaError(de.asModule); out.error = `${m.section}.${m.name}`; }
   }
   return out;

@@ -1,0 +1,506 @@
+{
+  "network": "portaldot-v3 testnet",
+  "spec": 3002,
+  "blockTimeSeconds": 6,
+  "vault": {
+    "address": "0x92cD058Cb7E4d69476bFc7Cbb7630C50f13B57D4",
+    "deployTx": "0x5d20d9a0c4be0cda48c3602ca60e8246cf38f691c6f53373f87d982643118ce8",
+    "block": 317284,
+    "costTPOT": 91.00391049622748,
+    "tokenAssetId": 20261104
+  },
+  "measured": {
+    "rescuesCompleted": 2,
+    "rescuesAttempted": 2,
+    "attacksStopped": 9,
+    "attacksTried": 9,
+    "legitimateRescuesWronglyBlocked": 0,
+    "wronglyBlockedCases": [],
+    "costPerProtectionTPOT": 0.02700572815675,
+    "costPerRescueTPOT": 0.06293,
+    "storageDepositRefundTPOT": 3.79868674820199,
+    "securityDepositTPOT": 0,
+    "friendGroupDepositTPOT": 0,
+    "delayBlocks": 10,
+    "delaySecondsMeasured": 55,
+    "kusdMoved": 150,
+    "tpotMoved": 13.99
+  },
+  "scenarios": [
+    {
+      "id": "H1",
+      "title": "Happy path: setup, initiate, approve, wait, finish, bring home (tPOT + kUSD + vault)",
+      "expected": "all items ItemCompleted; balances moved to the new key; vault Withdrawn(saver = old address)",
+      "pass": true,
+      "observed": "Ok",
+      "proofTx": {
+        "hash": "0xce6a011719f29aefea57207c78eec43663c319c999d2905c48b1096816b1028b",
+        "block": 317396,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317396?tab=events"
+      }
+    },
+    {
+      "id": "H2",
+      "title": "Cross-VM guardians: one sr25519 guardian approves with a native extrinsic, two on MetaMask",
+      "expected": "completes",
+      "pass": true,
+      "observed": "Ok",
+      "proofTx": {
+        "hash": "0x7f7d6ee0e339e03d873906836e15bdcf28496123e31344d383347ac62314e73d",
+        "block": 317418,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317418?tab=events"
+      }
+    },
+    {
+      "id": "A1",
+      "title": "A1",
+      "expected": "recovery.NotFriend",
+      "pass": true,
+      "observed": "recovery.NotFriend",
+      "proofTx": {
+        "hash": "0x51134300c2dc641bf6d3428662bf64f9da60cd37fd2baec001291178478b47c8",
+        "block": 317445,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317445?tab=events"
+      }
+    },
+    {
+      "id": "A2",
+      "title": "A2",
+      "expected": "recovery.NotApproved",
+      "pass": true,
+      "observed": "recovery.NotApproved",
+      "proofTx": {
+        "hash": "0x1bb1cd56ea7c9995e4bb3787d064ffc44d31fe85938beac4f1c2d6250e9c928b",
+        "block": 317447,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317447?tab=events"
+      }
+    },
+    {
+      "id": "A3",
+      "title": "A3",
+      "expected": "recovery.NotYetInheritable",
+      "pass": true,
+      "observed": "recovery.NotYetInheritable",
+      "proofTx": {
+        "hash": "0x6ae75662dd54472cf79ea4647d8b9b49d6d7ec5605e520ba548c0f5698883685",
+        "block": 317450,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317450?tab=events"
+      }
+    },
+    {
+      "id": "A4",
+      "title": "A4",
+      "expected": "recovery.AlreadyApproved",
+      "pass": true,
+      "observed": "recovery.AlreadyApproved",
+      "proofTx": {
+        "hash": "0x44303d0f6dbde41b13070e2fd0d1883c61bf962e5659101c26a87b88d083f71d",
+        "block": 317449,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317449?tab=events"
+      }
+    },
+    {
+      "id": "A5",
+      "title": "A5",
+      "expected": "AttemptSlashed",
+      "pass": true,
+      "observed": null,
+      "proofTx": {
+        "hash": "0xdf3de0b07ca84837e53dc5cee26aa5676a2eddeeb4831941c6e196958f25a214",
+        "block": 317451,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317451?tab=events"
+      }
+    },
+    {
+      "id": "A6",
+      "title": "A6",
+      "expected": "recovery.NotYetCancelable",
+      "pass": true,
+      "observed": "recovery.NotYetCancelable",
+      "proofTx": {
+        "hash": "0x0702ccd3a267b2c7a00d0725359b6a5f3e46344d058617511658de565571a842",
+        "block": 317453,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317453?tab=events"
+      }
+    },
+    {
+      "id": "A7",
+      "title": "Reentrancy guard: inheritor tries to rewrite recovery config through control_inherited_account",
+      "expected": "receipt ok, RecoveredAccountControlled.call_result = Err",
+      "pass": true,
+      "observed": {
+        "Err": {
+          "Module": {
+            "index": "0",
+            "error": "0x05000000"
+          }
+        }
+      },
+      "proofTx": {
+        "hash": "0xdcfac56327f266c0536d4d7f9e29f944d1c07db5540cedd23b80d49d13f87020",
+        "block": 317482,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317482?tab=events"
+      }
+    },
+    {
+      "id": "A8",
+      "title": "Priority override: Family (priority 0) finishes after Crew",
+      "expected": "AttemptFinished { previous_inheritor = Crew inheritor }",
+      "pass": true,
+      "observed": null,
+      "proofTx": {
+        "hash": "0xb3f8856dc72a2ab6a1eeddee7368f486de12efb34866fb9c2fae3e386f323fc8",
+        "block": 317480,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317480?tab=events"
+      }
+    },
+    {
+      "id": "A9",
+      "title": "Priority lock: Crew tries again after Family recovered",
+      "expected": "recovery.HigherPriorityRecovered",
+      "pass": true,
+      "observed": "recovery.HigherPriorityRecovered",
+      "proofTx": {
+        "hash": "0x15fffbc5bdc65db178789530f59b49cae78f0e7e651bce81e15cd3179dbb2bf7",
+        "block": 317481,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317481?tab=events"
+      }
+    },
+    {
+      "id": "A10",
+      "title": "Sweep with one item that must fail",
+      "expected": "other items ItemCompleted, one ItemFailed",
+      "pass": true,
+      "observed": "Ok",
+      "proofTx": {
+        "hash": "0x0e1e7f31469ac9dac32ec55056e55fd54b76b445c5d6c1476ba662d21853adf6",
+        "block": 317483,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317483?tab=events"
+      }
+    },
+    {
+      "id": "A11",
+      "title": "Contract set as inheritor",
+      "expected": "refused by Mate; on-chain probe shows contract to pallets address is a no-op",
+      "pass": true,
+      "observed": null,
+      "proofTx": null
+    },
+    {
+      "id": "A12",
+      "title": "Scam link with a different inheritor",
+      "expected": "call phrase mismatch, approve disabled",
+      "pass": true,
+      "observed": null,
+      "proofTx": null
+    },
+    {
+      "id": "C1",
+      "title": "Counterfactual: a wallet without Kedge, key discarded",
+      "expected": "balance unmovable; no path exists",
+      "pass": true,
+      "observed": null,
+      "proofTx": null
+    },
+    {
+      "id": "C2",
+      "title": "Counterfactual: EVM-only vault position without Kedge",
+      "expected": "unreachable forever",
+      "pass": true,
+      "observed": null,
+      "proofTx": {
+        "hash": "0x1655a08810c23a3b5420e3b73e66170d807f940301aed72670ff08e728543e30",
+        "block": 317489,
+        "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317489?tab=events"
+      }
+    }
+  ],
+  "misses": [],
+  "probeFindings": {
+    "headline_msgSenderIsLostH160": true,
+    "contractToPalletsAddressIsNoop": true,
+    "receiptStatusOnFailedInner": 1,
+    "hashRuleKeccakPayload": true
+  },
+  "txs": [
+    {
+      "scenario": "A1",
+      "label": "A1 stranger initiate_attempt",
+      "hash": "0x51134300c2dc641bf6d3428662bf64f9da60cd37fd2baec001291178478b47c8",
+      "block": 317445,
+      "ok": false,
+      "error": "recovery.NotFriend",
+      "signer": "0x27B9E53F3248e4a4676841B958DcD5CebE0EcC7c"
+    },
+    {
+      "scenario": "A10",
+      "label": "A10 force_batch [assets.transfer 999 kUSD (must fail), balances.transfer_all]",
+      "hash": "0x0e1e7f31469ac9dac32ec55056e55fd54b76b445c5d6c1476ba662d21853adf6",
+      "block": 317483,
+      "ok": true,
+      "error": null,
+      "signer": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8"
+    },
+    {
+      "scenario": "A2",
+      "label": "A2 finish with 1 of 2 approvals",
+      "hash": "0x1bb1cd56ea7c9995e4bb3787d064ffc44d31fe85938beac4f1c2d6250e9c928b",
+      "block": 317447,
+      "ok": false,
+      "error": "recovery.NotApproved",
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08"
+    },
+    {
+      "scenario": "A3",
+      "label": "A3 finish before the delay",
+      "hash": "0x6ae75662dd54472cf79ea4647d8b9b49d6d7ec5605e520ba548c0f5698883685",
+      "block": 317450,
+      "ok": false,
+      "error": "recovery.NotYetInheritable",
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08"
+    },
+    {
+      "scenario": "A4",
+      "label": "A4 ben approves twice",
+      "hash": "0x44303d0f6dbde41b13070e2fd0d1883c61bf962e5659101c26a87b88d083f71d",
+      "block": 317449,
+      "ok": false,
+      "error": "recovery.AlreadyApproved",
+      "signer": "0x225B5e89825c49CC7CEc3d53a29748E28019bd6F"
+    },
+    {
+      "scenario": "A5",
+      "label": "A5 owner slash_attempt (owner still holds key)",
+      "hash": "0xdf3de0b07ca84837e53dc5cee26aa5676a2eddeeb4831941c6e196958f25a214",
+      "block": 317451,
+      "ok": true,
+      "error": null,
+      "signer": "0xbC246Dda27b4a1B8707402c6f09b97c1A8e2c2Cf"
+    },
+    {
+      "scenario": "A6",
+      "label": "A6 initiator tries cancel_attempt inside the cancel delay",
+      "hash": "0x0702ccd3a267b2c7a00d0725359b6a5f3e46344d058617511658de565571a842",
+      "block": 317453,
+      "ok": false,
+      "error": "recovery.NotYetCancelable",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF"
+    },
+    {
+      "scenario": "A7",
+      "label": "A7 inheritor control_inherited_account(recovery.set_friend_groups)",
+      "hash": "0xdcfac56327f266c0536d4d7f9e29f944d1c07db5540cedd23b80d49d13f87020",
+      "block": 317482,
+      "ok": true,
+      "error": null,
+      "signer": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8"
+    },
+    {
+      "scenario": "A8",
+      "label": "set_friend_groups [Family priority 0, Crew priority 1]",
+      "hash": "0xba79092777ab1dd25a29361f2a887e8a4b23de0b23ea8d01a706e8f2e5406f6d",
+      "block": 317461,
+      "ok": true,
+      "error": null,
+      "signer": "0x70afb0D938C0CC30dA4c5Cd2c246a5E8A6B1B794"
+    },
+    {
+      "scenario": "A8",
+      "label": "crew initiate",
+      "hash": "0x315d83d0863cd866af6de8a3a3a1ed68d2e61abb3708c4805b9be53c9b78e02d",
+      "block": 317462,
+      "ok": true,
+      "error": null,
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF"
+    },
+    {
+      "scenario": "A8",
+      "label": "crew approve",
+      "hash": "0xf6d2b567eae8ce808721ffbde17a9eb2e90062ae140e9f2a2bd9db58b9291516",
+      "block": 317463,
+      "ok": true,
+      "error": null,
+      "signer": "0x225B5e89825c49CC7CEc3d53a29748E28019bd6F"
+    },
+    {
+      "scenario": "A8",
+      "label": "crew finish",
+      "hash": "0x3ceeb084fd8f5e1652e6c9325c4596d87614a3201b5ca008281ca1754ffcb9c2",
+      "block": 317468,
+      "ok": true,
+      "error": null,
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08"
+    },
+    {
+      "scenario": "A8",
+      "label": "family initiate",
+      "hash": "0xf8023e0ad96d77e02bf0522b82a56fb83f4919416ba5b11881c362eb5019799d",
+      "block": 317469,
+      "ok": true,
+      "error": null,
+      "signer": "0xa6c7b241fDa9Ce8809A8E6e337126D3f6cab710c"
+    },
+    {
+      "scenario": "A8",
+      "label": "family approve",
+      "hash": "0x03d062bf2e44a319ba839a76785e47413ed884af75738eed8f0c437352ea8ef3",
+      "block": 317470,
+      "ok": true,
+      "error": null,
+      "signer": "0xc8f0D700D851572326c554235Fd812B81DDa2849"
+    },
+    {
+      "scenario": "A8",
+      "label": "family finish (higher priority replaces the crew inheritor)",
+      "hash": "0xb3f8856dc72a2ab6a1eeddee7368f486de12efb34866fb9c2fae3e386f323fc8",
+      "block": 317480,
+      "ok": true,
+      "error": null,
+      "signer": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8"
+    },
+    {
+      "scenario": "A9",
+      "label": "A9 crew initiate again after Family recovered",
+      "hash": "0x15fffbc5bdc65db178789530f59b49cae78f0e7e651bce81e15cd3179dbb2bf7",
+      "block": 317481,
+      "ok": false,
+      "error": "recovery.HigherPriorityRecovered",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF"
+    },
+    {
+      "scenario": "C2",
+      "label": "approve kUSD (ERC-20 precompile)",
+      "hash": "0x95ffa21e09f39b66e5df1718f2a7170917b81f0d97904865ef3bf64e1a92710c",
+      "block": 317486,
+      "ok": true,
+      "error": null,
+      "signer": "0x63Ba8A389870F22138C4C21571C994B0b26C5c89"
+    },
+    {
+      "scenario": "C2",
+      "label": "save into AllotmentVault",
+      "hash": "0x320c5d51eecb543f55ebe350f0b90060699ac900f13b24c81ef416e32eeba5e8",
+      "block": 317487,
+      "ok": true,
+      "error": null,
+      "signer": "0x63Ba8A389870F22138C4C21571C994B0b26C5c89"
+    },
+    {
+      "scenario": "C2",
+      "label": "guardian tries to initiate on an account with no friend groups",
+      "hash": "0x1655a08810c23a3b5420e3b73e66170d807f940301aed72670ff08e728543e30",
+      "block": 317489,
+      "ok": false,
+      "error": "recovery.NoFriendGroups",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF"
+    },
+    {
+      "scenario": "H1",
+      "label": "approve kUSD (ERC-20 precompile)",
+      "hash": "0x8ea08e6bf135dfa72a5f08a9a46ede1086be20c1d72eb6fbd6a0ed1e0b0cd21e",
+      "block": 317380,
+      "ok": true,
+      "error": null,
+      "signer": "0xac9Fc67b8C3aa19BaB1826498b5d61De75AC74c9"
+    },
+    {
+      "scenario": "H1",
+      "label": "save into AllotmentVault",
+      "hash": "0xe90b809e2b0350bd785f5fb819ce5d40289dd81f1806b39d8d9414da1f01b184",
+      "block": 317381,
+      "ok": true,
+      "error": null,
+      "signer": "0xac9Fc67b8C3aa19BaB1826498b5d61De75AC74c9"
+    },
+    {
+      "scenario": "H1",
+      "label": "set_friend_groups",
+      "hash": "0x86cc5454fec2f857188d114d7b1e13394d7b173f2c89d5c62de15243a57b20fa",
+      "block": 317383,
+      "ok": true,
+      "error": null,
+      "signer": "0xac9Fc67b8C3aa19BaB1826498b5d61De75AC74c9"
+    },
+    {
+      "scenario": "H1",
+      "label": "initiate_attempt",
+      "hash": "0x8522fb0ae1065df9be2309b7e48bc1b09055e8e6af768cef937b2e7f6b6c6d77",
+      "block": 317384,
+      "ok": true,
+      "error": null,
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF"
+    },
+    {
+      "scenario": "H1",
+      "label": "approve_attempt",
+      "hash": "0xace97eab25ae922760f4f733a6fde2d357705d40b86cfff89eb96c7212e8d883",
+      "block": 317385,
+      "ok": true,
+      "error": null,
+      "signer": "0x225B5e89825c49CC7CEc3d53a29748E28019bd6F"
+    },
+    {
+      "scenario": "H1",
+      "label": "finish_attempt",
+      "hash": "0x0a544fc38e1cfaf5a52a3847cdc88d885bfd1475870689bb385cb5c5498e0223",
+      "block": 317395,
+      "ok": true,
+      "error": null,
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08"
+    },
+    {
+      "scenario": "H1",
+      "label": "control_inherited_account(force_batch[vault.withdrawAllTo, assets.transfer, balances.transfer_all])",
+      "hash": "0xce6a011719f29aefea57207c78eec43663c319c999d2905c48b1096816b1028b",
+      "block": 317396,
+      "ok": true,
+      "error": null,
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08"
+    },
+    {
+      "scenario": "H2",
+      "label": "set_friend_groups",
+      "hash": "0xe5199b5f4140c3d336a1771f3481b617e3c77dbcd3c1b9d5825b9990377f2490",
+      "block": 317407,
+      "ok": true,
+      "error": null,
+      "signer": "0xc490264F4B38bC4435157d4C503b19086b5fff6c"
+    },
+    {
+      "scenario": "H2",
+      "label": "initiate_attempt (lorna, MetaMask)",
+      "hash": "0x0294d42ed5f6c82fae8f7cac7dceb3d994ae48da175384ac6e50011ce3842322",
+      "block": 317408,
+      "ok": true,
+      "error": null,
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF"
+    },
+    {
+      "scenario": "H2",
+      "label": "approve_attempt (sr25519 guardian, native extrinsic)",
+      "hash": "0x3c710bb8b86df0abcf9f8b493f56e4878bfb7c8078ec27cc2ede06127117deee",
+      "block": 317409,
+      "ok": true,
+      "error": null,
+      "signer": "5CJ7j42sqU74Tz8VoJxc8K1weVZLeh3h19T9W9y26C3SCR6A"
+    },
+    {
+      "scenario": "H2",
+      "label": "finish_attempt",
+      "hash": "0xe6551acf3e77cf5bb78d50b2fba6d7cbcba6802d92e22b09ac3714af5ce6f58a",
+      "block": 317417,
+      "ok": true,
+      "error": null,
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08"
+    },
+    {
+      "scenario": "H2",
+      "label": "control_inherited_account(force_batch[assets.transfer, balances.transfer_all keep_alive=true])",
+      "hash": "0x7f7d6ee0e339e03d873906836e15bdcf28496123e31344d383347ac62314e73d",
+      "block": 317418,
+      "ok": true,
+      "error": null,
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08"
+    }
+  ]
+}

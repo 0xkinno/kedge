@@ -1,0 +1,16 @@
+{
+  "id": "SABOTAGE_sort",
+  "command": "KEDGE_SABOTAGE=sort npx tsx scripts/sabotage.mts",
+  "check": "Mate sort and duplicate check skipped",
+  "mateWithSabotage": "passed (sabotage skipped the check)",
+  "nodePreflightError": "FriendsNotSortedOrUnique",
+  "chain": {
+    "ethHash": "0xa20e77908d3946b8b064162bf09bd0becbf23630fbcc4f3c85dee9b533807299",
+    "block": 317530,
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317530?tab=events",
+    "receiptStatus": 0,
+    "error": "recovery.FriendsNotSortedOrUnique"
+  },
+  "pass": true,
+  "at": "2026-11-04T07:49:44.489Z"
+}

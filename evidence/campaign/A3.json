@@ -1,0 +1,51 @@
+{
+  "id": "A3",
+  "at": "2026-11-04T07:42:32.757Z",
+  "network": "portaldot-v3 testnet",
+  "title": "A3",
+  "expected": "recovery.NotYetInheritable",
+  "observedError": "recovery.NotYetInheritable",
+  "pass": true,
+  "tx": {
+    "label": "A3 finish before the delay",
+    "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08",
+    "hash": "0x6ae75662dd54472cf79ea4647d8b9b49d6d7ec5605e520ba548c0f5698883685",
+    "block": 317450,
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317450?tab=events",
+    "ok": false,
+    "error": "recovery.NotYetInheritable",
+    "fee": "0.01590752283801",
+    "events": [
+      "balances.Withdraw",
+      "balances.Withdraw",
+      "revive.EthExtrinsicRevert:recovery.NotYetInheritable",
+      "balances.Deposit",
+      "balances.Deposit",
+      "transactionPayment.TransactionFeePaid",
+      "system.ExtrinsicSuccess"
+    ],
+    "preflightRefusal": "NotYetInheritable"
+  },
+  "txs": [
+    {
+      "label": "A3 finish before the delay",
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08",
+      "hash": "0x6ae75662dd54472cf79ea4647d8b9b49d6d7ec5605e520ba548c0f5698883685",
+      "block": 317450,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317450?tab=events",
+      "ok": false,
+      "error": "recovery.NotYetInheritable",
+      "fee": "0.01590752283801",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.NotYetInheritable",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "NotYetInheritable"
+    }
+  ]
+}

@@ -72,3 +72,14 @@ test('constants: precompile address for the test asset matches the deployed vaul
   const d = JSON.parse(readFileSync('deployments/testnet.json', 'utf8')).AllotmentVault;
   assert.equal(assetPrecompile(KUSD_ASSET_ID).toLowerCase(), d.token.toLowerCase());
 });
+
+test('fault switch: KEDGE_SABOTAGE skips exactly the named pre-flight check', async () => {
+  const lost = acct(1); const ethTwin = new Uint8Array(32).fill(0xee); ethTwin.set(new Uint8Array(20).fill(7), 0);
+  try {
+    process.env.KEDGE_SABOTAGE = 'inheritor'; await refuseContractInheritor(ethTwin, async () => '0x6080'); // passes through when sabotaged
+    process.env.KEDGE_SABOTAGE = 'sort'; checkGroups(lost, [g({ friends: [acct(5), acct(5)] })]);
+    process.env.KEDGE_SABOTAGE = 'delay'; checkFinishable({ finishable: false, blocksLeft: 3 });
+    process.env.KEDGE_SABOTAGE = 'delay'; assert.throws(() => checkGroups(lost, [g({ cancelDelay: 0 })]), /cancel delay/); // other checks stay on
+  } finally { delete process.env.KEDGE_SABOTAGE; }
+  await assert.rejects(() => refuseContractInheritor(ethTwin, async () => '0x6080'));
+});

@@ -1,0 +1,53 @@
+{
+  "id": "C2",
+  "at": "2026-11-04T07:45:38.407Z",
+  "network": "portaldot-v3 testnet",
+  "title": "Counterfactual: EVM-only vault position without Kedge",
+  "expected": "unreachable forever",
+  "pass": true,
+  "account": "0x63Ba8A389870F22138C4C21571C994B0b26C5c89",
+  "vaultSavingsKUSD": "10000000",
+  "note": "withdrawAllTo only pays out for msg.sender == saver. Nobody can be the saver without the key.",
+  "txs": [
+    {
+      "label": "approve kUSD (ERC-20 precompile)",
+      "signer": "0x63Ba8A389870F22138C4C21571C994B0b26C5c89",
+      "hash": "0x95ffa21e09f39b66e5df1718f2a7170917b81f0d97904865ef3bf64e1a92710c",
+      "block": 317486,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317486?tab=events",
+      "ok": true,
+      "fee": "",
+      "events": []
+    },
+    {
+      "label": "save into AllotmentVault",
+      "signer": "0x63Ba8A389870F22138C4C21571C994B0b26C5c89",
+      "hash": "0x320c5d51eecb543f55ebe350f0b90060699ac900f13b24c81ef416e32eeba5e8",
+      "block": 317487,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317487?tab=events",
+      "ok": true,
+      "fee": "",
+      "events": []
+    },
+    {
+      "label": "guardian tries to initiate on an account with no friend groups",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+      "hash": "0x1655a08810c23a3b5420e3b73e66170d807f940301aed72670ff08e728543e30",
+      "block": 317489,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317489?tab=events",
+      "ok": false,
+      "error": "recovery.NoFriendGroups",
+      "fee": "0.01590663922684",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.NoFriendGroups",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "NoFriendGroups"
+    }
+  ]
+}

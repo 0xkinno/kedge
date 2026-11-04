@@ -1,0 +1,189 @@
+{
+  "id": "H1",
+  "at": "2026-11-04T07:36:20.653Z",
+  "network": "portaldot-v3 testnet",
+  "title": "Happy path: setup, initiate, approve, wait, finish, bring home (tPOT + kUSD + vault)",
+  "expected": "all items ItemCompleted; balances moved to the new key; vault Withdrawn(saver = old address)",
+  "pass": true,
+  "lost": "0xac9Fc67b8C3aa19BaB1826498b5d61De75AC74c9",
+  "lostTwin": "0xac9fc67b8c3aa19bab1826498b5d61de75ac74c9eeeeeeeeeeeeeeeeeeeeeeee",
+  "inheritor": "0x376E9e58312c650BC66F0d8344E452C182115D08",
+  "surveyPlan": [
+    {
+      "label": "Allotment vault savings",
+      "willMove": true,
+      "amount": "100000000"
+    },
+    {
+      "label": "kUSD (native asset)",
+      "willMove": true,
+      "amount": "50000000"
+    },
+    {
+      "label": "tPOT (native)",
+      "willMove": true,
+      "amount": "1019697370624189"
+    }
+  ],
+  "before": {
+    "tpot": "1022397943439864",
+    "kusd": "50000000",
+    "vault": "100000000",
+    "heirKusd": "150000000",
+    "heirTpot": "2201572258298275"
+  },
+  "after": {
+    "tpot": "0",
+    "kusd": "0",
+    "vault": "0",
+    "heirKusd": "300000000",
+    "heirTpot": "3600707333449557"
+  },
+  "delta": {
+    "heirKusd": "150000000",
+    "heirTpot": "13.99135075151282"
+  },
+  "storageDepositRefundTPOT": "3.79868674820199",
+  "storageDepositRefundNote": "heir tPOT gained minus the old account tPOT before, plus the control fee. A positive number means the vault slot deposit came back during the sweep.",
+  "items": [
+    {
+      "status": "completed"
+    },
+    {
+      "status": "completed"
+    },
+    {
+      "status": "completed"
+    }
+  ],
+  "controlResult": "Ok",
+  "vaultWithdrawnSaver": "0xac9Fc67b8C3aa19BaB1826498b5d61De75AC74c9",
+  "delaySeconds": 55.093,
+  "totalFeesTPOT": 0.10574099129837002,
+  "txs": [
+    {
+      "label": "approve kUSD (ERC-20 precompile)",
+      "signer": "0xac9Fc67b8C3aa19BaB1826498b5d61De75AC74c9",
+      "hash": "0x8ea08e6bf135dfa72a5f08a9a46ede1086be20c1d72eb6fbd6a0ed1e0b0cd21e",
+      "block": 317380,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317380?tab=events",
+      "ok": true,
+      "fee": "",
+      "events": []
+    },
+    {
+      "label": "save into AllotmentVault",
+      "signer": "0xac9Fc67b8C3aa19BaB1826498b5d61De75AC74c9",
+      "hash": "0xe90b809e2b0350bd785f5fb819ce5d40289dd81f1806b39d8d9414da1f01b184",
+      "block": 317381,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317381?tab=events",
+      "ok": true,
+      "fee": "",
+      "events": []
+    },
+    {
+      "label": "set_friend_groups",
+      "signer": "0xac9Fc67b8C3aa19BaB1826498b5d61De75AC74c9",
+      "hash": "0x86cc5454fec2f857188d114d7b1e13394d7b173f2c89d5c62de15243a57b20fa",
+      "block": 317383,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317383?tab=events",
+      "ok": true,
+      "fee": "0.02700572815675",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.FriendGroupsChanged",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "initiate_attempt",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+      "hash": "0x8522fb0ae1065df9be2309b7e48bc1b09055e8e6af768cef937b2e7f6b6c6d77",
+      "block": 317384,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317384?tab=events",
+      "ok": true,
+      "fee": "0.01580664060273",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Held",
+        "recovery.AttemptInitiated",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "approve_attempt",
+      "signer": "0x225B5e89825c49CC7CEc3d53a29748E28019bd6F",
+      "hash": "0xace97eab25ae922760f4f733a6fde2d357705d40b86cfff89eb96c7212e8d883",
+      "block": 317385,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317385?tab=events",
+      "ok": true,
+      "fee": "0.01580566780982",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "finish_attempt",
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08",
+      "hash": "0x0a544fc38e1cfaf5a52a3847cdc88d885bfd1475870689bb385cb5c5498e0223",
+      "block": 317395,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317395?tab=events",
+      "ok": true,
+      "fee": "0.01580752364126",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Released",
+        "recovery.AttemptFinished",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "control_inherited_account(force_batch[vault.withdrawAllTo, assets.transfer, balances.transfer_all])",
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08",
+      "hash": "0xce6a011719f29aefea57207c78eec43663c319c999d2905c48b1096816b1028b",
+      "block": 317396,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317396?tab=events",
+      "ok": true,
+      "fee": "0.03131543108781",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "assets.Transferred",
+        "revive.ContractEmitted",
+        "revive.ContractEmitted",
+        "balances.TransferOnHold",
+        "utility.ItemCompleted",
+        "assets.Transferred",
+        "utility.ItemCompleted",
+        "system.KilledAccount",
+        "balances.Transfer",
+        "utility.ItemCompleted",
+        "utility.BatchCompleted",
+        "recovery.RecoveredAccountControlled",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    }
+  ]
+}

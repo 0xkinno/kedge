@@ -1,0 +1,201 @@
+{
+  "id": "PRIORITY_RUN",
+  "at": "2026-11-04T07:45:04.093Z",
+  "network": "portaldot-v3 testnet",
+  "lost": "0x70afb0D938C0CC30dA4c5Cd2c246a5E8A6B1B794",
+  "totalFeesTPOT": 0.18856710292407,
+  "txs": [
+    {
+      "label": "set_friend_groups [Family priority 0, Crew priority 1]",
+      "signer": "0x70afb0D938C0CC30dA4c5Cd2c246a5E8A6B1B794",
+      "hash": "0xba79092777ab1dd25a29361f2a887e8a4b23de0b23ea8d01a706e8f2e5406f6d",
+      "block": 317461,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317461?tab=events",
+      "ok": true,
+      "fee": "0.03840573644586",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.FriendGroupsChanged",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "crew initiate",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+      "hash": "0x315d83d0863cd866af6de8a3a3a1ed68d2e61abb3708c4805b9be53c9b78e02d",
+      "block": 317462,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317462?tab=events",
+      "ok": true,
+      "fee": "0.01580663952078",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Held",
+        "recovery.AttemptInitiated",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "crew approve",
+      "signer": "0x225B5e89825c49CC7CEc3d53a29748E28019bd6F",
+      "hash": "0xf6d2b567eae8ce808721ffbde17a9eb2e90062ae140e9f2a2bd9db58b9291516",
+      "block": 317463,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317463?tab=events",
+      "ok": true,
+      "fee": "0.01580566691721",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "crew finish",
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08",
+      "hash": "0x3ceeb084fd8f5e1652e6c9325c4596d87614a3201b5ca008281ca1754ffcb9c2",
+      "block": 317468,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317468?tab=events",
+      "ok": true,
+      "fee": "0.01580752246796",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Released",
+        "recovery.AttemptFinished",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "family initiate",
+      "signer": "0xa6c7b241fDa9Ce8809A8E6e337126D3f6cab710c",
+      "hash": "0xf8023e0ad96d77e02bf0522b82a56fb83f4919416ba5b11881c362eb5019799d",
+      "block": 317469,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317469?tab=events",
+      "ok": true,
+      "fee": "0.01580663942363",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Held",
+        "recovery.AttemptInitiated",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "family approve",
+      "signer": "0xc8f0D700D851572326c554235Fd812B81DDa2849",
+      "hash": "0x03d062bf2e44a319ba839a76785e47413ed884af75738eed8f0c437352ea8ef3",
+      "block": 317470,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317470?tab=events",
+      "ok": true,
+      "fee": "0.01580566683706",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "family finish (higher priority replaces the crew inheritor)",
+      "signer": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8",
+      "hash": "0xb3f8856dc72a2ab6a1eeddee7368f486de12efb34866fb9c2fae3e386f323fc8",
+      "block": 317480,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317480?tab=events",
+      "ok": true,
+      "fee": "0.01580752227488",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Released",
+        "recovery.AttemptFinished",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "A9 crew initiate again after Family recovered",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+      "hash": "0x15fffbc5bdc65db178789530f59b49cae78f0e7e651bce81e15cd3179dbb2bf7",
+      "block": 317481,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317481?tab=events",
+      "ok": false,
+      "error": "recovery.HigherPriorityRecovered",
+      "fee": "0.01590663933766",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.HigherPriorityRecovered",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "HigherPriorityRecovered"
+    },
+    {
+      "label": "A7 inheritor control_inherited_account(recovery.set_friend_groups)",
+      "signer": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8",
+      "hash": "0xdcfac56327f266c0536d4d7f9e29f944d1c07db5540cedd23b80d49d13f87020",
+      "block": 317482,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317482?tab=events",
+      "ok": true,
+      "fee": "0.01570621033841",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.RecoveredAccountControlled",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "A10 force_batch [assets.transfer 999 kUSD (must fail), balances.transfer_all]",
+      "signer": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8",
+      "hash": "0x0e1e7f31469ac9dac32ec55056e55fd54b76b445c5d6c1476ba662d21853adf6",
+      "block": 317483,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317483?tab=events",
+      "ok": true,
+      "fee": "0.02370885936062",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "utility.ItemFailed:assets.BalanceLow",
+        "balances.Transfer",
+        "utility.ItemCompleted",
+        "utility.BatchCompletedWithErrors",
+        "recovery.RecoveredAccountControlled",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    }
+  ]
+}

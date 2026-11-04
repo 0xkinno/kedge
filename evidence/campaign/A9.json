@@ -1,0 +1,72 @@
+{
+  "id": "A9",
+  "at": "2026-11-04T07:44:49.258Z",
+  "network": "portaldot-v3 testnet",
+  "title": "Priority lock: Crew tries again after Family recovered",
+  "expected": "recovery.HigherPriorityRecovered",
+  "pass": true,
+  "observedError": "recovery.HigherPriorityRecovered",
+  "initiateWasAlreadyRefused": true,
+  "tx": {
+    "label": "A9 crew initiate again after Family recovered",
+    "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+    "hash": "0x15fffbc5bdc65db178789530f59b49cae78f0e7e651bce81e15cd3179dbb2bf7",
+    "block": 317481,
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317481?tab=events",
+    "ok": false,
+    "error": "recovery.HigherPriorityRecovered",
+    "fee": "0.01590663933766",
+    "events": [
+      "balances.Withdraw",
+      "balances.Withdraw",
+      "revive.EthExtrinsicRevert:recovery.HigherPriorityRecovered",
+      "balances.Deposit",
+      "balances.Deposit",
+      "transactionPayment.TransactionFeePaid",
+      "system.ExtrinsicSuccess"
+    ],
+    "preflightRefusal": "HigherPriorityRecovered"
+  },
+  "txs": [
+    {
+      "label": "A9 crew initiate again after Family recovered",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+      "hash": "0x15fffbc5bdc65db178789530f59b49cae78f0e7e651bce81e15cd3179dbb2bf7",
+      "block": 317481,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317481?tab=events",
+      "ok": false,
+      "error": "recovery.HigherPriorityRecovered",
+      "fee": "0.01590663933766",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.HigherPriorityRecovered",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "HigherPriorityRecovered"
+    },
+    {
+      "label": "A9 crew initiate again after Family recovered",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+      "hash": "0x15fffbc5bdc65db178789530f59b49cae78f0e7e651bce81e15cd3179dbb2bf7",
+      "block": 317481,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317481?tab=events",
+      "ok": false,
+      "error": "recovery.HigherPriorityRecovered",
+      "fee": "0.01590663933766",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.HigherPriorityRecovered",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "HigherPriorityRecovered"
+    }
+  ]
+}

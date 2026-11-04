@@ -1,0 +1,40 @@
+{
+  "id": "A10",
+  "at": "2026-11-04T07:45:04.093Z",
+  "network": "portaldot-v3 testnet",
+  "title": "Sweep with one item that must fail",
+  "expected": "other items ItemCompleted, one ItemFailed",
+  "pass": true,
+  "items": [
+    {
+      "status": "failed",
+      "error": "assets.BalanceLow"
+    },
+    {
+      "status": "completed"
+    }
+  ],
+  "controlResult": "Ok",
+  "tx": {
+    "label": "A10 force_batch [assets.transfer 999 kUSD (must fail), balances.transfer_all]",
+    "signer": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8",
+    "hash": "0x0e1e7f31469ac9dac32ec55056e55fd54b76b445c5d6c1476ba662d21853adf6",
+    "block": 317483,
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317483?tab=events",
+    "ok": true,
+    "fee": "0.02370885936062",
+    "events": [
+      "balances.Withdraw",
+      "balances.Withdraw",
+      "utility.ItemFailed:assets.BalanceLow",
+      "balances.Transfer",
+      "utility.ItemCompleted",
+      "utility.BatchCompletedWithErrors",
+      "recovery.RecoveredAccountControlled",
+      "balances.Deposit",
+      "balances.Deposit",
+      "transactionPayment.TransactionFeePaid",
+      "system.ExtrinsicSuccess"
+    ]
+  }
+}

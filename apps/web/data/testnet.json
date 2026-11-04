@@ -1,0 +1,16 @@
+{
+  "AllotmentVault": {
+    "address": "0x92cD058Cb7E4d69476bFc7Cbb7630C50f13B57D4",
+    "txHash": "0x5d20d9a0c4be0cda48c3602ca60e8246cf38f691c6f53373f87d982643118ce8",
+    "block": 317284,
+    "token": "0x013528f000000000000000000000000000010000",
+    "tokenAssetId": 20261104,
+    "costTPOT": "91.00391049622747446",
+    "runtimeBytecodeMatchesArtifact": true,
+    "solc": "0.8.28",
+    "evmVersion": "paris",
+    "deployer": "0x9db1ac0Ce3dabD203D23C46fDc064F9FbFe68Eb2",
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317284?tab=events",
+    "deployedAt": "2026-11-04T07:25:01.319Z"
+  }
+}

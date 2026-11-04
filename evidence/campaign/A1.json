@@ -1,0 +1,51 @@
+{
+  "id": "A1",
+  "at": "2026-11-04T07:42:32.756Z",
+  "network": "portaldot-v3 testnet",
+  "title": "A1",
+  "expected": "recovery.NotFriend",
+  "observedError": "recovery.NotFriend",
+  "pass": true,
+  "tx": {
+    "label": "A1 stranger initiate_attempt",
+    "signer": "0x27B9E53F3248e4a4676841B958DcD5CebE0EcC7c",
+    "hash": "0x51134300c2dc641bf6d3428662bf64f9da60cd37fd2baec001291178478b47c8",
+    "block": 317445,
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317445?tab=events",
+    "ok": false,
+    "error": "recovery.NotFriend",
+    "fee": "0.01590663983714",
+    "events": [
+      "balances.Withdraw",
+      "balances.Withdraw",
+      "revive.EthExtrinsicRevert:recovery.NotFriend",
+      "balances.Deposit",
+      "balances.Deposit",
+      "transactionPayment.TransactionFeePaid",
+      "system.ExtrinsicSuccess"
+    ],
+    "preflightRefusal": "NotFriend"
+  },
+  "txs": [
+    {
+      "label": "A1 stranger initiate_attempt",
+      "signer": "0x27B9E53F3248e4a4676841B958DcD5CebE0EcC7c",
+      "hash": "0x51134300c2dc641bf6d3428662bf64f9da60cd37fd2baec001291178478b47c8",
+      "block": 317445,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317445?tab=events",
+      "ok": false,
+      "error": "recovery.NotFriend",
+      "fee": "0.01590663983714",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.NotFriend",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "NotFriend"
+    }
+  ]
+}

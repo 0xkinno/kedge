@@ -27,6 +27,7 @@ export const transferAll = (dest, keepAlive) => hex(call('balances', 4, idAddr(d
 export const assetsTransfer = (id, dest, amount) => hex(call('assets', 8, compact(id), idAddr(dest), compact(amount)));
 export const forceBatch = (callHexes) => hex(call('utility', 4, vec(callHexes.map(bytes))));
 export const controlInheritedAccount = (recovered, innerHex) => hex(call('recovery', 0, idAddr(recovered), bytes(innerHex)));
+export const reviveCall = (dest, value, refTime, proofSize, depositLimit, dataHex) => hex(call('revive', 1, bytes(dest), compact(value), compact(refTime), compact(proofSize), compact(depositLimit), cat(compact(bytes(dataHex).length), bytes(dataHex))));
 export const revokeInheritor = () => hex(call('recovery', 1));
 export const friendGroup = (g) => cat(vec(g.friends.map(bytes)), u32(g.friendsNeeded), bytes(g.inheritor), u32(g.inheritanceDelay), u32(g.inheritancePriority), u32(g.cancelDelay));
 export const setFriendGroups = (groups) => hex(call('recovery', 2, vec(groups.map(friendGroup))));

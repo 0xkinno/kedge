@@ -26,6 +26,8 @@ test('scale.mjs equals polkadot.js byte for byte on live metadata', async () => 
   const inner = S.transferKeepAlive(dest, 1n);
   assert.equal(S.controlInheritedAccount(lost, inner), a.tx.recovery.controlInheritedAccount({ Id: lost }, a.tx.balances.transferKeepAlive({ Id: dest }, 1n)).method.toHex());
   assert.equal(S.forceBatch([inner, S.transferAll(dest, true)]), a.tx.utility.forceBatch([a.tx.balances.transferKeepAlive({ Id: dest }, 1n), a.tx.balances.transferAll({ Id: dest }, true)]).method.toHex());
+  assert.equal(S.reviveCall('0x92cD058Cb7E4d69476bFc7Cbb7630C50f13B57D4', 0, 123456789n, 20000n, 10n ** 13n, '0xdeadbeef'),
+    a.tx.revive.call('0x92cD058Cb7E4d69476bFc7Cbb7630C50f13B57D4', 0, { refTime: 123456789n, proofSize: 20000n }, 10n ** 13n, '0xdeadbeef').method.toHex());
   for (const n of [0n, 63n, 64n, 16383n, 16384n, 2n ** 30n - 1n, 2n ** 30n, 10n ** 20n]) assert.equal(u8aToHex(S.compact(n)), u8aToHex(a.createType('Compact<u128>', n).toU8a()), `compact ${n}`);
 });
 

@@ -1,0 +1,64 @@
+{
+  "id": "A6",
+  "at": "2026-11-04T07:42:32.757Z",
+  "network": "portaldot-v3 testnet",
+  "title": "A6",
+  "expected": "recovery.NotYetCancelable",
+  "observedError": "recovery.NotYetCancelable",
+  "pass": true,
+  "tx": {
+    "label": "A6 initiator tries cancel_attempt inside the cancel delay",
+    "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+    "hash": "0x0702ccd3a267b2c7a00d0725359b6a5f3e46344d058617511658de565571a842",
+    "block": 317453,
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317453?tab=events",
+    "ok": false,
+    "error": "recovery.NotYetCancelable",
+    "fee": "0.01590693001225",
+    "events": [
+      "balances.Withdraw",
+      "balances.Withdraw",
+      "revive.EthExtrinsicRevert:recovery.NotYetCancelable",
+      "balances.Deposit",
+      "balances.Deposit",
+      "transactionPayment.TransactionFeePaid",
+      "system.ExtrinsicSuccess"
+    ],
+    "preflightRefusal": "NotYetCancelable"
+  },
+  "cancelAfterDelay": {
+    "ok": true,
+    "events": [
+      "balances.Withdraw",
+      "balances.Withdraw",
+      "balances.Released",
+      "recovery.AttemptCanceled",
+      "balances.Deposit",
+      "balances.Deposit",
+      "transactionPayment.TransactionFeePaid",
+      "system.ExtrinsicSuccess"
+    ]
+  },
+  "txs": [
+    {
+      "label": "A6 initiator tries cancel_attempt inside the cancel delay",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+      "hash": "0x0702ccd3a267b2c7a00d0725359b6a5f3e46344d058617511658de565571a842",
+      "block": 317453,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317453?tab=events",
+      "ok": false,
+      "error": "recovery.NotYetCancelable",
+      "fee": "0.01590693001225",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.NotYetCancelable",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "NotYetCancelable"
+    }
+  ]
+}

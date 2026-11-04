@@ -9,7 +9,10 @@
     "keygen": "node scripts/keygen.mjs",
     "test": "node --import tsx --test tests/*.test.mjs tests/*.test.ts",
     "verify:sources": "node scripts/verify_sources.mjs",
-    "build:figures": "node scripts/build_figures.mjs"
+    "build:figures": "node scripts/build_figures.mjs",
+    "verify": "node scripts/verify.mjs",
+    "facts": "node scripts/facts.mjs",
+    "campaign": "npx tsx scripts/campaign.mts"
   },
   "dependencies": {
     "@polkadot/api": "^17.0.2",

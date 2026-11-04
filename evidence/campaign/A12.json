@@ -1,0 +1,22 @@
+{
+  "id": "A12",
+  "at": "2026-11-04T07:45:04.350Z",
+  "network": "portaldot-v3 testnet",
+  "title": "Scam link with a different inheritor",
+  "expected": "call phrase mismatch, approve disabled",
+  "pass": true,
+  "phraseFromRamonsNewPhone": [
+    "shoe",
+    "immense",
+    "bind",
+    "tortoise"
+  ],
+  "phraseOnScamLink": [
+    "device",
+    "amateur",
+    "purity",
+    "lumber"
+  ],
+  "approveEnabledWhenTypingScamWords": false,
+  "note": "Advisory UI. The chain enforces threshold and delay."
+}

@@ -1,0 +1,52 @@
+{
+  "id": "A5",
+  "at": "2026-11-04T07:42:32.757Z",
+  "network": "portaldot-v3 testnet",
+  "title": "A5",
+  "expected": "AttemptSlashed",
+  "pass": true,
+  "tx": {
+    "label": "A5 owner slash_attempt (owner still holds key)",
+    "signer": "0xbC246Dda27b4a1B8707402c6f09b97c1A8e2c2Cf",
+    "hash": "0xdf3de0b07ca84837e53dc5cee26aa5676a2eddeeb4831941c6e196958f25a214",
+    "block": 317451,
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317451?tab=events",
+    "ok": true,
+    "fee": "0.01250676268716",
+    "events": [
+      "balances.Withdraw",
+      "balances.Withdraw",
+      "recovery.AttemptSlashed",
+      "balances.Deposit",
+      "balances.Deposit",
+      "transactionPayment.TransactionFeePaid",
+      "system.ExtrinsicSuccess"
+    ]
+  },
+  "attemptsAfter": 0,
+  "note": "SecurityDeposit is 0 on V3, so nothing is burned. The owner can still end an attempt he did not start.",
+  "slashEvent": {
+    "lost": "5GKPgTnBcjfARY5BxmyTDyPhiBPWvZf6kSkbZFPoKqU4emGG",
+    "friendGroupIndex": "0"
+  },
+  "txs": [
+    {
+      "label": "A5 owner slash_attempt (owner still holds key)",
+      "signer": "0xbC246Dda27b4a1B8707402c6f09b97c1A8e2c2Cf",
+      "hash": "0xdf3de0b07ca84837e53dc5cee26aa5676a2eddeeb4831941c6e196958f25a214",
+      "block": 317451,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317451?tab=events",
+      "ok": true,
+      "fee": "0.01250676268716",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.AttemptSlashed",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    }
+  ]
+}

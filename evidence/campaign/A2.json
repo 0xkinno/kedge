@@ -1,0 +1,51 @@
+{
+  "id": "A2",
+  "at": "2026-11-04T07:42:32.757Z",
+  "network": "portaldot-v3 testnet",
+  "title": "A2",
+  "expected": "recovery.NotApproved",
+  "observedError": "recovery.NotApproved",
+  "pass": true,
+  "tx": {
+    "label": "A2 finish with 1 of 2 approvals",
+    "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08",
+    "hash": "0x1bb1cd56ea7c9995e4bb3787d064ffc44d31fe85938beac4f1c2d6250e9c928b",
+    "block": 317447,
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317447?tab=events",
+    "ok": false,
+    "error": "recovery.NotApproved",
+    "fee": "0.01590752288619",
+    "events": [
+      "balances.Withdraw",
+      "balances.Withdraw",
+      "revive.EthExtrinsicRevert:recovery.NotApproved",
+      "balances.Deposit",
+      "balances.Deposit",
+      "transactionPayment.TransactionFeePaid",
+      "system.ExtrinsicSuccess"
+    ],
+    "preflightRefusal": "NotApproved"
+  },
+  "txs": [
+    {
+      "label": "A2 finish with 1 of 2 approvals",
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08",
+      "hash": "0x1bb1cd56ea7c9995e4bb3787d064ffc44d31fe85938beac4f1c2d6250e9c928b",
+      "block": 317447,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317447?tab=events",
+      "ok": false,
+      "error": "recovery.NotApproved",
+      "fee": "0.01590752288619",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.NotApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "NotApproved"
+    }
+  ]
+}

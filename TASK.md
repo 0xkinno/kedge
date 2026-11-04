@@ -62,23 +62,23 @@ Source of truth: `reference/KEDGE_BUILD_INSTRUCTION.md` (section numbers below r
 - [ ] (Stretch, only if budget allows and Kinnoski approves) tiny ink! vault; deploy; record
 
 ## Phase 6. Core library (the action path)
-- [ ] `constants.ts`, `twin.ts` with tests against probe outputs
-- [ ] `purser.ts`: all Recovery calls, `bringHome` with `force_batch`; metadata-driven arg shapes
-- [ ] `watch/scale.mjs` dependency-free encoder; byte-for-byte test vs polkadot.js on live metadata
-- [ ] `helm.ts`: send via EIP-1193 to pallets address, persist hash first, poll up to 600 s, resolve extrinsic, decode events incl. module error names
-- [ ] `lookout.ts`: friend groups, attempts, inheritor, delay clock from `provided_block_number`
-- [ ] `survey.ts`: inventory + `ReviveApi_call` dry runs + Will move / Will not move
-- [ ] `mate.ts`: all pre-flight refusals incl. contract inheritor
-- [ ] `phrase.ts` + curated `words-maritime.json` (2048 words) + tests (determinism, mismatch on any input change)
-- [ ] Unit test suite green; commit
+- [x] `constants.ts`, `twin.ts` with tests against probe outputs (twin tests use recorded probe outputs)
+- [x] `purser.ts`: all Recovery calls, `bringHome` with `force_batch`; metadata-driven arg shapes (metadata-driven, force_batch, sweep order tested live)
+- [x] `watch/scale.mjs` dependency-free encoder; byte-for-byte test vs polkadot.js on live metadata (byte-for-byte equal to polkadot.js on live metadata, 14 call shapes plus compact edge cases)
+- [x] `helm.ts`: send via EIP-1193 to pallets address, persist hash first, poll up to 600 s, resolve extrinsic, decode events incl. module error names (hash persisted first, 600 s poll, keccak rule, decodes ExtrinsicFailed, EthExtrinsicRevert and ItemFailed)
+- [x] `lookout.ts`: friend groups, attempts, inheritor, delay clock from `provided_block_number` (bitfield decode verified against recorded probe data)
+- [x] `survey.ts`: inventory + `ReviveApi_call` dry runs + Will move / Will not move (inventory, ReviveApi_call dry run, Will move / Will not move)
+- [x] `mate.ts`: all pre-flight refusals incl. contract inheritor (all refusals incl. contract inheritor; fault switch)
+- [x] `phrase.ts` + curated `words-maritime.json` (2048 words) + tests (determinism, mismatch on any input change) (BIP39 English list used instead of a hand-curated maritime list; deviation disclosed in the code and README)
+- [x] Unit test suite green; commit (21 tests, node --test with tsx)
 
 ## Phase 7. Proof and break campaign (live testnet)
-- [ ] `scripts/campaign.mjs` runs H1, H2, A1 to A12, C1, C2 (Section 9); refusals sent on chain
-- [ ] `evidence/campaign/<id>.json` for each; failed extrinsics have decoded error names
-- [ ] Fault switch `KEDGE_SABOTAGE` (9.2) with documented commands and results
-- [ ] `scripts/facts.mjs` writes `docs/FACTS.json`; CI fails if README/UI numbers drift
-- [ ] `PROOF.md`, `EVIDENCE.md`, `FINDINGS.md` (positive and negative results)
-- [ ] `npm run verify`: keyless, re-reads every recorded tx from the public node and checks FACTS
+- [x] `scripts/campaign.mjs` runs H1, H2, A1 to A12, C1, C2 (Section 9); refusals sent on chain (scripts/campaign.mts; H1, H2, A1 to A12, C1, C2 all pass)
+- [x] `evidence/campaign/<id>.json` for each; failed extrinsics have decoded error names (16 scenario files plus run logs)
+- [x] Fault switch `KEDGE_SABOTAGE` (9.2) with documented commands and results (evidence/campaign/SABOTAGE_sort.json, block 317530)
+- [x] `scripts/facts.mjs` writes `docs/FACTS.json`; CI fails if README/UI numbers drift (FACTS drift test in the suite)
+- [x] `PROOF.md`, `EVIDENCE.md`, `FINDINGS.md` (positive and negative results) (generated and written)
+- [x] `npm run verify`: keyless, re-reads every recorded tx from the public node and checks FACTS (31 of 31 transactions re-read, ALL CHECKS PASSED)
 - [ ] **GATE 7:** report results incl. misses and wrongly blocked count
 
 ## Phase 8. Watchkeeper (autonomous background loop)

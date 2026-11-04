@@ -44,7 +44,7 @@ export async function pollReceipt(rpc: EvmRpc, hash: string, { timeoutMs = 600_0
 export type KedgeEvent = { event: string; data: any; error?: string };
 export type Outcome = {
   block: number; blockHash: string; extrinsicIndex: number; matchRule: string; explorer: string;
-  extrinsicFailed: boolean; errorName?: string; events: KedgeEvent[];
+  extrinsicFailed: boolean; errorName?: string; receiptStatus: number; events: KedgeEvent[];
   controlResult?: 'Ok' | { Err: any }; items: { status: 'completed' | 'failed'; error?: string }[];
 };
 
@@ -68,12 +68,14 @@ export async function resolveOutcome(api: ApiPromise, rpc: EvmRpc, hash: string,
     const { section, method } = e.event; const out: KedgeEvent = { event: `${section}.${method}`, data: e.event.data.toHuman() };
     if (section === 'system' && method === 'ExtrinsicFailed') out.error = modErr(api, e.event.data[0]);
     if (section === 'utility' && method === 'ItemFailed') out.error = modErr(api, e.event.data[0]);
+    // V3: a failing call sent through the pallets address is ExtrinsicSuccess + revive.EthExtrinsicRevert (receipt status 0).
+    if (section === 'revive' && method === 'EthExtrinsicRevert') out.error = modErr(api, e.event.data[0]);
     return out;
   });
-  const failed = events.find((e) => e.event === 'system.ExtrinsicFailed');
+  const failed = events.find((e) => e.event === 'system.ExtrinsicFailed' || e.event === 'revive.EthExtrinsicRevert');
   const ctl = events.find((e) => e.event === 'recovery.RecoveredAccountControlled');
   const items = events.filter((e) => /^utility\.Item(Completed|Failed)$/.test(e.event))
     .map((e) => (e.event.endsWith('Completed') ? { status: 'completed' as const } : { status: 'failed' as const, error: e.error }));
-  return { block: n, blockHash: bh.toHex(), extrinsicIndex: idx, matchRule: rule, explorer: explorerBlock(n), extrinsicFailed: !!failed,
-    errorName: failed?.error, events, controlResult: ctl ? (ctl.data.callResult ?? ctl.data.call_result) : undefined, items };
+  return { block: n, blockHash: bh.toHex(), extrinsicIndex: idx, matchRule: rule, explorer: explorerBlock(n), extrinsicFailed: !!failed || parseInt(r.status, 16) === 0,
+    receiptStatus: parseInt(r.status, 16), errorName: failed?.error, events, controlResult: ctl ? (ctl.data.callResult ?? ctl.data.call_result) : undefined, items };
 }

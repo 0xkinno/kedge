@@ -1,0 +1,35 @@
+name: Watchkeeper
+# Loop chaining: each run polls every 30 s for about 55 minutes, then dispatches the next run.
+# Plain cron fires unreliably on busy days, so cron is only the safety net that restarts a broken chain.
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+concurrency:
+  group: watchkeeper
+  cancel-in-progress: false
+permissions:
+  contents: read
+  actions: write
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Scan Recovery events and alert (keyless, read-only)
+        env:
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          APP_URL: ${{ vars.APP_URL }}
+        run: node watch/run.mjs --seconds 3240
+      - name: Dispatch the next run
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run watchkeeper.yml --repo "$GITHUB_REPOSITORY"

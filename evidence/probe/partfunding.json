@@ -1,63 +1,31 @@
 {
   "part": "funding",
-  "at": "2026-11-04T06:28:39.515Z",
+  "at": "2026-11-04T07:36:54.391Z",
   "plan": {
-    "ramon": 30,
-    "lorna": 3,
-    "ben": 3,
-    "ana": 2,
-    "lifeboat": 3,
-    "stranger": 2,
-    "sr-guardian": 3
+    "drill-lorna": 3,
+    "drill-ben": 3,
+    "drill-lifeboat": 3
   },
   "done": [
     {
-      "name": "ramon",
-      "tpot": 30,
-      "hash": "0x1750a73e8608d97de9d6a47b236eeda702dedcfa04ad7283f9da0b8141b5aff4",
-      "block": 316721,
-      "status": 1
-    },
-    {
-      "name": "lorna",
+      "name": "drill-lorna",
       "tpot": 3,
-      "hash": "0xbc9f472ed359736b335e568f3fe590560e2ff9c51b131a04aa433d587d95ee21",
-      "block": 316722,
+      "hash": "0x493e037b450cc856fe87f8387a6c35b85fd33c9b007d19dc9f2f076c5ac92e1e",
+      "block": 317399,
       "status": 1
     },
     {
-      "name": "ben",
+      "name": "drill-ben",
       "tpot": 3,
-      "hash": "0x77efc12ae204a1846e716d19160b8556cefffa20dafa073c61c7dbad9a11ebfe",
-      "block": 316723,
+      "hash": "0x8a6d6a49d6216556f0075e8c4535757b14f8ad7c96ca0e2d260cca0681cfd188",
+      "block": 317401,
       "status": 1
     },
     {
-      "name": "ana",
-      "tpot": 2,
-      "hash": "0x9e78848538baa26df8faa6ab33cea6457974f8ab86c0e4304d3c0d1179d5f3ff",
-      "block": 316724,
-      "status": 1
-    },
-    {
-      "name": "lifeboat",
+      "name": "drill-lifeboat",
       "tpot": 3,
-      "hash": "0xba0eb69dc6eb85bc2eb7cbf956ffc90188dc16da2d0e06cce40cb54cba7d246b",
-      "block": 316725,
-      "status": 1
-    },
-    {
-      "name": "stranger",
-      "tpot": 2,
-      "hash": "0xdf531dcbbce54d09ad59ba38b548df0a74e565ff6b1ae9e07dcda860e985796e",
-      "block": 316726,
-      "status": 1
-    },
-    {
-      "name": "sr-guardian",
-      "tpot": 3,
-      "hash": "0x618bd6e580ad2edab71376a839ac454b42278d167d3b9512560c6762d0876b25",
-      "block": 316727,
+      "hash": "0x541b2eea18737f4973a2b6fab728cfac6f92f43f534110819167bed4e7189b54",
+      "block": 317402,
       "status": 1
     }
   ]

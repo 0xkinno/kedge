@@ -1,0 +1,22 @@
+{
+  "id": "A11",
+  "at": "2026-11-04T07:45:04.348Z",
+  "network": "portaldot-v3 testnet",
+  "title": "Contract set as inheritor",
+  "expected": "refused by Mate; on-chain probe shows contract to pallets address is a no-op",
+  "pass": true,
+  "contract": "0x470CF1b1449Ec2580177045f63AB5BF7e0dBA0f4",
+  "mateRefusalCode": "INHERITOR_IS_CONTRACT",
+  "onChainProbe": {
+    "ethHash": "0x5dfa5618d9261b55e616122af7b03c9c40cafe34179dcd8587a07a4626da81fc",
+    "block": 316785,
+    "calledOk": [
+      {
+        "ok": true,
+        "returnSize": "0"
+      }
+    ],
+    "remarkedEventSeen": false,
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/316785?tab=events"
+  }
+}

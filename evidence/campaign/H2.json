@@ -1,0 +1,117 @@
+{
+  "id": "H2",
+  "at": "2026-11-04T07:38:33.147Z",
+  "network": "portaldot-v3 testnet",
+  "title": "Cross-VM guardians: one sr25519 guardian approves with a native extrinsic, two on MetaMask",
+  "expected": "completes",
+  "pass": true,
+  "items": [
+    {
+      "status": "completed"
+    },
+    {
+      "status": "completed"
+    }
+  ],
+  "controlResult": "Ok",
+  "q6_transferAll_keepAlive_true_leftOnOldAccountPlanck": "10000000000000",
+  "q6_note": "keep_alive=true leaves the existential deposit (0.1 tPOT = 10^13 planck) on the old account; H1 used false and left 0",
+  "txs": [
+    {
+      "label": "set_friend_groups",
+      "signer": "0xc490264F4B38bC4435157d4C503b19086b5fff6c",
+      "hash": "0xe5199b5f4140c3d336a1771f3481b617e3c77dbcd3c1b9d5825b9990377f2490",
+      "block": 317407,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317407?tab=events",
+      "ok": true,
+      "fee": "0.02700572787842",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.FriendGroupsChanged",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "initiate_attempt (lorna, MetaMask)",
+      "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+      "hash": "0x0294d42ed5f6c82fae8f7cac7dceb3d994ae48da175384ac6e50011ce3842322",
+      "block": 317408,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317408?tab=events",
+      "ok": true,
+      "fee": "0.01570664018909",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Held",
+        "recovery.AttemptInitiated",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "approve_attempt (sr25519 guardian, native extrinsic)",
+      "signer": "5CJ7j42sqU74Tz8VoJxc8K1weVZLeh3h19T9W9y26C3SCR6A",
+      "hash": "0x3c710bb8b86df0abcf9f8b493f56e4878bfb7c8078ec27cc2ede06127117deee",
+      "block": 317409,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317409?tab=events",
+      "ok": true,
+      "fee": "",
+      "events": [
+        "balances.Withdraw",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "finish_attempt",
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08",
+      "hash": "0xe6551acf3e77cf5bb78d50b2fba6d7cbcba6802d92e22b09ac3714af5ce6f58a",
+      "block": 317417,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317417?tab=events",
+      "ok": true,
+      "fee": "0.01580752328759",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Released",
+        "recovery.AttemptFinished",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "control_inherited_account(force_batch[assets.transfer, balances.transfer_all keep_alive=true])",
+      "signer": "0x376E9e58312c650BC66F0d8344E452C182115D08",
+      "hash": "0x7f7d6ee0e339e03d873906836e15bdcf28496123e31344d383347ac62314e73d",
+      "block": 317418,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317418?tab=events",
+      "ok": true,
+      "fee": "0.02370886062236",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "assets.Transferred",
+        "utility.ItemCompleted",
+        "balances.Transfer",
+        "utility.ItemCompleted",
+        "utility.BatchCompleted",
+        "recovery.RecoveredAccountControlled",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    }
+  ]
+}

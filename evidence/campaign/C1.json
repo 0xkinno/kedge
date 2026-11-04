@@ -1,0 +1,38 @@
+{
+  "id": "C1",
+  "at": "2026-11-04T07:45:38.407Z",
+  "network": "portaldot-v3 testnet",
+  "title": "Counterfactual: a wallet without Kedge, key discarded",
+  "expected": "balance unmovable; no path exists",
+  "pass": true,
+  "account": "0x63Ba8A389870F22138C4C21571C994B0b26C5c89",
+  "state": {
+    "tpot": "222397943926617",
+    "kusd": "20000000",
+    "vaultSavings": "10000000",
+    "friendGroups": 0,
+    "inheritor": null
+  },
+  "keyKept": false,
+  "onChainAttempt": {
+    "label": "guardian tries to initiate on an account with no friend groups",
+    "signer": "0xF75dC959e472419eE6520A39473D3236687844fF",
+    "hash": "0x1655a08810c23a3b5420e3b73e66170d807f940301aed72670ff08e728543e30",
+    "block": 317489,
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317489?tab=events",
+    "ok": false,
+    "error": "recovery.NoFriendGroups",
+    "fee": "0.01590663922684",
+    "events": [
+      "balances.Withdraw",
+      "balances.Withdraw",
+      "revive.EthExtrinsicRevert:recovery.NoFriendGroups",
+      "balances.Deposit",
+      "balances.Deposit",
+      "transactionPayment.TransactionFeePaid",
+      "system.ExtrinsicSuccess"
+    ],
+    "preflightRefusal": "NoFriendGroups"
+  },
+  "note": "No friend groups means no inheritor can ever be set. The funds are at an address nobody can sign for."
+}

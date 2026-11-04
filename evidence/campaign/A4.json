@@ -1,0 +1,54 @@
+{
+  "id": "A4",
+  "at": "2026-11-04T07:42:32.757Z",
+  "network": "portaldot-v3 testnet",
+  "title": "A4",
+  "expected": "recovery.AlreadyApproved",
+  "observedError": "recovery.AlreadyApproved",
+  "pass": true,
+  "tx": {
+    "label": "A4 ben approves twice",
+    "signer": "0x225B5e89825c49CC7CEc3d53a29748E28019bd6F",
+    "hash": "0x44303d0f6dbde41b13070e2fd0d1883c61bf962e5659101c26a87b88d083f71d",
+    "block": 317449,
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317449?tab=events",
+    "ok": false,
+    "error": "recovery.AlreadyApproved",
+    "fee": "0.01590566715802",
+    "events": [
+      "balances.Withdraw",
+      "balances.Withdraw",
+      "revive.EthExtrinsicRevert:recovery.AlreadyApproved",
+      "balances.Deposit",
+      "balances.Deposit",
+      "transactionPayment.TransactionFeePaid",
+      "system.ExtrinsicSuccess"
+    ],
+    "preflightRefusal": "AlreadyApproved"
+  },
+  "txs": [
+    {
+      "label": "A4 ben approves twice",
+      "signer": "0x225B5e89825c49CC7CEc3d53a29748E28019bd6F",
+      "hash": "0x44303d0f6dbde41b13070e2fd0d1883c61bf962e5659101c26a87b88d083f71d",
+      "block": 317449,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317449?tab=events",
+      "ok": false,
+      "error": "recovery.AlreadyApproved",
+      "fee": "0.01590566715802",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "revive.EthExtrinsicRevert:recovery.AlreadyApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "preflightRefusal": "AlreadyApproved"
+    }
+  ],
+  "predictedError": "recovery.AlreadyVoted",
+  "predictionMatched": false,
+  "note": "The build instruction predicted AlreadyVoted. V3 refuses a repeat approval from the same guardian with AlreadyApproved. The refusal held; the predicted name was wrong. Pass criterion amended after the run by scripts/amend_a4.mjs."
+}

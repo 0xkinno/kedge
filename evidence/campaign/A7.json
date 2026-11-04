@@ -1,0 +1,35 @@
+{
+  "id": "A7",
+  "at": "2026-11-04T07:44:58.304Z",
+  "network": "portaldot-v3 testnet",
+  "title": "Reentrancy guard: inheritor tries to rewrite recovery config through control_inherited_account",
+  "expected": "receipt ok, RecoveredAccountControlled.call_result = Err",
+  "pass": true,
+  "receiptStatusOk": true,
+  "controlResult": {
+    "Err": {
+      "Module": {
+        "index": "0",
+        "error": "0x05000000"
+      }
+    }
+  },
+  "tx": {
+    "label": "A7 inheritor control_inherited_account(recovery.set_friend_groups)",
+    "signer": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8",
+    "hash": "0xdcfac56327f266c0536d4d7f9e29f944d1c07db5540cedd23b80d49d13f87020",
+    "block": 317482,
+    "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/317482?tab=events",
+    "ok": true,
+    "fee": "0.01570621033841",
+    "events": [
+      "balances.Withdraw",
+      "balances.Withdraw",
+      "recovery.RecoveredAccountControlled",
+      "balances.Deposit",
+      "balances.Deposit",
+      "transactionPayment.TransactionFeePaid",
+      "system.ExtrinsicSuccess"
+    ]
+  }
+}
