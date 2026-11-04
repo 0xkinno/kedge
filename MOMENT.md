@@ -80,8 +80,7 @@ Every row was opened on 2026-11-04 and its quote re-checked against the live pag
 Rows replaced or reworded against the instruction's draft: the lost-bitcoin row (dormancy, not lost keys), and
 the Philippines row now cites a verified dollar figure for sea-based workers only.
 
-## Founder stake (DRAFT, awaiting Kinnoski's approval; not to be published until approved)
+## Founder stake (approved by Kinnoski on 2026-11-04, accurate and cleared for publication)
 
 > Kinnoski is training toward STCW maritime certification. Ramon's moment is his future working life.
 
-Open question for Kinnoski: is that sentence accurate and are you happy to publish it as written?

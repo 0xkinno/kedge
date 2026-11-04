@@ -31,7 +31,7 @@ Source of truth: `reference/KEDGE_BUILD_INSTRUCTION.md` (section numbers below r
 - [x] `MOMENT.md` from Section 5 (from Section 5, persona and clock, caveats on each source)
 - [x] Verify every source in the pain table; write `docs/sources.json` (url, title, quote, date opened) (8 quotes re-checked against live pages by scripts/verify_sources.mjs; 3 caveats recorded in sources.json)
 - [x] Test asserting the landing-page money figure equals `sources.json` (tests/sources.test.mjs; tampering the figure makes it fail, restoring passes)
-- [ ] Founder-stake line approved by Kinnoski
+- [x] Founder-stake line approved by Kinnoski (confirmed in chat 2026-11-04: accurate, happy to publish)
 
 ## Phase 3. G3 and G5 (discovery probes on the live chain)  <- the build lives or dies here
 - [ ] `scripts/keygen.mjs`: testnet keys for ramon, lorna, ben, ana, lifeboat, stranger, drill crew; addresses printed only

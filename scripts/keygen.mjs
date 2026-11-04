@@ -4,7 +4,8 @@
 // Each key is one secp256k1 key: it is the MetaMask address (h160) and, through the
 // Portaldot twin rule (h160 followed by twelve 0xEE bytes), also a native 5... account.
 import { Wallet, getBytes, hexlify } from 'ethers';
-import { encodeAddress } from '@polkadot/util-crypto';
+import { encodeAddress, mnemonicGenerate, cryptoWaitReady } from '@polkadot/util-crypto';
+import { Keyring } from '@polkadot/keyring';
 import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
 
 const NAMES = process.argv.slice(2);
@@ -17,10 +18,19 @@ const twinOf = (h160) => {
 };
 
 mkdirSync('keys', { recursive: true, mode: 0o700 });
+await cryptoWaitReady();
 for (const name of NAMES) {
   if (!/^[a-z0-9-]+$/.test(name)) throw new Error(`bad name ${name}`);
   const file = `keys/${name}.json`;
   if (existsSync(file)) { console.log(`${name}: exists, not overwritten (${file})`); continue; }
+  if (name.startsWith('sr-')) { // native sr25519 account (SubWallet style guardian)
+    const mnemonic = mnemonicGenerate();
+    const pair = new Keyring({ type: 'sr25519', ss58Format: 42 }).addFromMnemonic(mnemonic);
+    const rec = { name, kind: 'sr25519', network: 'portaldot-v3-testnet', note: 'testnet only', ss58: pair.address, mnemonic };
+    writeFileSync(file, JSON.stringify(rec, null, 2), { mode: 0o600 });
+    console.log(`${name}\n  native sr25519 (5...)  ${pair.address}\n  saved                  ${file} (mode 600)`);
+    continue;
+  }
   const w = Wallet.createRandom();
   const twin = twinOf(w.address);
   const rec = {
