@@ -25,3 +25,38 @@ export function save(part, obj) {
 }
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 export { hexlify, getBytes };
+
+// ---- Helmsman-lite for probes: send an encoded RuntimeCall from an EOA to the pallets address and resolve the
+// real Substrate outcome. Never trusts the receipt alone (gasUsed is 0, control_inherited_account returns Ok).
+import { keccak256 } from 'ethers';
+export async function sendRuntime(api, who, callHex, { value = 0n } = {}) {
+  const p = who.provider; const price = (await p.getFeeData()).gasPrice;
+  const gas = await p.estimateGas({ from: who.address, to: PALLETS, data: callHex, value });
+  const tx = await who.sendTransaction({ to: PALLETS, data: callHex, gasLimit: gas * 13n / 10n, gasPrice: price, value });
+  const rc = await tx.wait();
+  return { hash: tx.hash, receipt: rc, outcome: await resolve(api, tx.hash, rc) };
+}
+export async function resolve(api, hash, rc) {
+  const bh = await api.rpc.chain.getBlockHash(rc.blockNumber);
+  const [signed, events] = await Promise.all([api.rpc.chain.getBlock(bh), api.query.system.events.at(bh)]);
+  const xts = signed.block.extrinsics;
+  const cands = xts.map((xt, i) => ({ i, section: xt.method.section, method: xt.method.method }))
+    .filter((c) => c.section === 'revive' && /ethTransact/i.test(c.method));
+  let idx = -1, rule = null;
+  for (const c of cands) {
+    const payload = xts[c.i].method.args[0].toU8a(true);
+    if (keccak256(payload) === hash) { idx = c.i; rule = 'keccak256(ethTransact payload) == eth tx hash'; break; }
+  }
+  if (idx < 0) { idx = cands[rc.index ?? 0]?.i ?? -1; rule = `FALLBACK by position ${rc.index}`; }
+  const mine = events.filter((e) => e.phase.isApplyExtrinsic && e.phase.asApplyExtrinsic.toNumber() === idx);
+  return { block: rc.blockNumber, blockHash: bh.toHex(), extrinsicIndex: idx, matchRule: rule, ethTransactCountInBlock: cands.length,
+    events: mine.map((e) => decodeEvent(api, e)) };
+}
+export function decodeEvent(api, e) {
+  const { section, method } = e.event; const data = e.event.data.toHuman();
+  let out = { event: `${section}.${method}`, data };
+  if (section === 'system' && method === 'ExtrinsicFailed') {
+    const de = e.event.data[0]; if (de.isModule) { const m = api.registry.findMetaError(de.asModule); out.error = `${m.section}.${m.name}`; }
+  }
+  return out;
+}

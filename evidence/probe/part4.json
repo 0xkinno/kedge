@@ -1,0 +1,71 @@
+{
+  "part": 4,
+  "at": "2026-11-04T06:29:13.882Z",
+  "from": "0x85fbBA0fD74dAd192A277DCF5e8B83DA96FCA816",
+  "callHex": "0x00072c6b656467652070726f6265",
+  "ethHash": "0xe2fdda58d4075225c6c4363a1faa22a3b5413f1212a9d4095c93551ef1d7173d",
+  "receiptStatus": 1,
+  "gasUsed": "0",
+  "block": 316733,
+  "extrinsicIndex": 1,
+  "matchRule": "keccak256(ethTransact payload) == eth tx hash",
+  "remarkedEventSeen": true,
+  "events": [
+    {
+      "event": "balances.Withdraw",
+      "data": {
+        "who": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+        "amount": "478,982,945,906"
+      }
+    },
+    {
+      "event": "balances.Withdraw",
+      "data": {
+        "who": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+        "amount": "1,330,483,206,276"
+      }
+    },
+    {
+      "event": "system.Remarked",
+      "data": {
+        "sender": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+        "hash_": "0x0b6312283d43cf31f5e33a92ba0e8ef2d71a352324dcc1a0ccf1b0d19eb7f434"
+      }
+    },
+    {
+      "event": "balances.Deposit",
+      "data": {
+        "who": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+        "amount": "478,982,945,906"
+      }
+    },
+    {
+      "event": "balances.Deposit",
+      "data": {
+        "who": "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+        "amount": "1,330,483,206,276"
+      }
+    },
+    {
+      "event": "transactionPayment.TransactionFeePaid",
+      "data": {
+        "who": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+        "actualFee": "1,330,483,206,276",
+        "tip": "0"
+      }
+    },
+    {
+      "event": "system.ExtrinsicSuccess",
+      "data": {
+        "dispatchInfo": {
+          "weight": {
+            "refTime": "936,000,791",
+            "proofSize": "13,003"
+          },
+          "class": "Normal",
+          "paysFee": "Yes"
+        }
+      }
+    }
+  ]
+}

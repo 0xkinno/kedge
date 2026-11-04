@@ -1,0 +1,66 @@
+{
+  "part": 7,
+  "at": "2026-11-04T06:33:55.889Z",
+  "probeContract": "0x4DE1eaD45E10bf7158aee2eB945F095272744Adb",
+  "ramonH160": "0x85fbBA0fD74dAd192A277DCF5e8B83DA96FCA816",
+  "dryRun": {
+    "weightConsumed": {
+      "refTime": 170322449,
+      "proofSize": 10440
+    },
+    "weightRequired": {
+      "refTime": 170322449,
+      "proofSize": 10856
+    },
+    "storageDeposit": {
+      "charge": 384150000000000
+    },
+    "maxStorageDeposit": {
+      "charge": 384150000000000
+    },
+    "gasConsumed": 169605852303821,
+    "result": {
+      "ok": {
+        "flags": {
+          "bits": 0
+        },
+        "data": "0x"
+      }
+    }
+  },
+  "ethHash": "0x81ba3d35a15cf4d67025702ab2734b8ca2374d90de93b5a498cab48566d3f69f",
+  "receiptStatus": 1,
+  "block": 316779,
+  "callResult": "Ok",
+  "lastSenderOnChain": "0x85fbba0fd74dad192a277dcf5e8b83da96fca816",
+  "msgSenderIsLostH160": true,
+  "seenEventLogs": [
+    {
+      "topics": [
+        "0xa8a4eb66b377d8f8786a05fcf52254c93c925d417dfc66a12a62bc66d37add09"
+      ],
+      "data": "0x00000000000000000000000085fbba0fd74dad192a277dcf5e8b83da96fca816"
+    }
+  ],
+  "events": [
+    "balances.Withdraw",
+    "balances.Withdraw",
+    "revive.ContractEmitted",
+    "balances.TransferAndHold",
+    "recovery.RecoveredAccountControlled",
+    "balances.Deposit",
+    "balances.Deposit",
+    "transactionPayment.TransactionFeePaid",
+    "system.ExtrinsicSuccess"
+  ],
+  "failingInner": {
+    "ethHash": "0xaee1cd0e355c340e65bf611414167d4546e362296f2b81ed6b2559b3d6e6de61",
+    "receiptStatus": 1,
+    "callResult": {
+      "Err": {
+        "Token": "FundsUnavailable"
+      }
+    },
+    "extrinsicFailed": false
+  }
+}

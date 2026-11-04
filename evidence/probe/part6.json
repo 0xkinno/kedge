@@ -1,0 +1,227 @@
+{
+  "part": 6,
+  "at": "2026-11-04T06:32:27.103Z",
+  "initBlock": 316750,
+  "targetBlock": 316760,
+  "waitedSeconds": 52.541,
+  "inheritor": [
+    "1",
+    "5DKPMLKYUYarwzzQcLbGHsNhYetjmJb4cdpdxSYwPvHecjWv",
+    {
+      "depositor": "5DKPMLKYUYarwzzQcLbGHsNhYetjmJb4cdpdxSYwPvHecjWv",
+      "ticket": null
+    }
+  ],
+  "steps": [
+    {
+      "label": "initiate_attempt (lorna)",
+      "ethHash": "0x3da2531e07da0c6da905a3e0772306e954183c083664ebf9a46da78ebc1c6194",
+      "block": 316750,
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Held",
+        "recovery.AttemptInitiated",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "raw": [
+        {
+          "event": "recovery.AttemptInitiated",
+          "data": {
+            "lost": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+            "friendGroupIndex": "0",
+            "initiator": "5Hf3YZyL6EUBqSiF7CqJKGwd2b2mVtWCRR46sVGs1oNU7udh"
+          }
+        },
+        {
+          "event": "recovery.AttemptApproved",
+          "data": {
+            "lost": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+            "friendGroupIndex": "0",
+            "friend": "5Hf3YZyL6EUBqSiF7CqJKGwd2b2mVtWCRR46sVGs1oNU7udh"
+          }
+        }
+      ]
+    },
+    {
+      "label": "approve_attempt (ben)",
+      "ethHash": "0xd58a7ec9c7036a64d74775a4a375cfd24c0dafa8e76d435b608f659f28c7a551",
+      "block": 316752,
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "raw": [
+        {
+          "event": "recovery.AttemptApproved",
+          "data": {
+            "lost": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+            "friendGroupIndex": "0",
+            "friend": "5CqkdMTXzUCt6Nnz6jb1NZS3snutXJcU94oDGz4BxJu574wX"
+          }
+        }
+      ]
+    },
+    {
+      "label": "finish_attempt too early",
+      "result": "missing revert data"
+    },
+    {
+      "label": "finish_attempt (lifeboat)",
+      "ethHash": "0x172cdfb9c9a476e97a71ebf6ed37d462345e4f1efc0710a6470bb31ce05da59d",
+      "block": 316763,
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Released",
+        "recovery.AttemptFinished",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "raw": [
+        {
+          "event": "recovery.AttemptFinished",
+          "data": {
+            "lost": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+            "friendGroupIndex": "0",
+            "inheritor": "5DKPMLKYUYarwzzQcLbGHsNhYetjmJb4cdpdxSYwPvHecjWv",
+            "previousInheritor": null
+          }
+        }
+      ]
+    },
+    {
+      "label": "control_inherited_account(balances.transfer_keep_alive)",
+      "ethHash": "0xd425960f5a7c141fc100bcdc2cec3618975a8f611ff3e6bf04d7b93f95e46431",
+      "block": 316765,
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Transfer",
+        "recovery.RecoveredAccountControlled",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ],
+      "raw": [
+        {
+          "event": "recovery.RecoveredAccountControlled",
+          "data": {
+            "recovered": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+            "inheritor": "5DKPMLKYUYarwzzQcLbGHsNhYetjmJb4cdpdxSYwPvHecjWv",
+            "callHash": "0x45451dd70337e7508314e7daa864ceabe064d9e916754a38fb0c1768a5812420",
+            "callResult": "Ok"
+          }
+        }
+      ]
+    }
+  ],
+  "snaps": [
+    {
+      "label": "before",
+      "lorna": {
+        "holds": [],
+        "free": "310000000000000"
+      },
+      "ramonFree": "3005968943228494",
+      "lifeboatFree": "310000000000000",
+      "attempt": null
+    },
+    {
+      "label": "after initiate",
+      "lorna": {
+        "holds": [],
+        "free": "308419335058288"
+      },
+      "ramonFree": "3005968943228494",
+      "lifeboatFree": "310000000000000",
+      "attempt": [
+        {
+          "friendGroupIndex": "0",
+          "initiator": "5Hf3YZyL6EUBqSiF7CqJKGwd2b2mVtWCRR46sVGs1oNU7udh",
+          "initBlock": "316,750",
+          "lastApprovalBlock": "316,750",
+          "approvals": [
+            "4",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "depositor": "5Hf3YZyL6EUBqSiF7CqJKGwd2b2mVtWCRR46sVGs1oNU7udh",
+          "ticket": null
+        },
+        "0"
+      ]
+    },
+    {
+      "label": "after approve",
+      "lorna": {
+        "holds": [],
+        "free": "308419335058288"
+      },
+      "ramonFree": "3005968943228494",
+      "lifeboatFree": "310000000000000",
+      "attempt": [
+        {
+          "friendGroupIndex": "0",
+          "initiator": "5Hf3YZyL6EUBqSiF7CqJKGwd2b2mVtWCRR46sVGs1oNU7udh",
+          "initBlock": "316,750",
+          "lastApprovalBlock": "316,752",
+          "approvals": [
+            "5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "depositor": "5Hf3YZyL6EUBqSiF7CqJKGwd2b2mVtWCRR46sVGs1oNU7udh",
+          "ticket": null
+        },
+        "0"
+      ]
+    },
+    {
+      "label": "after finish",
+      "lorna": {
+        "holds": [],
+        "free": "308419335058288"
+      },
+      "ramonFree": "3005968943228494",
+      "lifeboatFree": "308419246617646",
+      "attempt": null
+    },
+    {
+      "label": "after control",
+      "lorna": {
+        "holds": [],
+        "free": "308419335058288"
+      },
+      "ramonFree": "2505968943228494",
+      "lifeboatFree": "806428641461536",
+      "attempt": null
+    }
+  ],
+  "controlReceiptStatus": 1,
+  "controlCallResult": "Ok"
+}

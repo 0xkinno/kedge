@@ -1,0 +1,27 @@
+{
+  "part": 8,
+  "at": "2026-11-04T06:34:29.287Z",
+  "callerContract": "0x470CF1b1449Ec2580177045f63AB5BF7e0dBA0f4",
+  "ethHash": "0x5dfa5618d9261b55e616122af7b03c9c40cafe34179dcd8587a07a4626da81fc",
+  "receiptStatus": 1,
+  "block": 316785,
+  "calledEvent": [
+    {
+      "ok": true,
+      "returnSize": "0"
+    }
+  ],
+  "remarkedEventSeen": false,
+  "events": [
+    "balances.Withdraw",
+    "balances.Withdraw",
+    "revive.ContractEmitted",
+    "balances.Burned",
+    "balances.Withdraw",
+    "balances.Deposit",
+    "balances.Deposit",
+    "transactionPayment.TransactionFeePaid",
+    "system.ExtrinsicSuccess"
+  ],
+  "note": "Compare with part 4: the same call sent by an EOA to the pallets address emits System.Remarked."
+}

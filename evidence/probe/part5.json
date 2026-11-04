@@ -1,0 +1,91 @@
+{
+  "part": 5,
+  "at": "2026-11-04T06:29:45.718Z",
+  "ethHash": "0xe9d18b38e203496a392165b56efef1b190528483e4a62a4425fdef045035599b",
+  "receiptStatus": 1,
+  "block": 316738,
+  "callHex": "0x1e02040c225b5e89825c49cc7cec3d53a29748e28019bd6feeeeeeeeeeeeeeeeeeeeeeee74d68cba023de616006b025469fb9e71e26da5d6eeeeeeeeeeeeeeeeeeeeeeeef75dc959e472419ee6520a39473d3236687844ffeeeeeeeeeeeeeeeeeeeeeeee02000000376e9e58312c650bc66f0d8344e452c182115d08eeeeeeeeeeeeeeeeeeeeeeee0a0000000100000002000000",
+  "changedEvent": true,
+  "before": {
+    "holds": [],
+    "free": "3008669516793724"
+  },
+  "after": {
+    "holds": [],
+    "free": "3005968943228494"
+  },
+  "stored": [
+    [
+      {
+        "friends": [
+          "5CqkdMTXzUCt6Nnz6jb1NZS3snutXJcU94oDGz4BxJu574wX",
+          "5Ehu9ScyA6DTKMkBXCoD4ngbedSEc518ZAL7YPy9upmLxsQr",
+          "5Hf3YZyL6EUBqSiF7CqJKGwd2b2mVtWCRR46sVGs1oNU7udh"
+        ],
+        "friendsNeeded": "2",
+        "inheritor": "5DKPMLKYUYarwzzQcLbGHsNhYetjmJb4cdpdxSYwPvHecjWv",
+        "inheritanceDelay": "10",
+        "inheritancePriority": "1",
+        "cancelDelay": "2"
+      }
+    ],
+    null
+  ],
+  "events": [
+    {
+      "event": "balances.Withdraw",
+      "data": {
+        "who": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+        "amount": "904,636,877,109"
+      }
+    },
+    {
+      "event": "balances.Withdraw",
+      "data": {
+        "who": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+        "amount": "2,700,573,565,230"
+      }
+    },
+    {
+      "event": "recovery.FriendGroupsChanged",
+      "data": {
+        "lost": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF"
+      }
+    },
+    {
+      "event": "balances.Deposit",
+      "data": {
+        "who": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+        "amount": "904,636,877,109"
+      }
+    },
+    {
+      "event": "balances.Deposit",
+      "data": {
+        "who": "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+        "amount": "2,700,573,565,230"
+      }
+    },
+    {
+      "event": "transactionPayment.TransactionFeePaid",
+      "data": {
+        "who": "5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF",
+        "actualFee": "2,700,573,565,230",
+        "tip": "0"
+      }
+    },
+    {
+      "event": "system.ExtrinsicSuccess",
+      "data": {
+        "dispatchInfo": {
+          "weight": {
+            "refTime": "1,135,462,305",
+            "proofSize": "26,160"
+          },
+          "class": "Normal",
+          "paysFee": "Yes"
+        }
+      }
+    }
+  ]
+}

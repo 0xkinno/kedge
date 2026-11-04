@@ -34,19 +34,19 @@ Source of truth: `reference/KEDGE_BUILD_INSTRUCTION.md` (section numbers below r
 - [x] Founder-stake line approved by Kinnoski (confirmed in chat 2026-11-04: accurate, happy to publish)
 
 ## Phase 3. G3 and G5 (discovery probes on the live chain)  <- the build lives or dies here
-- [ ] `scripts/keygen.mjs`: testnet keys for ramon, lorna, ben, ana, lifeboat, stranger, drill crew; addresses printed only
-- [ ] **GATE 3a:** give Kinnoski the funding list (addresses, amounts from live estimates); wait for funds
-- [ ] `scripts/probe.mjs` part 1: spec name/version, genesis, decimals, ED, NativeToEthRatio, gas price, block time
-- [ ] probe part 2: `ReviveApi_runtime_pallets_address`, twin mapping both directions (`ReviveApi_account_id`, `ReviveApi_address`)
-- [ ] probe part 3: Recovery metadata: call indices, arg names and types, block-number type, constants (`SecurityDeposit`, `MaxFriendsPerConfig`), consideration costs
-- [ ] probe part 4: EOA Ethereum tx to pallets address with `system.remark_with_event` lands; record hash and resolved Substrate events
-- [ ] probe part 5: `set_friend_groups` from MetaMask-style EOA (ramon) succeeds; `FriendGroupsChanged` event
-- [ ] probe part 6: full mini rescue with delay 10 blocks: initiate (lorna), approve (ben), finish, `control_inherited_account(balances.transfer_keep_alive)`; read `RecoveredAccountControlled.call_result`
-- [ ] probe part 7 (**headline mechanism**): `control_inherited_account(revive.call(vault.withdrawAllTo))` makes `msg.sender` the lost H160 (deploy a throwaway 1-function probe contract first if the vault is not deployed)
-- [ ] probe part 8: Solidity contract calling the pallets address runs nothing (backs the contract-inheritor refusal)
-- [ ] probe part 9: Ethereum tx hash to Substrate extrinsic matching rule confirmed
-- [ ] Pre-register FINDINGS questions with a commit hash before probes 6 to 8 (Section 10)
-- [ ] `PLATFORM_PROBE.md` and `DISCOVERY.md` (delete test: "remove Recovery and step 5 fails")
+- [x] `scripts/keygen.mjs`: testnet keys for ramon, lorna, ben, ana, lifeboat, stranger, drill crew; addresses printed only (12 keys written to keys/ mode 600, addresses printed only, plus sr25519 guardian)
+- [x] **GATE 3a:** give Kinnoski the funding list (addresses, amounts from live estimates); wait for funds (funding arrived before the ask was needed: deployer holds 500 tPOT. pUSD still needed, see report)
+- [x] `scripts/probe.mjs` part 1: spec name/version, genesis, decimals, ED, NativeToEthRatio, gas price, block time (evidence/probe/part1.json)
+- [x] probe part 2: `ReviveApi_runtime_pallets_address`, twin mapping both directions (`ReviveApi_account_id`, `ReviveApi_address`) (both directions match, sr25519 follows the keccak rule)
+- [x] probe part 3: Recovery metadata: call indices, arg names and types, block-number type, constants (`SecurityDeposit`, `MaxFriendsPerConfig`), consideration costs (SecurityDeposit 0, MaxFriendsPerConfig 100, u32 block numbers)
+- [x] probe part 4: EOA Ethereum tx to pallets address with `system.remark_with_event` lands; record hash and resolved Substrate events (tx 0xe2fdda58..., System.Remarked seen, gasUsed 0)
+- [x] probe part 5: `set_friend_groups` from MetaMask-style EOA (ramon) succeeds; `FriendGroupsChanged` event (FriendGroupsChanged, no deposit taken)
+- [x] probe part 6: full mini rescue with delay 10 blocks: initiate (lorna), approve (ben), finish, `control_inherited_account(balances.transfer_keep_alive)`; read `RecoveredAccountControlled.call_result` (full lifecycle from EOAs, call_result Ok)
+- [x] probe part 7 (**headline mechanism**): `control_inherited_account(revive.call(vault.withdrawAllTo))` makes `msg.sender` the lost H160 (deploy a throwaway 1-function probe contract first if the vault is not deployed) (msg.sender equals the lost H160)
+- [x] probe part 8: Solidity contract calling the pallets address runs nothing (backs the contract-inheritor refusal) (contract call is a silent no-op)
+- [x] probe part 9: Ethereum tx hash to Substrate extrinsic matching rule confirmed (keccak256(payload) rule, 9 of 9)
+- [x] Pre-register FINDINGS questions with a commit hash before probes 6 to 8 (Section 10) (commit 059260908a6ba139a07c26b2cc1c803dd95ab528)
+- [x] `PLATFORM_PROBE.md` and `DISCOVERY.md` (delete test: "remove Recovery and step 5 fails") (delete test written)
 - [ ] **GATE 3b:** report Plan A / A-minus / B decision per Section 13; wait for Kinnoski's go
 
 ## Phase 4. G4 (thesis, risk)
