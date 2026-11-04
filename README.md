@@ -17,7 +17,7 @@ At 03:40 off Singapore, Ramon's phone slips over the side. His wages were on it.
 
 | | |
 |---|---|
-| **Live app** | not deployed yet; run it locally (see *Run it yourself*) or use `scripts/deploy_vercel.sh` |
+| **Live app** | **https://kedge-kinnoskis-projects.vercel.app** (Vercel, no login). The 12-step wallet journey below passed against this URL |
 | **See it work in 2 minutes** | `/drill`: a full rescue on the live testnet, streamed step by step |
 | **Check our claims** | `npm run verify` re-reads 31 recorded transactions from the public node with no key. `/proof` decodes them in your browser |
 | **Measured** | 2 of 2 rescues completed, 9 of 9 attacks stopped, **0** honest rescues wrongly blocked, 0.06293 tPOT in fees per rescue |
@@ -130,7 +130,7 @@ Both directions are reported, **and the second number is the one that matters.**
 
 ## The browser test: real signing, real chain
 
-`e2e/wallet.mjs` drives headless Chromium through every screen. An EIP-1193 provider is injected into the page and backed by a real key in the test process, so each transaction is **signed and sent to the live testnet**: connect, switch chain, sign a message for alerts, protect a wallet, read the phrase on the new phone, lock and unlock the guardian gate, approve, wait out the delay, bring it home, stop and slash from the alert link, decode a refused attack on `/proof`, run the tour, run a drill, and a 390 px phone pass. Videos and screenshots are in `docs/demo/test-run/`.
+`e2e/wallet.mjs` drives headless Chromium through every screen. An EIP-1193 provider is injected into the page and backed by a real key in the test process, so each transaction is **signed and sent to the live testnet**: connect, switch chain, sign a message for alerts, protect a wallet, read the phrase on the new phone, lock and unlock the guardian gate, approve, wait out the delay, bring it home, stop and slash from the alert link, decode a refused attack on `/proof`, run the tour, run a drill, and a 390 px phone pass. Run against the live Vercel URL; videos and screenshots are in `docs/demo/deployed-run/` (and the first local run in `docs/demo/test-run/`).
 
 - pass: A1 connect deployer wallet and subscribe to alerts (EIP-191 signature)
 - pass: B1 Lifeboat key made in the browser and the card PDF downloads
@@ -215,16 +215,15 @@ Nothing headline is typed. `scripts/facts.mjs` builds [docs/FACTS.json](docs/FAC
 
 ## Business and what comes next
 
-Free for individuals. Manning agencies and seafarer welfare groups reach crews at scale; wallet makers can embed the protection flow because every Portaldot account is recoverable the same way, and families use the same mechanism with a longer delay for inheritance. Next: a real-people drill with consenting guardians, an ink! vault so one rescue spans both contract VMs, the real Rabby and SubWallet sessions, and an agency pilot.
+Free for individuals. Manning agencies and seafarer welfare groups reach crews at scale; wallet makers can embed the protection flow because every Portaldot account is recoverable the same way, and families use the same mechanism with a longer delay for inheritance. Next: a real-people drill with consenting guardians, deploying the ink! vault so one rescue spans both contract VMs, the real Rabby and SubWallet sessions, and an agency pilot.
 
 ## Limits, stated plainly
 
-- No ink! contract: the "WASM" half of WASM/EVM is **not** demonstrated.
+- The ink! (WASM) contract is written and unit-tested (`ink/allotment_ink`) but **not deployed**: this chain charges 0.06 tPOT per byte of contract code, so its 4.9 KB would need about 295 tPOT. Until it is deployed, the "WASM" half of WASM/EVM is **not** demonstrated.
 - The security deposit is 0 on this testnet, so slashing is a signal, not a penalty.
 - The demo token is Kedge's own **kUSD** (asset 20261104). The pUSD pool held about 127 pUSD, too thin to demo with.
 - Wallet paths are proven with an injected test wallet backed by real signing, not yet with the Rabby or SubWallet extensions, and not on MetaMask mobile.
-- No real-people drill has been run yet, and no public deployment exists yet.
-- Without Upstash the public drill lock is per instance, not global (labelled in `/api/status`).
+- No real-people drill has been run yet.
 - Testnet only. Not audited.
 
 ## Docs

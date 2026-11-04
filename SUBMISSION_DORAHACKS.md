@@ -15,7 +15,7 @@ The live DoraHacks form could not be read from this environment, so the field li
 | Reproducible runnable code | `npm ci && npm run verify && npm test` |
 | Testnet deployment info | AllotmentVault in README and deployments/testnet.json; chain facts in PLATFORM_PROBE.md |
 | Contract addresses and transaction hashes | EVIDENCE.md (generated, every transaction with block link) |
-| Runnable demo | **TO DO:** public URL after the Vercel deploy; until then local instructions in README |
+| Runnable demo | https://kedge-kinnoskis-projects.vercel.app (no login); `/drill` runs a full rescue on testnet |
 | Demo video (max 3 min) | **TO DO:** edit from the recorded scenes in `docs/demo/test-run/` and the tour recording |
 | Pitch deck (PDF) | docs/kedge-deck.pdf |
 

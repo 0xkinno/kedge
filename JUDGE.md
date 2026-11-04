@@ -1,5 +1,7 @@
 # JUDGE
 
+Live: https://kedge-kinnoskis-projects.vercel.app
+
 ## 60 seconds
 1. Open `/drill`, press Start. A full rescue runs on the Portaldot V3 testnet with live block countdown.
 2. Open `/proof`, filter to A3, press Check: `recovery.NotYetInheritable`, decoded in your browser from the public node.

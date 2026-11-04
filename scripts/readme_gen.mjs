@@ -8,7 +8,7 @@ const E = (n) => `https://scanner-testnet-v3.portaldot.dev/#/blocks/${n}?tab=eve
 const scen = f.scenarios.map((s) => `| ${s.id} | ${s.title} | ${s.pass ? 'pass' : 'MISS'} | ${s.observed ? '`' + (typeof s.observed === 'string' ? s.observed : JSON.stringify(s.observed)) + '`' : ''} | ${s.proofTx ? `[${s.proofTx.block}](${E(s.proofTx.block)})` : 'guard'} |`).join('\n');
 const pain = [['seafarers-1-89m', 'About 1.89 million seafarers serve the world merchant fleet (2021 report, through press coverage)'], ['sea-remittances', fig.sentence], ['lost-bitcoin', 'About 3.7 million bitcoin, around 20 percent of supply, had not moved for five years (June 2020). Dormant, not proven lost'], ['ledger-recover', 'A hardware-wallet vendor\'s seed backup service split the phrase among three custodians and drew backlash (2023)'], ['quadriga', 'An exchange founder died and about 190 million Canadian dollars of customer crypto became inaccessible (2019)'], ['adoption-philippines', 'The Philippines ranks 9th and Nigeria 6th in the 2025 crypto adoption index']]
   .map(([id, t]) => { const s = src.find((x) => x.id === id); return `| ${t} | [${s.title.split(' (')[0]}](${s.url}) |`; }).join('\n');
-const tr = (() => { try { return JSON.parse(readFileSync('docs/demo/test-run/results.json', 'utf8')); } catch { return null; } })();
+const tr = (() => { try { return JSON.parse(readFileSync('docs/demo/deployed-run/results.json', 'utf8')); } catch { return null; } })();
 const trLine = tr ? `${tr.results.filter((r) => r.ok).length} of ${tr.results.length} end-to-end steps passed in headless Chromium` : 'not run';
 const readme = `<p align="center"><img src="docs/brand/kedge-banner.png" alt="Kedge: a rescue brought home on Portaldot" /></p>
 
@@ -29,7 +29,7 @@ At 03:40 off Singapore, Ramon's phone slips over the side. His wages were on it.
 
 | | |
 |---|---|
-| **Live app** | not deployed yet; run it locally (see *Run it yourself*) or use \`scripts/deploy_vercel.sh\` |
+| **Live app** | **https://kedge-kinnoskis-projects.vercel.app** (Vercel, no login). The 12-step wallet journey below passed against this URL |
 | **See it work in 2 minutes** | \`/drill\`: a full rescue on the live testnet, streamed step by step |
 | **Check our claims** | \`npm run verify\` re-reads ${f.txs.length} recorded transactions from the public node with no key. \`/proof\` decodes them in your browser |
 | **Measured** | ${m.rescuesCompleted} of ${m.rescuesAttempted} rescues completed, ${m.attacksStopped} of ${m.attacksTried} attacks stopped, **${m.legitimateRescuesWronglyBlocked}** honest rescues wrongly blocked, ${m.costPerRescueTPOT} tPOT in fees per rescue |
@@ -127,7 +127,7 @@ ${scen}
 
 ## The browser test: real signing, real chain
 
-\`e2e/wallet.mjs\` drives headless Chromium through every screen. An EIP-1193 provider is injected into the page and backed by a real key in the test process, so each transaction is **signed and sent to the live testnet**: connect, switch chain, sign a message for alerts, protect a wallet, read the phrase on the new phone, lock and unlock the guardian gate, approve, wait out the delay, bring it home, stop and slash from the alert link, decode a refused attack on \`/proof\`, run the tour, run a drill, and a 390 px phone pass. Videos and screenshots are in \`docs/demo/test-run/\`.
+\`e2e/wallet.mjs\` drives headless Chromium through every screen. An EIP-1193 provider is injected into the page and backed by a real key in the test process, so each transaction is **signed and sent to the live testnet**: connect, switch chain, sign a message for alerts, protect a wallet, read the phrase on the new phone, lock and unlock the guardian gate, approve, wait out the delay, bring it home, stop and slash from the alert link, decode a refused attack on \`/proof\`, run the tour, run a drill, and a 390 px phone pass. Run against the live Vercel URL; videos and screenshots are in \`docs/demo/deployed-run/\` (and the first local run in \`docs/demo/test-run/\`).
 
 ${tr ? tr.results.map((r) => `- ${r.ok ? 'pass' : 'FAIL'}: ${r.step}`).join('\n') : ''}
 
@@ -196,16 +196,15 @@ ${pain}
 
 ## Business and what comes next
 
-Free for individuals. Manning agencies and seafarer welfare groups reach crews at scale; wallet makers can embed the protection flow because every Portaldot account is recoverable the same way, and families use the same mechanism with a longer delay for inheritance. Next: a real-people drill with consenting guardians, an ink! vault so one rescue spans both contract VMs, the real Rabby and SubWallet sessions, and an agency pilot.
+Free for individuals. Manning agencies and seafarer welfare groups reach crews at scale; wallet makers can embed the protection flow because every Portaldot account is recoverable the same way, and families use the same mechanism with a longer delay for inheritance. Next: a real-people drill with consenting guardians, deploying the ink! vault so one rescue spans both contract VMs, the real Rabby and SubWallet sessions, and an agency pilot.
 
 ## Limits, stated plainly
 
-- No ink! contract: the "WASM" half of WASM/EVM is **not** demonstrated.
+- The ink! (WASM) contract is written and unit-tested (\`ink/allotment_ink\`) but **not deployed**: this chain charges 0.06 tPOT per byte of contract code, so its 4.9 KB would need about 295 tPOT. Until it is deployed, the "WASM" half of WASM/EVM is **not** demonstrated.
 - The security deposit is 0 on this testnet, so slashing is a signal, not a penalty.
 - The demo token is Kedge's own **kUSD** (asset 20261104). The pUSD pool held about 127 pUSD, too thin to demo with.
 - Wallet paths are proven with an injected test wallet backed by real signing, not yet with the Rabby or SubWallet extensions, and not on MetaMask mobile.
-- No real-people drill has been run yet, and no public deployment exists yet.
-- Without Upstash the public drill lock is per instance, not global (labelled in \`/api/status\`).
+- No real-people drill has been run yet.
 - Testnet only. Not audited.
 
 ## Docs

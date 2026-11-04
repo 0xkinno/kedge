@@ -16,5 +16,5 @@ export async function GET() {
   ]);
   const writesAllowed = checks.every((c) => c.ok) && (checks[1] as any).matchesPinned === true;
   return json({ at: new Date().toISOString(), writesAllowed, reason: writesAllowed ? null : 'a probe failed or the runtime spec changed; writes are refused until it recovers', checks,
-    labelled: { sharedStore: storeKind, drillKillSwitch: process.env.DRILL_KILL === '1' ? 'on' : 'off', hero: 'illustration (photograph pending)' } });
+    labelled: { sharedStore: storeKind, drillKillSwitch: process.env.DRILL_KILL === '1' ? 'on' : 'off', hero: 'AI-generated photograph' } });
 }

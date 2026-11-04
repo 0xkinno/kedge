@@ -18,5 +18,10 @@ Generated from git history by `node scripts/readme_gen.mjs`. Transaction hashes 
 | 2026-11-04 | `63f5ea0` | feat: web app (landing, harbour, crew door, rescue, proof, drill, judge, guided tour), design system, API routes, quality gates passing on 7 viewports |
 | 2026-11-04 | `9bd1942` | feat: live muster drill proven twice, watchkeeper demonstrated on chain with signed subscription and one alert per event, lighter UI motion |
 | 2026-11-04 | `f480c3a` | docs: README, SDK surface, design, judge walk, pitch deck, red team log, community drafts, silent tour recording; reachability script; final status update |
+| 2026-11-04 | `8bcbb6f` | feat: redesigned landing and Harbour, hero photograph placed per brief, live chain strip, tactile controls, end-to-end wallet journey test with recordings, Vercel deploy script, new README |
+| 2026-11-04 | `ed96862` | docs: real-people drill protocol and record template |
+| 2026-11-04 | `e46e423` | feat: ink! allotment contract source with unit tests (pallet-contracts vault, mirrors the Solidity vault) |
+| 2026-11-04 | `85dc284` | fix: resolve shared watch code dependencies from apps/web so the Vercel build finds them |
+| 2026-11-04 | `8877216` | fix: upgrade Next.js to 15.5.29 and React to 19.1.10 (patched releases); pin the ink contract toolchain to Rust 1.81 |
 
 Key chain milestones: vault deployed at block 317284; headline mechanism proven at block 317779 (PLATFORM_PROBE part 7); campaign blocks in EVIDENCE.md.
