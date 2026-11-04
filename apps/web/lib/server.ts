@@ -8,7 +8,7 @@ export const evmProvider = new JsonRpcProvider(NET.evmRpc, { chainId: NET.chainI
 export const evmRpc = (m: string, p: unknown[]) => evmProvider.send(m, p);
 export const chainApi = polkadot;
 export const store = (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN)
-  ? upstash(process.env.UPSTASH_REDIS_REST_URL, process.env.UPSTASH_REDIS_REST_TOKEN) : fileStore('/tmp/kedge-store.json');
+  ? upstash(process.env.UPSTASH_REDIS_REST_URL, process.env.UPSTASH_REDIS_REST_TOKEN) : fileStore(process.env.KEDGE_STORE_FILE ?? '/tmp/kedge-store.json');
 export const storeKind = store.kind as string;
 export const hexToU8 = (h: string) => Uint8Array.from(Buffer.from(h.replace(/^0x/, ''), 'hex'));
 export const json = (o: unknown, status = 200) => new Response(JSON.stringify(o, (_, v) => (typeof v === 'bigint' ? v.toString() : v)), { status, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });

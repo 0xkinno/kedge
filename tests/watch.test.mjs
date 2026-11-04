@@ -39,3 +39,13 @@ test('keyless: no key material in watch/ or the workflow', () => {
   const wf = readFileSync('.github/workflows/watchkeeper.yml', 'utf8');
   assert.ok(!/secrets\.(?!UPSTASH_REDIS_REST_URL|UPSTASH_REDIS_REST_TOKEN|TELEGRAM_BOT_TOKEN)\w+/.test(wf), 'workflow may only reference the three alerting secrets');
 });
+
+test('alerts: reads the camelCase field names polkadot.js produces, so the group number is never NaN', () => {
+  const a = alertsFromEvents([ev('AttemptInitiated', { lost: LOST, friendGroupIndex: '2', initiator: LORNA })], subs);
+  assert.equal(a[0].group, 2); assert.ok(!formatAlert(a[0], 'https://app.test').includes('NaN'));
+  const b = alertsFromEvents([ev('AttemptInitiated', { lost: LOST, friend_group_index: '1', initiator: LORNA })], subs); assert.equal(b[0].group, 1);
+});
+test('alerts: the message says when the attempt becomes finishable', () => {
+  const a = alertsFromEvents([ev('AttemptInitiated', { lost: LOST, friendGroupIndex: '0', initiator: LORNA })], subs, () => 110)[0];
+  assert.match(formatAlert(a, 'https://app.test', 6, 100), /block 110, about 60 seconds/);
+});

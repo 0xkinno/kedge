@@ -28,7 +28,10 @@ async function tick(api) {
     const bh = await api.rpc.chain.getBlockHash(n); const evs = await api.query.system.events.at(bh);
     const events = evs.map((e, i) => ({ block: n, index: i, section: e.event.section, method: e.event.method, data: Object.fromEntries(e.event.data.map((d, j) => [e.event.data.names?.[j] ?? j, d.toHuman?.() ?? d])) }))
       .filter((e) => e.section === 'recovery');
-    const alerts = alertsFromEvents(events, subs, (lost, gi, blk) => null);
+    const alerts = alertsFromEvents(events, subs, () => null);
+    for (const al of alerts) if (al.kind === 'initiated') { // when does it become finishable? init block + the group's inheritance delay
+      const g = (await api.query.recovery.friendGroups(api.createType('AccountId32', al.lost).toHex())).toJSON(); const delay = g?.[0]?.[al.group]?.inheritanceDelay;
+      if (delay != null) al.finishableAtBlock = al.block + Number(delay); }
     sent += await deliver(alerts, store, sink, APP, head);
     await store.set('kedge:cursor', String(n));
   }

@@ -5,7 +5,7 @@ export function upstash(url, token) {
   return { kind: 'upstash', get: (k) => cmd('GET', k), set: (k, v) => cmd('SET', k, v), setNx: async (k, v) => (await cmd('SET', k, v, 'NX')) === 'OK',
     list: async (prefix) => { const keys = await cmd('KEYS', `${prefix}*`); return Promise.all(keys.map(async (k) => [k, await cmd('GET', k)])); } };
 }
-export function fileStore(path = 'evidence/watch/store.json') {
+export function fileStore(path = process.env.KEDGE_STORE_FILE ?? 'evidence/watch/store.json') {
   const load = () => (existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : {});
   const save = (o) => { mkdirSync(path.split('/').slice(0, -1).join('/') || '.', { recursive: true }); writeFileSync(path, JSON.stringify(o, null, 1)); };
   return { kind: 'file', get: async (k) => load()[k] ?? null, set: async (k, v) => { const o = load(); o[k] = v; save(o); },

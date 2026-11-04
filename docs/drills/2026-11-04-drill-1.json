@@ -1,0 +1,24 @@
+{
+ "drill": 1,
+ "date": "2026-11-04",
+ "by": "scripted run through /api/drill with house crew keys",
+ "note": "First live drill through the real endpoint. The receipt line in this record reports the house pool balance, a wording flaw fixed afterwards.",
+ "stream": [
+  "BANNER: House crew keys sign this drill. For your own wallet, use Harbour.",
+  "{'n': 0, 'label': 'Fund a throwaway wallet from the house pool', 'status': 'run'}",
+  "{'n': 0, 'label': 'Throwaway wallet funded with 1.5 tPOT', 'status': 'ok', 'tx': '0x1e667f1272358c11ee1818b272de865cedaf71130f74123338832e363099ea94'}",
+  "{'n': 1, 'label': 'Ramon names his crew (set_friend_groups)', 'status': 'run'}",
+  "{'n': 1, 'label': 'Crew named: 2 of 2, delay 10 blocks', 'status': 'ok', 'explorer': 'https://scanner-testnet-v3.portaldot.dev/#/blocks/317864?tab=events'}",
+  "{'n': 2, 'label': 'Lorna hears the call phrase and starts the attempt', 'status': 'run', 'phrase': 'program habit curious soda'}",
+  "{'n': 2, 'label': 'Attempt started by Lorna', 'status': 'ok', 'explorer': 'https://scanner-testnet-v3.portaldot.dev/#/blocks/317865?tab=events', 'phrase': 'program habit curious soda'}",
+  "{'n': 3, 'label': 'Ben approves', 'status': 'run'}",
+  "{'n': 3, 'label': 'Ben approved: 2 of 2', 'status': 'ok', 'explorer': 'https://scanner-testnet-v3.portaldot.dev/#/blocks/317866?tab=events'}",
+  "{'n': 4, 'label': 'Safety delay passed', 'status': 'ok'}",
+  "{'n': 5, 'label': 'Finish the attempt (new phone becomes the inheritor)', 'status': 'run'}",
+  "{'n': 5, 'label': 'Inheritor set', 'status': 'ok', 'explorer': 'https://scanner-testnet-v3.portaldot.dev/#/blocks/317876?tab=events'}",
+  "{'n': 6, 'label': 'Bring it home: one signature moves everything', 'status': 'run'}",
+  "{'n': 6, 'label': 'Brought home', 'status': 'ok', 'explorer': 'https://scanner-testnet-v3.portaldot.dev/#/blocks/317877?tab=events', 'items': [{'status': 'completed'}], 'controlResult': 'Ok'}",
+  "{'n': 7, 'label': 'Receipt', 'status': 'ok', 'moved': '8.834844657182867705 tPOT now on the new phone', 'txBlocks': [317864, 317865, 317866, 317876, 317877]}",
+  "{'done': True}"
+ ]
+}

@@ -2,6 +2,7 @@
 // Public lock (one drill at a time), 3 per hour per IP, 20 per day in total, kill switch DRILL_KILL=1.
 import { Wallet, formatEther } from 'ethers';
 import { twinOf } from '@/lib/kedge/twin';
+const twinHex = (a: string) => '0x' + Buffer.from(twinOf(a)).toString('hex');
 import * as P from '@/lib/kedge/purser';
 import { sendRuntimeCall, resolveOutcome } from '@/lib/kedge/helm';
 import { attempts, delayClock } from '@/lib/kedge/lookout';
@@ -53,10 +54,11 @@ export async function GET(req: Request) {
         for (;;) { const head = (await a.rpc.chain.getHeader()).number.toNumber(); const c = delayClock(at.initBlock, 10, head); step(4, 'Safety delay', 'run', { blocksLeft: c.blocksLeft, secondsLeft: c.secondsLeft }); if (c.finishable) break; await sleep(3000); }
         step(4, 'Safety delay passed', 'ok');
         step(5, 'Finish the attempt (new phone becomes the inheritor)', 'run'); const o5 = await send(crew.boat, await P.finish(lost32, 0)); step(5, 'Inheritor set', 'ok', { explorer: o5.explorer });
+        const before = ((await a.query.system.account(twinHex(ramon.address))) as any).data.free.toBigInt() as bigint;
         step(6, 'Bring it home: one signature moves everything', 'run');
         const o6 = await send(crew.boat, await P.bringHome(lost32, twinOf(crew.boat.address), [{ kind: 'native', keepAlive: false }]));
         step(6, 'Brought home', 'ok', { explorer: o6.explorer, items: o6.items, controlResult: o6.controlResult });
-        step(7, 'Receipt', 'ok', { moved: `${formatEther(await evmProvider.getBalance(crew.boat.address))} tPOT now on the new phone`, txBlocks: [o1.block, o2.block, o3.block, o5.block, o6.block] });
+        step(7, 'Receipt', 'ok', { moved: `${formatEther(before * 10_000n)} tPOT moved from the old wallet to the new phone, in one signature`, txBlocks: [o1.block, o2.block, o3.block, o5.block, o6.block] });
         emit({ done: true });
       } catch (e: any) { emit({ error: String(e?.message ?? e), honest: 'This is a real failure from a live drill. It is shown, not hidden.' }); }
       finally { await store.set('kedge:drill:lock', '0'); ctl.close(); }

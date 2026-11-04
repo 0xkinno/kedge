@@ -1,20 +1,21 @@
 'use client';
-import { motion } from 'framer-motion';
 import { useRef, type ReactNode, type ButtonHTMLAttributes } from 'react';
 import Link from 'next/link';
 
 export function GlowCard({ children, className = '' }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  // CSS-only lift and a cursor-following glow; no animation library, so the page stays light on phones.
   return (
-    <motion.div ref={ref} whileHover={{ y: -6 }} transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+    <div ref={ref}
       onMouseMove={(e) => { const r = ref.current!.getBoundingClientRect(); ref.current!.style.setProperty('--mx', `${e.clientX - r.left}px`); ref.current!.style.setProperty('--my', `${e.clientY - r.top}px`); }}
-      className={`relative overflow-hidden rounded-[22px] border border-fog bg-white/70 backdrop-blur-md before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity hover:before:opacity-100 before:[background:radial-gradient(240px_circle_at_var(--mx)_var(--my),rgba(255,90,31,.22),transparent_60%)] ${className}`}>
+      className={`relative overflow-hidden rounded-[22px] border border-fog bg-white/70 backdrop-blur-md transition-transform duration-300 hover:-translate-y-1.5 before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition-opacity hover:before:opacity-100 before:[background:radial-gradient(240px_circle_at_var(--mx)_var(--my),rgba(255,90,31,.22),transparent_60%)] ${className}`}>
       {children}
-    </motion.div>
+    </div>
   );
 }
+/** Fade and 16 px rise, staggered by delay. Pure CSS; disabled under prefers-reduced-motion. */
 export const Reveal = ({ children, delay = 0, className = '' }: { children: ReactNode; delay?: number; className?: string }) => (
-  <motion.div className={className} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ duration: 0.5, delay }}>{children}</motion.div>
+  <div className={`rise ${className}`} style={{ animationDelay: `${Math.round(delay * 1000)}ms` }}>{children}</div>
 );
 const btn = 'inline-flex min-h-[44px] items-center justify-center rounded-xl px-5 py-2.5 font-semibold transition focus-visible:outline-offset-4';
 export const PrimaryButton = ({ className = '', ready, ...p }: ButtonHTMLAttributes<HTMLButtonElement> & { ready?: boolean }) =>

@@ -19,9 +19,9 @@ export function alertsFromEvents(events, subs, finishableAtBlockFor = () => null
     if (e.section !== 'recovery') continue;
     const lost = e.data.lost ?? e.data.recovered; const sub = subs.get(lost);
     if (!sub) continue;
-    const id = `${e.block}:${e.index}`;
-    if (e.method === 'AttemptInitiated') out.push({ id, kind: 'initiated', chatId: sub.chatId, lost, initiator: e.data.initiator, group: Number(e.data.friend_group_index), block: e.block, finishableAtBlock: finishableAtBlockFor(lost, Number(e.data.friend_group_index), e.block) });
-    else if (e.method === 'AttemptFinished') out.push({ id, kind: 'finished', chatId: sub.chatId, lost, inheritor: e.data.inheritor, group: Number(e.data.friend_group_index), block: e.block });
+    const id = `${e.block}:${e.index}`; const gi = Number(e.data.friendGroupIndex ?? e.data.friend_group_index);
+    if (e.method === 'AttemptInitiated') out.push({ id, kind: 'initiated', chatId: sub.chatId, lost, initiator: e.data.initiator, group: gi, block: e.block, finishableAtBlock: finishableAtBlockFor(lost, gi, e.block) });
+    else if (e.method === 'AttemptFinished') out.push({ id, kind: 'finished', chatId: sub.chatId, lost, inheritor: e.data.inheritor, group: gi, block: e.block });
     else if (e.method === 'RecoveredAccountControlled') out.push({ id, kind: 'controlled', chatId: sub.chatId, lost, inheritor: e.data.inheritor, block: e.block });
   }
   return out;
