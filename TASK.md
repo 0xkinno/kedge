@@ -19,7 +19,7 @@ Source of truth: `reference/KEDGE_BUILD_INSTRUCTION.md` (section numbers below r
 - [x] Move this instruction file and TASK.md source into `reference/`; copy TASK.md to repo root (both files in reference/, TASK.md copied to root)
 - [x] Clone reference repos (Section 16) into `reference/repos/` (20 directories: 18 samples, V3 guide, polkadot-sdk sparse)
 - [x] `scripts/check_copy.mjs`: fails on emoji, em/en dashes, hype words, and any sample-project name outside `reference/`; wired into CI (negative test trips emoji, dash, hype word, sample-name hash; ci.yml runs it, CI run pending the repo)
-- [x] First commit and push: "chore: scaffold, identity guards, copy checks" (committed with the exact message; push pending the repo)
+- [ ] First commit and push: "chore: scaffold, identity guards, copy checks" (commit 72ee7a3 done; OPEN: push, no remote yet)
 
 ## Phase 1. G0 and G1 (rules, lanes, sponsor intel)
 - [x] `RULES_EXTRACT.md` from Section 2 (verbatim criteria, tracks, dates in WAT, DoraHacks fields, code-compliance rules) (from the announcement; DoraHacks page not fetchable (405), flagged inside the file)
