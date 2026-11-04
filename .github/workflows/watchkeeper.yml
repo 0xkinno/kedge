@@ -1,6 +1,7 @@
 name: Watchkeeper
 # Loop chaining: each run polls every 30 s for about 55 minutes, then dispatches the next run.
 # Plain cron fires unreliably on busy days, so cron is only the safety net that restarts a broken chain.
+# The next run is dispatched only after a successful run, so a failing job can never re-dispatch itself in a loop.
 on:
   schedule:
     - cron: '17 * * * *'
@@ -29,7 +30,7 @@ jobs:
           APP_URL: ${{ vars.APP_URL || 'https://kedge-kinnoskis-projects.vercel.app' }}
         run: node watch/run.mjs --seconds 3240
       - name: Dispatch the next run
-        if: always()
+        if: success()
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run watchkeeper.yml --repo "$GITHUB_REPOSITORY"
