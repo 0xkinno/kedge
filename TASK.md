@@ -50,15 +50,15 @@ Source of truth: `reference/KEDGE_BUILD_INSTRUCTION.md` (section numbers below r
 - [ ] **GATE 3b:** report Plan A / A-minus / B decision per Section 13; wait for Kinnoski's go
 
 ## Phase 4. G4 (thesis, risk)
-- [ ] `THESIS.md` from Section 6 (five lines, hook, X without Y, primary guarantee, crew)
-- [ ] `RISK.md`: deposits held vs lost, maximum loss per role, house drill keys, phrase is advisory, stranded friend-group deposit (measured)
-- [ ] Name collision check for "Kedge" (npm, GitHub, web, crypto projects); backups "Kedging", "Salvor"; record result
+- [x] `THESIS.md` from Section 6 (five lines, hook, X without Y, primary guarantee, crew) (five lines, hook, X without Y, guarantee with honest limit, crew)
+- [x] `RISK.md`: deposits held vs lost, maximum loss per role, house drill keys, phrase is advisory, stranded friend-group deposit (measured) (deposits measured: all zero except the contract storage deposit)
+- [x] Name collision check for "Kedge" (npm, GitHub, web, crypto projects); backups "Kedging", "Salvor"; record result (no crypto project named Kedge; recorded in RISK.md)
 
 ## Phase 5. Contracts
-- [ ] Foundry project; `AllotmentVault.sol` (Section 8.9); tests incl. fuzz and refusals; `forge test` green
-- [ ] Probe contract `Caller.sol` for probe part 8 (if not done)
-- [ ] `scripts/deploy.mjs`: estimate, print tPOT cost; **ask Kinnoski**; deploy; verify runtime bytecode equals artifact; write `deployments/testnet.json`
-- [ ] Ramon saves pUSD into the vault through the ERC-20 precompile (approve + save) from his EOA; record txs
+- [x] Foundry project; `AllotmentVault.sol` (Section 8.9); tests incl. fuzz and refusals; `forge test` green (forge 1.5.1 from the official release tarball; 10 tests pass incl. 2 fuzz)
+- [x] Probe contract `Caller.sol` for probe part 8 (if not done) (deployed in Phase 3)
+- [x] `scripts/deploy.mjs`: estimate, print tPOT cost; **ask Kinnoski**; deploy; verify runtime bytecode equals artifact; write `deployments/testnet.json` (approved by Kinnoski; vault 0x92cD058C... cost 91.0 tPOT; bytecode matches)
+- [x] Ramon saves pUSD into the vault through the ERC-20 precompile (approve + save) from his EOA; record txs (used the kUSD test asset 20261104 because the pUSD pool is too thin; approve block 317288, save block 317289)
 - [ ] (Stretch, only if budget allows and Kinnoski approves) tiny ink! vault; deploy; record
 
 ## Phase 6. Core library (the action path)
