@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+f="$1"
+# strip any AI attribution lines the tool might add
+sed -i.bak -E '/^[[:space:]]*(Co-authored-by:.*(Claude|Anthropic).*|Claude-Session:.*|.*Generated with.*Claude Code.*)$/Id' "$f" && rm -f "$f.bak"
+name="$(git config user.name)"; email="$(git config user.email)"
+if echo "$name $email" | grep -qiE 'claude|anthropic'; then echo "Refusing: committer identity is not 0xkinno"; exit 1; fi

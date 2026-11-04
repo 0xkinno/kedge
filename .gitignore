@@ -1,0 +1,9 @@
+reference/
+.env*
+keys/
+*.key
+evidence/raw/private/
+node_modules/
+.next/
+out/
+cache/
