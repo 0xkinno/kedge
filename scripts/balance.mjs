@@ -1,0 +1,10 @@
+import { connect, evm, loadKey } from './lib.mjs';
+import { formatEther } from 'ethers';
+const api = await connect(); const p = evm(); const k = loadKey('deployer');
+const acc = await api.query.system.account(k.twinSs58);
+console.log('substrate free', acc.data.free.toString(), '=', Number(acc.data.free.toBigInt()) / 1e14, 'tPOT; reserved', acc.data.reserved.toString(), 'frozen', acc.data.frozen.toString());
+console.log('evm balance', formatEther(await p.getBalance(k.h160)), 'tPOT');
+console.log('dex-like pallets:', Object.keys(api.tx).filter((x) => /swap|dex|convert|pool|amm|liquid/i.test(x)).join(', '));
+for (const m of Object.keys(api.tx).filter((x) => /swap|dex|convert/i.test(x))) console.log(m, Object.keys(api.tx[m]).join(','));
+const pu = await api.query.assets.account(7777, k.twinSs58); console.log('deployer pUSD', pu.isSome ? pu.unwrap().balance.toString() : 'none');
+await api.disconnect(); process.exit(0);

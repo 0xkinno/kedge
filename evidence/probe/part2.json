@@ -1,0 +1,46 @@
+{
+  "part": 2,
+  "at": "2026-11-04T06:25:58.688Z",
+  "palletsAddress": "0x6d6f646c70792f70616464720000000000000000",
+  "matchesConstant": true,
+  "forward": [
+    {
+      "name": "deployer",
+      "h160": "0x9db1ac0Ce3dabD203D23C46fDc064F9FbFe68Eb2",
+      "chain": "0x9db1ac0ce3dabd203d23c46fdc064f9fbfe68eb2eeeeeeeeeeeeeeeeeeeeeeee",
+      "ours": "0x9db1ac0ce3dabd203d23c46fdc064f9fbfe68eb2eeeeeeeeeeeeeeeeeeeeeeee",
+      "match": true
+    },
+    {
+      "name": "ramon",
+      "h160": "0x85fbBA0fD74dAd192A277DCF5e8B83DA96FCA816",
+      "chain": "0x85fbba0fd74dad192a277dcf5e8b83da96fca816eeeeeeeeeeeeeeeeeeeeeeee",
+      "ours": "0x85fbba0fd74dad192a277dcf5e8b83da96fca816eeeeeeeeeeeeeeeeeeeeeeee",
+      "match": true
+    }
+  ],
+  "reverse": [
+    {
+      "kind": "eth-twin",
+      "account": "0x9db1ac0ce3dabd203d23c46fdc064f9fbfe68eb2eeeeeeeeeeeeeeeeeeeeeeee",
+      "chainH160": "0x9db1ac0ce3dabd203d23c46fdc064f9fbfe68eb2",
+      "expected": "0x9db1ac0ce3dabd203d23c46fdc064f9fbfe68eb2",
+      "match": true
+    },
+    {
+      "kind": "eth-twin",
+      "account": "0x85fbba0fd74dad192a277dcf5e8b83da96fca816eeeeeeeeeeeeeeeeeeeeeeee",
+      "chainH160": "0x85fbba0fd74dad192a277dcf5e8b83da96fca816",
+      "expected": "0x85fbba0fd74dad192a277dcf5e8b83da96fca816",
+      "match": true
+    },
+    {
+      "kind": "sr25519",
+      "ss58": "5CJ7j42sqU74Tz8VoJxc8K1weVZLeh3h19T9W9y26C3SCR6A",
+      "account": "0x0a3a8a194dfbc93b9549b0d034cd174097ee5828b372d5e05c1878f8dd47771f",
+      "chainH160": "0xcbb1ab4112bf9af7abbe791ca22d7f4a032f588c",
+      "keccakRule": "0xcbb1ab4112bf9af7abbe791ca22d7f4a032f588c",
+      "match": true
+    }
+  ]
+}

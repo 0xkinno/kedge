@@ -1,0 +1,27 @@
+{
+  "part": "estimates",
+  "at": "2026-11-04T06:27:05.003Z",
+  "gasPriceWei": "22650",
+  "estimates": [
+    {
+      "label": "plain value transfer",
+      "gas": "4958388028985",
+      "tPOT": "0.11230748885651025"
+    },
+    {
+      "label": "remark_with_event via pallets address",
+      "gas": "587620077587",
+      "tPOT": "0.01330959475734555"
+    },
+    {
+      "label": "deploy AllotmentVault",
+      "gas": "4080620298056180",
+      "tPOT": "92.426049750972477"
+    },
+    {
+      "label": "deploy Caller",
+      "gas": "1975258814263403",
+      "tPOT": "44.73961214306607795"
+    }
+  ]
+}

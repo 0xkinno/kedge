@@ -1,0 +1,18 @@
+{
+  "part": 1,
+  "at": "2026-11-04T06:25:57.294Z",
+  "specName": "portaldot-v3",
+  "specVersion": 3002,
+  "genesis": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+  "pallets": 69,
+  "decimals": 14,
+  "ss58": 42,
+  "token": "tPOT",
+  "existentialDeposit": "10000000000000",
+  "nativeToEthRatio": "10000",
+  "autoMap": "true",
+  "gasPriceWei": "22650",
+  "evmChainId": "420420777",
+  "head": 316700,
+  "blockTimeSeconds": 6
+}

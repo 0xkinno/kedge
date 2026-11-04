@@ -1,0 +1,149 @@
+{
+  "part": 3,
+  "at": "2026-11-04T06:25:58.693Z",
+  "calls": {
+    "controlInheritedAccount": {
+      "index": "30,0",
+      "args": [
+        {
+          "name": "recovered",
+          "type": "MultiAddress"
+        },
+        {
+          "name": "call",
+          "type": "Call"
+        }
+      ]
+    },
+    "revokeInheritor": {
+      "index": "30,1",
+      "args": []
+    },
+    "setFriendGroups": {
+      "index": "30,2",
+      "args": [
+        {
+          "name": "friendGroups",
+          "type": "Vec<PalletRecoveryFriendGroup>"
+        }
+      ]
+    },
+    "initiateAttempt": {
+      "index": "30,3",
+      "args": [
+        {
+          "name": "lost",
+          "type": "MultiAddress"
+        },
+        {
+          "name": "friendGroupIndex",
+          "type": "u32"
+        }
+      ]
+    },
+    "approveAttempt": {
+      "index": "30,4",
+      "args": [
+        {
+          "name": "lost",
+          "type": "MultiAddress"
+        },
+        {
+          "name": "friendGroupIndex",
+          "type": "u32"
+        }
+      ]
+    },
+    "finishAttempt": {
+      "index": "30,5",
+      "args": [
+        {
+          "name": "lost",
+          "type": "MultiAddress"
+        },
+        {
+          "name": "friendGroupIndex",
+          "type": "u32"
+        }
+      ]
+    },
+    "cancelAttempt": {
+      "index": "30,6",
+      "args": [
+        {
+          "name": "lost",
+          "type": "MultiAddress"
+        },
+        {
+          "name": "friendGroupIndex",
+          "type": "u32"
+        }
+      ]
+    },
+    "slashAttempt": {
+      "index": "30,7",
+      "args": [
+        {
+          "name": "friendGroupIndex",
+          "type": "u32"
+        }
+      ]
+    }
+  },
+  "friendGroupFields": {
+    "friends": "Vec<AccountId32>",
+    "friendsNeeded": "u32",
+    "inheritor": "AccountId",
+    "inheritanceDelay": "u32",
+    "inheritancePriority": "u32",
+    "cancelDelay": "u32"
+  },
+  "constants": {
+    "securityDeposit": "0",
+    "maxFriendsPerConfig": "100"
+  },
+  "blockNumberType": "u32",
+  "events": [
+    "AttemptApproved",
+    "AttemptCanceled",
+    "AttemptInitiated",
+    "AttemptFinished",
+    "AttemptDiscarded",
+    "AttemptSlashed",
+    "FriendGroupsChanged",
+    "InheritorRevoked",
+    "RecoveredAccountControlled"
+  ],
+  "errors": [
+    "AlreadyApproved",
+    "AlreadyInitiated",
+    "AlreadyVoted",
+    "HasOngoingAttempts",
+    "LostAccountInFriendGroup",
+    "HigherPriorityRecovered",
+    "NoCancelDelay",
+    "NoFriendGroups",
+    "NoFriends",
+    "NoInheritor",
+    "NotApproved",
+    "NotAttempt",
+    "NotCanceller",
+    "NotFriend",
+    "NotFriendGroup",
+    "NotInheritor",
+    "NotYetCancelable",
+    "NotYetInheritable",
+    "TooManyFriendGroups",
+    "TooManyFriendsNeeded",
+    "NoFriendsNeeded",
+    "FriendsNotSortedOrUnique",
+    "DuplicateFriendGroups"
+  ],
+  "storage": {
+    "palletVersion": "{\"plain\":17}",
+    "friendGroups": "{\"map\":{\"hashers\":[\"Blake2_128Concat\"],\"key\":1,\"value\":677}}",
+    "attempt": "{\"map\":{\"hashers\":[\"Blake2_128Concat\",\"Blake2_128Concat\"],\"key\":600,\"value\":679}}",
+    "inheritor": "{\"map\":{\"hashers\":[\"Blake2_128Concat\"],\"key\":1,\"value\":687}}"
+  },
+  "runtimeApisMatchingRecovery": []
+}
