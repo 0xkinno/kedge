@@ -3,7 +3,7 @@
 // Usage: node watch/run.mjs [--once] [--seconds 3300] [--from <block>] [--sink telegram|file]
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import { mkdirSync, appendFileSync } from 'node:fs';
-import { storeFromEnv } from './store.mjs';
+import { storeFromEnv, clean } from './store.mjs';
 import { alertsFromEvents, deliver } from './core.mjs';
 
 const arg = (n, d) => { const i = process.argv.indexOf(`--${n}`); return i < 0 ? d : process.argv[i + 1] ?? true; };
@@ -11,11 +11,12 @@ const WS = process.env.SUBSTRATE_WS ?? 'wss://test-node-v3.portaldot.dev';
 const APP = process.env.APP_URL ?? 'https://kedge.vercel.app';
 const store = storeFromEnv();
 const telegramSink = async ({ chatId, text }) => {
-  const r = await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ chat_id: chatId, text }) });
+  const r = await fetch(`https://api.telegram.org/bot${TG}/sendMessage`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ chat_id: chatId, text }) });
   if (!r.ok) throw new Error(`telegram ${r.status}`);
 };
 const fileSink = async (m) => { mkdirSync('evidence/watch', { recursive: true }); appendFileSync('evidence/watch/alerts.jsonl', JSON.stringify({ at: new Date().toISOString(), ...m }) + '\n'); console.log('ALERT (file sink):', m.text.split('\n')[0]); };
-const sink = (arg('sink', process.env.TELEGRAM_BOT_TOKEN ? 'telegram' : 'file') === 'telegram') ? telegramSink : fileSink;
+const TG = clean(process.env.TELEGRAM_BOT_TOKEN);
+const sink = (arg('sink', TG ? 'telegram' : 'file') === 'telegram') ? telegramSink : fileSink;
 
 export async function subscriptions() { const m = new Map(); for (const [, v] of await store.list('kedge:sub:')) { const s = typeof v === 'string' ? JSON.parse(v) : v; m.set(s.lostSs58, s); } return m; }
 

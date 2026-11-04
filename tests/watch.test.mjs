@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { Wallet } from 'ethers';
 import { alertsFromEvents, deliver, formatAlert, subscriptionMessage, verifySubscription } from '../watch/core.mjs';
-import { fileStore } from '../watch/store.mjs';
+import { fileStore, clean, storeFromEnv } from '../watch/store.mjs';
 
 const LOST = '5F6P1CjuaRxpuztZKBqDWqUTH8miLNs76icUzHCSFRGLHNvF'; const LORNA = '5Hf3YZyL6EUBqSiF7CqJKGwd2b2mVtWCRR46sVGs1oNU7udh';
 const subs = new Map([[LOST, { chatId: '12345', address: '0xabc' }]]);
@@ -48,4 +48,9 @@ test('alerts: reads the camelCase field names polkadot.js produces, so the group
 test('alerts: the message says when the attempt becomes finishable', () => {
   const a = alertsFromEvents([ev('AttemptInitiated', { lost: LOST, friendGroupIndex: '0', initiator: LORNA })], subs, () => 110)[0];
   assert.match(formatAlert(a, 'https://app.test', 6, 100), /block 110, about 60 seconds/);
+});
+
+test('secrets pasted with surrounding quotes still work', () => {
+  assert.equal(clean('"https://x.upstash.io"'), 'https://x.upstash.io'); assert.equal(clean(" 'abc' "), 'abc'); assert.equal(clean('plain'), 'plain');
+  assert.equal(storeFromEnv({ UPSTASH_REDIS_REST_URL: '"https://x.upstash.io"', UPSTASH_REDIS_REST_TOKEN: '"t"' }).kind, 'upstash');
 });

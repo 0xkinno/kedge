@@ -12,4 +12,9 @@ export function fileStore(path = process.env.KEDGE_STORE_FILE ?? 'evidence/watch
     setNx: async (k) => { const o = load(); if (k in o) return false; o[k] = '1'; save(o); return true; },
     list: async (prefix) => Object.entries(load()).filter(([k]) => k.startsWith(prefix)) };
 }
-export const storeFromEnv = (env = process.env) => (env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN ? upstash(env.UPSTASH_REDIS_REST_URL, env.UPSTASH_REDIS_REST_TOKEN) : fileStore());
+/** Secrets are often pasted with their surrounding quotes. Strip them so a quoted value still works. */
+export const clean = (v) => (typeof v === 'string' ? v.trim().replace(/^["']+|["']+$/g, '').trim() : v);
+export const storeFromEnv = (env = process.env) => {
+  const url = clean(env.UPSTASH_REDIS_REST_URL), token = clean(env.UPSTASH_REDIS_REST_TOKEN);
+  return url && token ? upstash(url, token) : fileStore();
+};
