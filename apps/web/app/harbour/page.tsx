@@ -9,6 +9,9 @@ import { PrimaryButton, GhostButton, StatusRing, Notice, GlowCard, Receipt } fro
 import facts from '@/data/FACTS.json';
 
 const PRESETS = { drill: { delay: 10, cancel: 2, label: 'Drill: 10 blocks (about a minute)' }, real: { delay: 43200, cancel: 7200, label: 'Real: 72 hours (43,200 blocks)' } } as const;
+const Step = ({ n, id, title, children }: { n: number; id: string; title: string; children: React.ReactNode }) => (
+    <section aria-labelledby={id} className="rounded-[22px] border border-fog bg-white/70 p-5 backdrop-blur md:p-7"><div className="flex items-center gap-3"><span aria-hidden="true" className="numeral flex h-9 w-9 items-center justify-center rounded-full bg-deep-water text-paper">{n}</span><h2 id={id} className="display h3">{title}</h2></div><div className="mt-4 space-y-3">{children}</div></section>);
+
 export default function Harbour() {
   const [me, setMe] = useState(''); const [g, setG] = useState(['', '', '']); const [need, setNeed] = useState(2); const [preset, setPreset] = useState<keyof typeof PRESETS>('drill');
   const [pass, setPass] = useState(''); const [boat, setBoat] = useState<{ address: string; keystore: string } | null>(null);
@@ -43,27 +46,36 @@ export default function Harbour() {
   const attempts = view?.attempts ?? [];
   return (<div className="space-y-8">
     <header><p className="micro text-brass-ink">Owner</p><h1 className="display h1">Harbour</h1><p className="mt-2 max-w-2xl">Name your crew once, print the card, keep your phone. Your own wallet signs everything.</p></header>
-    <GlowCard className="p-6"><div className="flex flex-wrap items-center justify-between gap-4"><StatusRing state={state} />
-      {me ? <p className="mono" aria-label="Connected wallet">{me}</p> : <PrimaryButton onClick={doConnect}>Connect wallet</PrimaryButton>}</div></GlowCard>
     {msg && <Notice tone={msg.tone}>{msg.text}</Notice>}
     {act && attempts.length > 0 && (<Notice tone="refusal"><h2 className="display h3">An attempt is open on your wallet</h2><p className="mt-1 text-sm">If this was not your crew, stop it. Started by <span className="mono">{short(attempts[0].initiator)}</span> in group {attempts[0].groupIndex}.</p>
       <div className="mt-3 flex flex-wrap gap-3"><PrimaryButton disabled={busy || !me} onClick={() => run('cancel', attempts[0].groupIndex)}>Stop this attempt</PrimaryButton><GhostButton disabled={busy || !me} onClick={() => run('slash', attempts[0].groupIndex)}>Slash the starter</GhostButton></div></Notice>)}
-    <section aria-labelledby="boat" className="space-y-3"><h2 id="boat" className="display h2">1. Lifeboat key and card</h2>
-      <p className="max-w-2xl text-sm">This is the wallet you will use on your new phone. It is made here, locked with a passphrase you choose, and never leaves this page.</p>
-      <label className="block"><span className="micro">Passphrase (8 or more characters)</span><input type="password" value={pass} onChange={(e) => setPass(e.target.value)} className="mt-1 block min-h-[44px] w-full max-w-md rounded-xl border border-ink/30 bg-white/80 px-3" autoComplete="new-password" /></label>
-      <div className="flex flex-wrap gap-3"><GhostButton onClick={makeBoat} disabled={busy || pass.length < 8}>Make my Lifeboat key</GhostButton>{boat && <PrimaryButton onClick={card}>Download Lifeboat Card (PDF)</PrimaryButton>}</div>
-      {boat && <p className="text-sm">New wallet: <span className="mono">{boat.address}</span></p>}</section>
-    <section aria-labelledby="crew" className="space-y-3"><h2 id="crew" className="display h2">2. Your crew</h2>
-      {g.map((v, i) => (<label key={i} className="block"><span className="micro">Guardian {i + 1} wallet address</span><input value={v} onChange={(e) => setG(g.map((x, j) => (j === i ? e.target.value : x)))} placeholder="0x..." className="mono mt-1 block min-h-[44px] w-full max-w-xl rounded-xl border border-ink/30 bg-white/80 px-3" /></label>))}
-      <div className="flex flex-wrap gap-6"><label><span className="micro block">Approvals needed</span><select value={need} onChange={(e) => setNeed(+e.target.value)} className="mt-1 min-h-[44px] rounded-xl border border-ink/30 bg-white/80 px-3">{[1, 2, 3].map((n) => <option key={n}>{n}</option>)}</select></label>
-        <label><span className="micro block">Safety delay</span><select value={preset} onChange={(e) => setPreset(e.target.value as any)} className="mt-1 min-h-[44px] rounded-xl border border-ink/30 bg-white/80 px-3">{Object.entries(PRESETS).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}</select></label></div>
-      <label className="block"><span className="micro">New-phone wallet (inheritor)</span><input value={heir} onChange={(e) => setHeir(e.target.value)} placeholder="0x..." className="mono mt-1 block min-h-[44px] w-full max-w-xl rounded-xl border border-ink/30 bg-white/80 px-3" /></label>
-      <PrimaryButton onClick={protect} disabled={busy || !me}>{me ? 'Protect my wallet' : 'Connect a wallet first'}</PrimaryButton></section>
-    {rows.length > 0 && <Receipt rows={rows} />}
-    <section aria-labelledby="cost"><h2 id="cost" className="display h2">What it costs</h2>
-      <dl className="mt-3 grid max-w-xl grid-cols-2 gap-2 text-sm"><dt>Naming the crew</dt><dd>{facts.measured.costPerProtectionTPOT} tPOT fee</dd><dt>Deposits held</dt><dd>0 tPOT (measured: none on this testnet)</dd><dt>Refundable</dt><dd>Not applicable</dd><dt>A rescue</dt><dd>{facts.measured.costPerRescueTPOT} tPOT in fees</dd></dl></section>
-    <section aria-labelledby="watch" className="space-y-3"><h2 id="watch" className="display h2">3. Alerts (optional)</h2><p className="max-w-2xl text-sm">Get one message when someone starts an attempt on your wallet. You sign a short message in your wallet to prove it is yours.</p>
-      <label className="block"><span className="micro">Telegram chat id</span><input value={chat} onChange={(e) => setChat(e.target.value)} inputMode="numeric" className="mono mt-1 block min-h-[44px] w-full max-w-xs rounded-xl border border-ink/30 bg-white/80 px-3" /></label>
-      <GhostButton onClick={watch} disabled={!me || !/^-?\d{3,20}$/.test(chat)}>Turn on alerts</GhostButton></section>
+    <div className="grid items-start gap-6 lg:grid-cols-[1fr_360px]">
+      <div className="space-y-6">
+        <Step n={1} id="boat" title="Lifeboat key and card">
+          <p className="max-w-xl text-sm">The wallet you will use on your new phone. It is made here, locked with a passphrase you choose, and never leaves this page.</p>
+          <label className="block"><span className="micro">Passphrase (8 or more characters)</span><input type="password" value={pass} onChange={(e) => setPass(e.target.value)} className="mt-1 block min-h-[44px] w-full rounded-xl border border-ink/25 bg-white/85 px-3 shadow-[inset_0_1px_2px_rgba(12,37,54,.06)] focus:border-lifejacket max-w-md" autoComplete="new-password" /></label>
+          <div className="flex flex-wrap gap-3"><GhostButton onClick={makeBoat} disabled={busy || pass.length < 8}>Make my Lifeboat key</GhostButton>{boat && <PrimaryButton onClick={card}>Download Lifeboat Card (PDF)</PrimaryButton>}</div>
+          {boat && <p className="text-sm">New wallet: <span className="mono">{boat.address}</span></p>}</Step>
+        <Step n={2} id="crew" title="Your crew">
+          {g.map((v, i) => (<label key={i} className="block"><span className="micro">Guardian {i + 1} wallet address</span><input value={v} onChange={(e) => setG(g.map((x, j) => (j === i ? e.target.value : x)))} placeholder="0x..." className="mt-1 block min-h-[44px] w-full rounded-xl border border-ink/25 bg-white/85 px-3 shadow-[inset_0_1px_2px_rgba(12,37,54,.06)] focus:border-lifejacket mono" /></label>))}
+          <div className="grid gap-4 sm:grid-cols-2"><label><span className="micro block">Approvals needed</span><select value={need} onChange={(e) => setNeed(+e.target.value)} className="mt-1 block min-h-[44px] w-full rounded-xl border border-ink/25 bg-white/85 px-3 shadow-[inset_0_1px_2px_rgba(12,37,54,.06)] focus:border-lifejacket">{[1, 2, 3].map((n) => <option key={n}>{n}</option>)}</select></label>
+            <label><span className="micro block">Safety delay</span><select value={preset} onChange={(e) => setPreset(e.target.value as any)} className="mt-1 block min-h-[44px] w-full rounded-xl border border-ink/25 bg-white/85 px-3 shadow-[inset_0_1px_2px_rgba(12,37,54,.06)] focus:border-lifejacket">{Object.entries(PRESETS).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}</select></label></div>
+          <label className="block"><span className="micro">New-phone wallet (inheritor)</span><input value={heir} onChange={(e) => setHeir(e.target.value)} placeholder="0x..." className="mt-1 block min-h-[44px] w-full rounded-xl border border-ink/25 bg-white/85 px-3 shadow-[inset_0_1px_2px_rgba(12,37,54,.06)] focus:border-lifejacket mono" /></label>
+          <PrimaryButton onClick={protect} disabled={busy || !me}>{me ? 'Protect my wallet' : 'Connect a wallet first'}</PrimaryButton>
+          {rows.length > 0 && <Receipt rows={rows} />}</Step>
+        <Step n={3} id="watch" title="Alerts (optional)">
+          <p className="max-w-xl text-sm">One message when someone starts an attempt on your wallet. You sign a short message in your wallet to prove it is yours.</p>
+          <label className="block"><span className="micro">Telegram chat id</span><input value={chat} onChange={(e) => setChat(e.target.value)} inputMode="numeric" className="mt-1 block min-h-[44px] w-full rounded-xl border border-ink/25 bg-white/85 px-3 shadow-[inset_0_1px_2px_rgba(12,37,54,.06)] focus:border-lifejacket mono max-w-xs" /></label>
+          <GhostButton onClick={watch} disabled={!me || !/^-?\d{3,20}$/.test(chat)}>Turn on alerts</GhostButton></Step>
+      </div>
+      <aside aria-label="Your protection" className="space-y-5 lg:sticky lg:top-24">
+        <GlowCard className="p-5"><p className="micro text-brass-ink">Your protection</p><div className="mt-3"><StatusRing state={state} /></div>
+          <div className="mt-4">{me ? <p className="mono text-[13px]" aria-label="Connected wallet">{me}</p> : <PrimaryButton onClick={doConnect}>Connect wallet</PrimaryButton>}</div>
+          {view?.groups?.length ? <p className="mt-3 text-sm">{view.groups.length} group on chain. {view.inheritor ? 'An inheritor is set.' : 'No inheritor yet.'}</p> : null}</GlowCard>
+        <GlowCard className="p-5"><p className="micro text-brass-ink">What it costs</p>
+          <dl className="mt-3 grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 text-sm"><dt>Naming the crew</dt><dd className="numeral text-base">{facts.measured.costPerProtectionTPOT.toFixed(4)} tPOT</dd><dt>Deposits held</dt><dd className="numeral text-base">0 tPOT</dd><dt>A rescue, in fees</dt><dd className="numeral text-base">{facts.measured.costPerRescueTPOT.toFixed(4)} tPOT</dd></dl>
+          <p className="mt-3 text-xs text-ink/70">Measured on this testnet: no deposit is held, so nothing is refundable or lost.</p></GlowCard>
+      </aside>
+    </div>
   </div>);
 }

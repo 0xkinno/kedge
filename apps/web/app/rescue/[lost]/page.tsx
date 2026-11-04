@@ -5,6 +5,9 @@ import { isAddress, getAddress } from 'ethers';
 import { connect, calls, sendCall, trace, short } from '@/lib/client';
 import { PrimaryButton, GlowCard, Notice, Receipt } from '@/components/ui';
 import { Flag } from '@/components/art';
+import { twinOf } from '@/lib/kedge/twin';
+import { callPhrase } from '@/lib/kedge/phrase';
+import { decodeAddress, encodeAddress } from '@polkadot/util-crypto';
 
 const fmt = (planck: string) => (Number(BigInt(planck) / 10n ** 10n) / 1e4).toLocaleString(undefined, { maximumFractionDigits: 4 });
 export default function Rescue() {
@@ -15,6 +18,8 @@ export default function Rescue() {
   useEffect(() => { if (me && isAddress(lost)) fetch(`/api/survey?lost=${lost}&dest=${me}`).then((r) => r.json()).then(setSv).catch(() => setErr('Could not survey the old wallet.')); }, [me, lost, v?.inheritor?.account]);
   if (!isAddress(lost)) return <Notice tone="refusal">That is not a wallet address.</Notice>;
   const att = v?.attempts?.[0]; const grp = att ? v.groups[att.groupIndex] : v?.groups?.[0]; const clock = att?.clock; const heir = v?.inheritor;
+  const gi = att?.groupIndex ?? 0; const isNewPhone = !!(me && grp && encodeAddress(twinOf(me), 42) === grp.inheritor);
+  const phrase = grp && isAddress(lost) ? callPhrase(twinOf(lost), decodeAddress(grp.inheritor), gi) : null;
   const step = heir ? 3 : att ? (clock?.finishable ? 2 : 1) : 0;
   const bring = async () => {
     setBusy(true); setErr(''); const out: any[] = [];
@@ -30,7 +35,6 @@ export default function Rescue() {
     } catch (e: any) { setErr(e.message); }
     setBusy(false);
   };
-  const isHeir = !!me && !!heir && heir.account === (v?.groups?.[0]?.inheritor);
   return (<div className="space-y-8">
     <header><p className="micro text-brass-ink">New phone</p><h1 className="display h1">Rescue</h1><p className="mt-2">Bringing back <span className="mono">{getAddress(lost)}</span></p></header>
     <GlowCard className="p-6"><h2 className="display h3">Timeline</h2>
@@ -42,6 +46,10 @@ export default function Rescue() {
         <p className="mt-2 text-sm">{att.approvedIndexes.length} of {grp.friendsNeeded} needed. Started by <span className="mono">{short(att.initiator)}</span> at block {att.initBlock}.</p></div>)}
       {clock && !heir && (<div className="mt-5" aria-live="polite"><p className="micro">Safety delay</p><p className="display text-4xl text-deep-water">{clock.finishable ? 'Passed' : `${clock.blocksLeft} blocks`}</p>{!clock.finishable && <p className="text-sm">About {clock.secondsLeft} seconds. Head block {v.head}, finishable at block {clock.readyAtBlock}.</p>}</div>)}
       {v && !grp && <p className="mt-4">This wallet has no crew. Nothing can be rescued.</p>}</GlowCard>
+    {grp && !heir && (<GlowCard className="p-6"><h2 className="display h3">Call phrase</h2>
+      {isNewPhone && phrase ? (<><p className="mt-1 text-sm">Call your guardian. Read them these four words. They type them before they can approve.</p>
+        <p data-testid="call-phrase" className="mono mt-3 flex flex-wrap gap-2 text-lg">{phrase.map((w, i) => <span key={i} className="rounded-lg border-2 border-ink bg-white px-3 py-2">{w}</span>)}</p></>)
+        : <p className="mt-1 text-sm">{me ? 'This wallet is not the new phone named in the crew settings, so the phrase is hidden.' : 'Connect the new-phone wallet to see the four words to read to your guardian.'}</p>}</GlowCard>)}
     <GlowCard className="p-6"><h2 className="display h3">What will move</h2>
       {!me ? <div className="mt-3"><p className="text-sm">Connect your new-phone wallet to survey the old wallet.</p><PrimaryButton className="mt-3" onClick={async () => setMe(getAddress(await connect()))}>Connect new phone</PrimaryButton></div>
         : !sv ? <p className="mt-3 text-sm">Surveying and dry-running each item...</p>

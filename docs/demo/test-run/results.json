@@ -1,0 +1,79 @@
+{
+  "at": "2026-11-04T10:07:28.464Z",
+  "base": "http://localhost:3100",
+  "wallet": "injected EIP-1193 test wallet (ethers-backed), not the Rabby or SubWallet extension",
+  "results": [
+    {
+      "step": "A1 connect deployer wallet and subscribe to alerts (EIP-191 signature)",
+      "ok": true,
+      "secs": 2,
+      "detail": "0x9db1ac0Ce3dabD203D23C46fDc064F9FbFe68Eb2"
+    },
+    {
+      "step": "B1 Lifeboat key made in the browser and the card PDF downloads",
+      "ok": true,
+      "secs": 4,
+      "detail": "kedge-lifeboat-card.pdf 21531 bytes"
+    },
+    {
+      "step": "C1 owner protects a wallet from Harbour (set_friend_groups through the wallet)",
+      "ok": true,
+      "secs": 36,
+      "detail": "0xAFEDd6ade2ea1aC331A48382f67A386E5b8828D9"
+    },
+    {
+      "step": "C2 new phone shows the four-word call phrase",
+      "ok": true,
+      "secs": 2,
+      "detail": "guilt wealth absurd strategy"
+    },
+    {
+      "step": "D1 guardian Lorna: locked on a wrong phrase, unlocks on the right one, starts the attempt",
+      "ok": true,
+      "secs": 13,
+      "detail": "attempt started"
+    },
+    {
+      "step": "D2 guardian Ben: same gate, approves",
+      "ok": true,
+      "secs": 10,
+      "detail": "approved"
+    },
+    {
+      "step": "E1 safety delay passes and the new phone brings everything home in one signature",
+      "ok": true,
+      "secs": 61,
+      "detail": "Finish the attempt block 318869 COMPLETED Explorer (opens in a new tab) | Bring it home (one signature) block 318870 COMPLETED Explorer (opens in a new tab) | tPOT (native) COMPLETED"
+    },
+    {
+      "step": "F1 owner stops an attempt he did not start (alert link), then slashes a second one",
+      "ok": true,
+      "secs": 49,
+      "detail": "stopped then slashed"
+    },
+    {
+      "step": "G1 Proof page decodes a refused attack (A3) in the browser from the public node",
+      "ok": true,
+      "secs": 1,
+      "detail": "recovery.NotYetInheritable decoded"
+    },
+    {
+      "step": "G2 guided tour runs through all 7 steps with the keyboard",
+      "ok": true,
+      "secs": 9,
+      "detail": "seven steps, finished on /judge"
+    },
+    {
+      "step": "G3 Muster Drill runs a full rescue from the page",
+      "ok": true,
+      "secs": 92,
+      "detail": "drill finished"
+    },
+    {
+      "step": "H1 mobile (390 px): connect and protect form usable, no horizontal scroll",
+      "ok": true,
+      "secs": 1,
+      "detail": "ok"
+    }
+  ]
+}

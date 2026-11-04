@@ -17,5 +17,6 @@ Generated from git history by `node scripts/readme_gen.mjs`. Transaction hashes 
 | 2026-11-04 | `b583f72` | feat: proof and break campaign on live testnet (H1, H2, A1 to A12, C1, C2), facts pipeline, keyless verify, fault switch, watchkeeper, web app foundations |
 | 2026-11-04 | `63f5ea0` | feat: web app (landing, harbour, crew door, rescue, proof, drill, judge, guided tour), design system, API routes, quality gates passing on 7 viewports |
 | 2026-11-04 | `9bd1942` | feat: live muster drill proven twice, watchkeeper demonstrated on chain with signed subscription and one alert per event, lighter UI motion |
+| 2026-11-04 | `f480c3a` | docs: README, SDK surface, design, judge walk, pitch deck, red team log, community drafts, silent tour recording; reachability script; final status update |
 
 Key chain milestones: vault deployed at block 317284; headline mechanism proven at block 317779 (PLATFORM_PROBE part 7); campaign blocks in EVIDENCE.md.

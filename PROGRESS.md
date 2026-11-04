@@ -13,10 +13,10 @@ Self-scores (1 to 5) against the four criteria. Rivals A, B, C are the three str
 Phases 0 to 8 (repo, intel, moment, probes, thesis, contracts, library, campaign, watchkeeper), the web app, the quality gates, the docs set.
 
 ## Not done, and why
-- **Public deployment (Vercel):** needs the owner's Vercel account and env vars.
-- **Real wallet tests** (MetaMask desktop, MetaMask mobile in-app browser, SubWallet): need physical wallets. The code path is the standard EIP-1193 `eth_sendTransaction`, tested only through ethers wallets.
+- **Public deployment (Vercel):** `scripts/deploy_vercel.sh` does the whole deploy and tests the live link, but it needs a Vercel API token. The Vercel login on the owner's machine does not exist in this cloud container.
+- **Real wallet extensions** (Rabby, SubWallet, MetaMask mobile): not run. The wallet journey is proven with an injected EIP-1193 test wallet backed by real signing keys (`e2e/wallet.mjs`, videos in `docs/demo/test-run/`). Installing and onboarding extensions in headless Chromium was not attempted.
 - **Real-people drill:** needs 2 to 3 consenting guardians. Not invented.
 - **Unattended Watchkeeper run:** needs a Telegram bot token and Upstash. A file-sink run on chain is recorded in `evidence/watch/demo-run.json`.
-- **Hero photograph, demo video with live wallet clips, narrated tour:** need the owner's image and wallet; a silent tour recording is produced instead.
-- **Lighthouse and axe:** run locally on the production build, not on a deployed URL.
-- **Judge-agent red team:** a single-model self red team was run, see REDTEAM_LOG.md. V5 Appendix B was not available.
+- **Final demo video:** the test-run recordings and a silent tour recording exist as raw scenes; the edited film is the next step.
+- **ink! contract:** not built, so the WASM half of WASM/EVM is not demonstrated.
+- **Independent red team:** a single-model self red team was run, see REDTEAM_LOG.md.

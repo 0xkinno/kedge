@@ -16,7 +16,7 @@ The live DoraHacks form could not be read from this environment, so the field li
 | Testnet deployment info | AllotmentVault in README and deployments/testnet.json; chain facts in PLATFORM_PROBE.md |
 | Contract addresses and transaction hashes | EVIDENCE.md (generated, every transaction with block link) |
 | Runnable demo | **TO DO:** public URL after the Vercel deploy; until then local instructions in README |
-| Demo video (max 3 min) | **TO DO:** record from the guided tour (`/?tour=1&render=1`) plus live wallet clips |
+| Demo video (max 3 min) | **TO DO:** edit from the recorded scenes in `docs/demo/test-run/` and the tour recording |
 | Pitch deck (PDF) | docs/kedge-deck.pdf |
 
 Before submitting: set the public URL and video link in README, tag the submitted commit `v1.0-submitted`, freeze the deployment. Code freeze is Nov 6 2026, 05:00 WAT.

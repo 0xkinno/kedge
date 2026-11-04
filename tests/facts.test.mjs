@@ -20,5 +20,5 @@ test('README and UI do not type the headline numbers by hand', () => {
 });
 test('README states the same headline numbers as FACTS', () => {
   const f = JSON.parse(read('docs/FACTS.json')).measured; const r = read('README.md');
-  for (const s of [`${f.rescuesCompleted} of ${f.rescuesAttempted} rescues completed`, `${f.attacksStopped} of ${f.attacksTried} attacks stopped`, `**${f.legitimateRescuesWronglyBlocked}** legitimate rescues wrongly blocked`, `${f.costPerRescueTPOT} tPOT in fees per rescue`]) assert.ok(r.includes(s), `README is missing: ${s}`);
+  for (const s of [`${f.rescuesCompleted} of ${f.rescuesAttempted} rescues completed`, `${f.attacksStopped} of ${f.attacksTried} attacks stopped`, `**${f.legitimateRescuesWronglyBlocked}** honest rescues wrongly blocked`, `${f.costPerRescueTPOT} tPOT in fees per rescue`]) assert.ok(r.includes(s), `README is missing: ${s}`);
 });
