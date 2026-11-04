@@ -7,7 +7,7 @@ const p = evm(); const w = wallet('deployer', p); const file = 'deployments/prob
 const rec = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : {};
 for (const name of process.argv.slice(2)) {
   if (rec[name]) { console.log(name, 'already deployed at', rec[name].address); continue; }
-  const art = JSON.parse(readFileSync(`contracts/out/${name}.json`, 'utf8'));
+  const art = JSON.parse(readFileSync(`contracts/artifacts/${name}.json`, 'utf8'));
   const f = new ContractFactory(art.abi, art.bytecode, w);
   const dtx = await f.getDeployTransaction(); const gas = await p.estimateGas({ from: w.address, data: dtx.data }); const price = (await p.getFeeData()).gasPrice;
   const before = await p.getBalance(w.address);

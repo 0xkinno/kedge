@@ -52,7 +52,7 @@ const HYPE = [/revolution[a]ry/i, /seam[l]ess/i, /cutting[- ]edge/i, /game[- ]ch
 const EMOJI = new RegExp('\\p{Extended_Pictographic}|' + String.fromCharCode(0xfe0f) + '|' + String.fromCharCode(0x200d), 'u');
 const DASH = new RegExp('[' + String.fromCharCode(0x2013) + String.fromCharCode(0x2014) + ']');
 const SELF = 'scripts/check_copy.mjs';
-const SKIP = /(^|\/)(node_modules|reference|\.next|out|cache|keys|evidence\/raw\/private)\//;
+const SKIP = /(^|\/)(node_modules|reference|contracts\/lib|contracts\/out|contracts\/cache|\.next|out|cache|keys|evidence\/raw\/private)\//;
 const SKIP_FILES = /(package-lock\.json|\.(png|jpe?g|webp|gif|pdf|woff2?|ico|mp3|mp4)$)/i;
 
 const tracked = execSync('git ls-files --cached --others --exclude-standard', { encoding: 'utf8' })

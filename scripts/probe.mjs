@@ -116,7 +116,7 @@ P[6] = async () => { // full mini rescue: initiate (lorna), approve (ben), wait 
 
 P[7] = async () => { // HEADLINE: msg.sender inside revive.call run by control_inherited_account is the lost H160
   const lost = A('ramon'); const ramonH160 = loadKey('ramon').h160; const dep = JSON.parse(readFileSync('deployments/probes.json', 'utf8'));
-  const probe = dep.SenderProbe.address; const iface = new Interface(JSON.parse(readFileSync('contracts/out/SenderProbe.json', 'utf8')).abi);
+  const probe = dep.SenderProbe.address; const iface = new Interface(JSON.parse(readFileSync('contracts/artifacts/SenderProbe.json', 'utf8')).abi);
   const data = iface.encodeFunctionData('ping', []);
   const dry = await api.call.reviveApi.call(lost, probe, 0, null, null, data);
   const dj = dry.toJSON();
@@ -140,7 +140,7 @@ P[7] = async () => { // HEADLINE: msg.sender inside revive.call run by control_i
 };
 
 P[8] = async () => { // a Solidity contract calling the pallets address runs nothing
-  const dep = JSON.parse(readFileSync('deployments/probes.json', 'utf8')); const iface = new Interface(JSON.parse(readFileSync('contracts/out/Caller.json', 'utf8')).abi);
+  const dep = JSON.parse(readFileSync('deployments/probes.json', 'utf8')); const iface = new Interface(JSON.parse(readFileSync('contracts/artifacts/Caller.json', 'utf8')).abi);
   const w = wallet('deployer', provider); const price = (await provider.getFeeData()).gasPrice;
   const remark = api.tx.system.remarkWithEvent('0x636f6e74726163742d63616c6c').method.toHex();
   const data = iface.encodeFunctionData('poke', [remark]);

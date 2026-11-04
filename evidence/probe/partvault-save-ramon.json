@@ -1,0 +1,21 @@
+{
+  "part": "vault-save-ramon",
+  "at": "2026-11-04T07:25:31.328Z",
+  "name": "ramon",
+  "amount": "150000000",
+  "txs": [
+    {
+      "label": "approve",
+      "hash": "0x3906ed46c3b7c8918b8032f81894a14858cdc523ede7b7332728efc8b608a7a3",
+      "block": 317288,
+      "status": 1
+    },
+    {
+      "label": "save",
+      "hash": "0x1da4cc78d9b13048b1aee064b871dc69882460258068f3c47f316e452e9081f1",
+      "block": 317289,
+      "status": 1
+    }
+  ],
+  "savingsOf": "150000000"
+}

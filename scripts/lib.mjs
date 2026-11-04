@@ -8,6 +8,8 @@ export const NET = {
   ws: 'wss://test-node-v3.portaldot.dev', http: 'https://test-node-v3.portaldot.dev',
   evm: 'https://test-evm-rpc-v3.portaldot.dev', chainId: 420420777, explorer: 'https://scanner-testnet-v3.portaldot.dev',
 };
+export const KUSD_ID = 20261104; // Kedge native test asset (pUSD pool is too thin to buy from)
+export const assetPrecompile = (id) => '0x' + id.toString(16).padStart(8, '0') + '0'.repeat(24) + '00010000';
 export const PALLETS = '0x6d6f646c70792f70616464720000000000000000';
 export const twin = (h160) => { const a = getBytes(h160); const o = new Uint8Array(32); o.set(a, 0); o.fill(0xee, 20); return o; };
 export const ss58 = (u8) => encodeAddress(u8, 42);

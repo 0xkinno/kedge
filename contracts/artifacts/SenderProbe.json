@@ -1,0 +1,43 @@
+{
+  "name": "SenderProbe",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "who",
+          "type": "address"
+        }
+      ],
+      "name": "Seen",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "last",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ping",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b5060b780601d6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806347799da81460375780635c36b186146065575b600080fd5b6000546049906001600160a01b031681565b6040516001600160a01b03909116815260200160405180910390f35b606b606d565b005b600080546001600160a01b031916339081179091556040519081527fa8a4eb66b377d8f8786a05fcf52254c93c925d417dfc66a12a62bc66d37add099060200160405180910390a156",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c806347799da81460375780635c36b186146065575b600080fd5b6000546049906001600160a01b031681565b6040516001600160a01b03909116815260200160405180910390f35b606b606d565b005b600080546001600160a01b031916339081179091556040519081527fa8a4eb66b377d8f8786a05fcf52254c93c925d417dfc66a12a62bc66d37add099060200160405180910390a156",
+  "immutableReferences": {},
+  "solc": "0.8.28",
+  "evmVersion": "paris"
+}
