@@ -10,21 +10,21 @@ Source of truth: `reference/KEDGE_BUILD_INSTRUCTION.md` (section numbers below r
 ---
 
 ## Phase 0. Repo, identity, guards
-- [ ] Create public repo `0xkinno/kedge`; clone locally
-- [ ] `git config user.name "0xkinno"` and `user.email` (Section 14.1); verify with `git config --list`
-- [ ] `.claude/settings.json` with empty attribution (14.2)
-- [ ] `.githooks/commit-msg` + `git config core.hooksPath .githooks` (14.3); test it strips a fake trailer
-- [ ] `.github/workflows/no-claude-attribution.yml` (14.4); confirm it passes on the first push
-- [ ] `.gitignore` per 14.6; confirm `reference/` and `keys/` are ignored (`git check-ignore -v`)
-- [ ] Move this instruction file and TASK.md source into `reference/`; copy TASK.md to repo root
-- [ ] Clone reference repos (Section 16) into `reference/repos/`
-- [ ] `scripts/check_copy.mjs`: fails on emoji, em/en dashes, hype words, and any sample-project name outside `reference/`; wired into CI
-- [ ] First commit and push: "chore: scaffold, identity guards, copy checks"
+- [ ] Create public repo `0xkinno/kedge`; clone locally (OPEN: GitHub token in this session is invalid and Kinnoski will create the repo; local repo initialised at kedge/ on branch main)
+- [x] `git config user.name "0xkinno"` and `user.email` (Section 14.1); verify with `git config --list` (git config --local shows user.name 0xkinno, user.email 0xkinno@users.noreply.github.com placeholder; replace with the real GitHub email before the first push)
+- [x] `.claude/settings.json` with empty attribution (14.2)
+- [x] `.githooks/commit-msg` + `git config core.hooksPath .githooks` (14.3); test it strips a fake trailer (fake trailer test: Claude trailers stripped; spec regex fixed because it missed 'Co-Authored-By: Claude ... <noreply@anthropic.com>'; a real commit carrying the trailers logged clean)
+- [ ] `.github/workflows/no-claude-attribution.yml` (14.4); confirm it passes on the first push (OPEN: file written; passing on first push cannot be confirmed until the repo exists)
+- [x] `.gitignore` per 14.6; confirm `reference/` and `keys/` are ignored (`git check-ignore -v`) (git check-ignore -v shows reference/ and keys/ ignored; git ls-files lists neither)
+- [x] Move this instruction file and TASK.md source into `reference/`; copy TASK.md to repo root (both files in reference/, TASK.md copied to root)
+- [x] Clone reference repos (Section 16) into `reference/repos/` (20 directories: 18 samples, V3 guide, polkadot-sdk sparse)
+- [x] `scripts/check_copy.mjs`: fails on emoji, em/en dashes, hype words, and any sample-project name outside `reference/`; wired into CI (negative test trips emoji, dash, hype word, sample-name hash; ci.yml runs it, CI run pending the repo)
+- [x] First commit and push: "chore: scaffold, identity guards, copy checks" (committed with the exact message; push pending the repo)
 
 ## Phase 1. G0 and G1 (rules, lanes, sponsor intel)
-- [ ] `RULES_EXTRACT.md` from Section 2 (verbatim criteria, tracks, dates in WAT, DoraHacks fields, code-compliance rules)
-- [ ] `reference/LANE_MAP.md` from Section 3 plus anything new found in Discord / DoraHacks gallery (V5 22.8)
-- [ ] `SPONSOR_INTEL.md` from Section 4: founder primitive, newest releases, depth ladder, availability; link the upstream Recovery PR and its date
+- [x] `RULES_EXTRACT.md` from Section 2 (verbatim criteria, tracks, dates in WAT, DoraHacks fields, code-compliance rules) (from the announcement; DoraHacks page not fetchable (405), flagged inside the file)
+- [x] `reference/LANE_MAP.md` from Section 3 plus anything new found in Discord / DoraHacks gallery (V5 22.8) (grep of all clones: no sample sends to Recovery; Discord and DoraHacks gallery not checked, flagged)
+- [x] `SPONSOR_INTEL.md` from Section 4: founder primitive, newest releases, depth ladder, availability; link the upstream Recovery PR and its date (live metadata checked; upstream PR paritytech/polkadot-sdk#10482, commit dated 2026-05-01; finding: SecurityDeposit = 0)
 - [ ] **GATE 1:** report to Kinnoski: lane confirmed empty, any new rival in the Recovery lane
 
 ## Phase 2. G2 (the moment) and sources
