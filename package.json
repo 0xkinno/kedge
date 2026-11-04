@@ -7,7 +7,7 @@
   "scripts": {
     "check:copy": "node scripts/check_copy.mjs",
     "keygen": "node scripts/keygen.mjs",
-    "test": "node --test tests/*.test.mjs",
+    "test": "node --import tsx --test tests/*.test.mjs tests/*.test.ts",
     "verify:sources": "node scripts/verify_sources.mjs",
     "build:figures": "node scripts/build_figures.mjs"
   },
@@ -19,6 +19,9 @@
     "ethers": "^6.17.0"
   },
   "devDependencies": {
-    "solc": "^0.8.28"
+    "@types/node": "^26.6.6",
+    "solc": "^0.8.28",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
   }
 }
