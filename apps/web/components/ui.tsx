@@ -27,7 +27,7 @@ export const LinkButton = ({ href, children, primary }: { href: string; children
 export const Mono = ({ children }: { children: ReactNode }) => <span className="mono">{children}</span>;
 export function StatusRing({ state }: { state: 'protected' | 'not' | 'unknown' }) {
   const c = state === 'protected' ? '#1BB3A2' : state === 'not' ? '#D3263C' : '#B88A2E';
-  const t = state === 'protected' ? 'Protected' : state === 'not' ? 'Not protected' : 'Checking';
+  const t = state === 'protected' ? 'Protected' : state === 'not' ? 'Not protected' : 'Not checked yet';
   return (<div className="flex items-center gap-4" role="status"><svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="30" fill="none" stroke="#DDD4C2" strokeWidth="8" /><circle cx="36" cy="36" r="30" fill="none" stroke={c} strokeWidth="8" strokeDasharray={state === 'protected' ? '188 0' : state === 'not' ? '40 148' : '90 98'} strokeLinecap="round" transform="rotate(-90 36 36)" /></svg><span className="display h3">{t}</span></div>);
 }
 export function Receipt({ rows }: { rows: { label: string; status: 'ok' | 'failed' | 'wait'; detail?: string; href?: string }[] }) {

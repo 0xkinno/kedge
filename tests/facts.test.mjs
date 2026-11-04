@@ -18,3 +18,7 @@ test('every scenario passed or is listed as a miss, and counts are consistent', 
 test('README and UI do not type the headline numbers by hand', () => {
   const home = read('apps/web/app/page.tsx'); assert.ok(!/\b(9 of 9|2 of 2)\b/.test(home), 'landing must read numbers from FACTS');
 });
+test('README states the same headline numbers as FACTS', () => {
+  const f = JSON.parse(read('docs/FACTS.json')).measured; const r = read('README.md');
+  for (const s of [`${f.rescuesCompleted} of ${f.rescuesAttempted} rescues completed`, `${f.attacksStopped} of ${f.attacksTried} attacks stopped`, `**${f.legitimateRescuesWronglyBlocked}** legitimate rescues wrongly blocked`, `${f.costPerRescueTPOT} tPOT in fees per rescue`]) assert.ok(r.includes(s), `README is missing: ${s}`);
+});

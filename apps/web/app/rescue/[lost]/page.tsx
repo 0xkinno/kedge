@@ -35,7 +35,7 @@ export default function Rescue() {
     <header><p className="micro text-brass-ink">New phone</p><h1 className="display h1">Rescue</h1><p className="mt-2">Bringing back <span className="mono">{getAddress(lost)}</span></p></header>
     <GlowCard className="p-6"><h2 className="display h3">Timeline</h2>
       <ol className="mt-4 space-y-4" aria-label="Rescue timeline">
-        {[['Crew named', !!grp], ['Attempt started and approved', !!att], ['Safety delay passed', !!clock?.finishable || !!heir], ['New phone is the inheritor', !!heir], ['Brought home', rows.some((r) => r.label.startsWith('Bring') && r.status === 'ok')]].map(([t, d], i) => (
+        {[['Crew named', !!grp], ['Attempt started and approved', !!att || !!heir], ['Safety delay passed', !!clock?.finishable || !!heir], ['New phone is the inheritor', !!heir], ['Brought home', rows.some((r) => r.label.startsWith('Bring') && r.status === 'ok')]].map(([t, d], i) => (
           <li key={i} className="flex items-center gap-3"><span aria-hidden="true" className={`flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink text-xs ${d ? 'bg-sea-glass' : 'bg-paper-deep'}`}>{d ? 'ok' : i + 1}</span><span className={d ? 'font-semibold' : 'text-ink/70'}>{t as string}</span></li>))}
       </ol>
       {att && grp && (<div className="mt-5"><p className="micro">Approvals</p><div className="mt-2 flex gap-2">{grp.friends.map((_: string, i: number) => <Flag key={i} letter={String.fromCharCode(65 + i)} on={att.approvedIndexes.includes(i)} />)}</div>

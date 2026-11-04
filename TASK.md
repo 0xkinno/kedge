@@ -79,51 +79,51 @@ Source of truth: `reference/KEDGE_BUILD_INSTRUCTION.md` (section numbers below r
 - [x] `scripts/facts.mjs` writes `docs/FACTS.json`; CI fails if README/UI numbers drift (FACTS drift test in the suite)
 - [x] `PROOF.md`, `EVIDENCE.md`, `FINDINGS.md` (positive and negative results) (generated and written)
 - [x] `npm run verify`: keyless, re-reads every recorded tx from the public node and checks FACTS (31 of 31 transactions re-read, ALL CHECKS PASSED)
-- [ ] **GATE 7:** report results incl. misses and wrongly blocked count
+- [x] **GATE 7:** report results incl. misses and wrongly blocked count (results reported in the hand-off message: 16 of 16 scenarios pass, 0 wrongly blocked, A4 name miss)
 
 ## Phase 8. Watchkeeper (autonomous background loop)
-- [ ] `watch/` job: cursor in Upstash, Recovery event scan, Telegram alert, one message per event
-- [ ] `/api/watch`: EIP-191 signed subscription; refuse unsigned
-- [ ] GitHub Actions schedule with loop chaining; test proving no key material in job or workflow
-- [ ] Record one unattended run (attempt started while nobody watched, alert delivered); evidence saved
+- [x] `watch/` job: cursor in Upstash, Recovery event scan, Telegram alert, one message per event (job and tests done; cursor store works with Upstash REST and a file fallback; only the file store was exercised live)
+- [x] `/api/watch`: EIP-191 signed subscription; refuse unsigned (unsigned 401, wrong signer 401, signed 200 (evidence/watch/demo-run.json))
+- [x] GitHub Actions schedule with loop chaining; test proving no key material in job or workflow (workflow written; test greps for key material; not yet running because the repo secrets are not set)
+- [ ] Record one unattended run (attempt started while nobody watched, alert delivered); evidence saved (OPEN: needs the Telegram bot token and Upstash; a file-sink run on chain is recorded, with exactly one alert per event)
 
 ## Phase 9. Design system (before screens)
-- [ ] `DESIGN.md` from Section 11 (mark, wordmark, tokens, fonts, motion, ornaments)
-- [ ] Fonts via `next/font`: Bricolage Grotesque, Instrument Serif, Hanken Grotesk, JetBrains Mono
-- [ ] Tokens in Tailwind v4 theme; paper background + grain + chart contours
-- [ ] SVG set (Section 11.10) in `components/art/`; each checked at 24, 48, 96 px
-- [ ] Hero image received from Kinnoski (11.8 prompt) and placed with mask; mobile crop
-- [ ] `GlowCard`, square capsule nav, buttons, status ring, timeline, flag bitfield, receipt row components
+- [x] `DESIGN.md` from Section 11 (mark, wordmark, tokens, fonts, motion, ornaments) (written; Framer Motion and Lenis dropped for performance, disclosed in the file)
+- [x] Fonts via `next/font`: Bricolage Grotesque, Instrument Serif, Hanken Grotesk, JetBrains Mono (all four, self-hosted at build)
+- [x] Tokens in Tailwind v4 theme; paper background + grain + chart contours (@theme, grain, contours)
+- [ ] SVG set (Section 11.10) in `components/art/`; each checked at 24, 48, 96 px (OPEN: nine SVGs drawn; not individually audited at 24, 48 and 96 px)
+- [ ] Hero image received from Kinnoski (11.8 prompt) and placed with mask; mobile crop (OPEN: needs the photograph from Kinnoski; an illustration stands in and is labelled)
+- [x] `GlowCard`, square capsule nav, buttons, status ring, timeline, flag bitfield, receipt row components (built: GlowCard, capsule nav, buttons, status ring, receipt rows, approval flags; the timeline is inline on the Rescue page)
 
 ## Phase 10. Screens (person first)
-- [ ] Landing (9 sections, Section 11.6) with FACTS-driven stats
-- [ ] Harbour (owner setup, groups, Lifeboat Card PDF, watch toggle, cost panel)
-- [ ] Lifeboat Card PDF: wallet size, QR of lifeboat key encrypted with a passphrase the owner chooses, plain instructions; print test
-- [ ] Crew door (phone first, phrase boxes, approve gated, refusal states)
-- [ ] Rescue (timeline, countdown, survey, bring it home, honest receipt incl. ItemFailed state)
-- [ ] Proof (in-browser decoding, before/after balances)
-- [ ] Drill (SSE streamed steps, public lock, caps, kill switch, labelled house crew)
-- [ ] Judge page (60 s / 3 min / 10 min walk)
-- [ ] `/api/status` measured probes with timestamps; `/api/facts`; `/api/trace`
-- [ ] Guided tour with 7 steps, render mode `?tour=1&render=1`
+- [x] Landing (9 sections, Section 11.6) with FACTS-driven stats (FACTS-driven stats)
+- [x] Harbour (owner setup, groups, Lifeboat Card PDF, watch toggle, cost panel) (connect, Lifeboat key, groups with Mate checks, cost panel, watch toggle, stop and slash)
+- [ ] Lifeboat Card PDF: wallet size, QR of lifeboat key encrypted with a passphrase the owner chooses, plain instructions; print test (OPEN: PDF and encrypted QR generated in the browser; not print-tested and the QR scan round trip was not tested)
+- [x] Crew door (phone first, phrase boxes, approve gated, refusal states) (phrase boxes, gated approve, refusal states)
+- [x] Rescue (timeline, countdown, survey, bring it home, honest receipt incl. ItemFailed state) (timeline, countdown, survey, bring it home, per-item receipt including the failed-item state)
+- [x] Proof (in-browser decoding, before/after balances) (decodes in the browser from the public node; before and after balances)
+- [x] Drill (SSE streamed steps, public lock, caps, kill switch, labelled house crew) (ran twice live, docs/drills/; lock returns 409, caps and kill switch tested)
+- [x] Judge page (60 s / 3 min / 10 min walk) (written)
+- [x] `/api/status` measured probes with timestamps; `/api/facts`; `/api/trace` (status, facts, trace, lookout, survey)
+- [x] Guided tour with 7 steps, render mode `?tour=1&render=1` (render mode recorded to docs/demo/tour-silent.webm)
 
 ## Phase 11. Quality
-- [ ] Playwright: all 7 viewports, overlap test, no horizontal scroll, h1, focus ring, zero console errors
-- [ ] axe-core AA on every page; Lighthouse mobile >= 95 on all four categories
-- [ ] Real wallet test: MetaMask desktop + MetaMask mobile in-app browser + SubWallet guardian
-- [ ] Deploy to Vercel; reachability script curls every public path after deploy
-- [ ] Real-people drill (9.1) with 2 to 3 consenting guardians; record times and confusion points honestly
+- [x] Playwright: all 7 viewports, overlap test, no horizontal scroll, h1, focus ring, zero console errors (63 of 63 checks, twice)
+- [x] axe-core AA on every page; Lighthouse mobile >= 95 on all four categories (axe clean; Lighthouse mobile 95 or more on five pages, locally)
+- [ ] Real wallet test: MetaMask desktop + MetaMask mobile in-app browser + SubWallet guardian (OPEN: needs physical MetaMask and SubWallet)
+- [ ] Deploy to Vercel; reachability script curls every public path after deploy (OPEN: needs the owner's Vercel account and env vars; reachability script written and run locally)
+- [ ] Real-people drill (9.1) with 2 to 3 consenting guardians; record times and confusion points honestly (OPEN: needs 2 to 3 consenting guardians; not invented)
 
 ## Phase 12. Red team (G9)
-- [ ] Five judge-agent roles on the deployed URL (V5 Appendix B); `REDTEAM_LOG.md`
-- [ ] Fix, redeploy, repeat until a clean round
+- [ ] Five judge-agent roles on the deployed URL (V5 Appendix B); `REDTEAM_LOG.md` (OPEN: a single-model self red team on the local build, labelled as such in REDTEAM_LOG.md)
+- [ ] Fix, redeploy, repeat until a clean round (OPEN: fixes made and gates rerun clean locally; no deployment to redeploy)
 
 ## Phase 13. Story and submission
-- [ ] README in Section 12 order; 2x2 screenshots from Playwright; landing banner; house-style test passes
-- [ ] `SDK_SURFACE.md` with file:line; `JUDGE.md`; `PROGRESS.md` self-scores; `MILESTONES.md`
-- [ ] Demo video (max 3 min) from tour render + live wallet clips: hook, flow, failure, explorer proof, receipt; timestamps in submission
-- [ ] Pitch deck PDF (problem, why Portaldot is essential, proof, reasons for continued support)
-- [ ] `SUBMISSION_DORAHACKS.md` mirroring the live form; Kinnoski reviews; **Kinnoski submits**
-- [ ] Tag the submitted commit `v1.0-submitted`; freeze the deployment
-- [ ] `PITCH.md` for Demo Day (Nov 8 to 9): 20 s hook, 60 s live drill, 30 s proof, fallback recording
-- [ ] Community Choice: short X thread and Discord post with the drill link (Kinnoski publishes)
+- [x] README in Section 12 order; 2x2 screenshots from Playwright; landing banner; house-style test passes (generated from FACTS)
+- [x] `SDK_SURFACE.md` with file:line; `JUDGE.md`; `PROGRESS.md` self-scores; `MILESTONES.md` (generated with file:line; JUDGE, PROGRESS, MILESTONES also written)
+- [ ] Demo video (max 3 min) from tour render + live wallet clips: hook, flow, failure, explorer proof, receipt; timestamps in submission (OPEN: only a silent tour recording exists; the final video needs live wallet clips and your voice)
+- [x] Pitch deck PDF (problem, why Portaldot is essential, proof, reasons for continued support) (docs/kedge-deck.pdf, 6 slides from FACTS)
+- [ ] `SUBMISSION_DORAHACKS.md` mirroring the live form; Kinnoski reviews; **Kinnoski submits** (OPEN: draft written; Kinnoski reviews and submits)
+- [ ] Tag the submitted commit `v1.0-submitted`; freeze the deployment (OPEN: after Kinnoski submits)
+- [x] `PITCH.md` for Demo Day (Nov 8 to 9): 20 s hook, 60 s live drill, 30 s proof, fallback recording (written with fallback)
+- [ ] Community Choice: short X thread and Discord post with the drill link (Kinnoski publishes) (OPEN: drafts in docs/COMMUNITY.md; Kinnoski publishes)

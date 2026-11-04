@@ -4,6 +4,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 /** @type {import('next').NextConfig} */
 export default {
   reactStrictMode: true,
+  poweredByHeader: false,
   outputFileTracingRoot: path.join(here, '../..'),
   serverExternalPackages: ['@polkadot/api', '@polkadot/util', '@polkadot/util-crypto', '@polkadot/keyring'],
   experimental: { externalDir: true },
