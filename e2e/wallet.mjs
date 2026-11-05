@@ -116,6 +116,19 @@ await step('I1 deep link door: a visiting dApp sends the owner to Harbour pre-fi
   await p.getByText('Returning to').waitFor({ timeout: 30000 }); const href = await p.getByRole('link', { name: 'Return now' }).getAttribute('href'); if (href !== back) throw new Error('return link wrong: ' + href);
   await shot(a, 'I1-door-returning'); await a.close(); return `signed, then a return link to ${new URL(back).hostname}`;
 });
+await step('J1 inheritance door: Crew and Family groups together, Family outranks Crew, links carry the right group', async () => {
+  const o = await fundNew(3); const a = await actor('J-family', o); const p = a.page;
+  await p.goto(BASE + '/harbour'); await p.getByRole('button', { name: 'Connect wallet' }).first().click(); await p.getByLabel('Connected wallet').waitFor();
+  await p.getByLabel('Guardian 1 wallet address').fill(addr('lorna')); await p.getByLabel('Guardian 2 wallet address').fill(addr('ben')); await p.getByLabel('Guardian 3 wallet address').fill(addr('ana')); await p.getByLabel('New-phone wallet (inheritor)').fill(addr('lifeboat'));
+  await p.getByText('If I do not come home').click();
+  await p.getByLabel('Family guardian 1 wallet address').fill(addr('drill-lorna')); await p.getByLabel('Family guardian 2 wallet address').fill(addr('drill-ben')); await p.getByLabel('Family heir wallet').fill(addr('ramon'));
+  await shot(a, 'J1-family-form'); await p.getByRole('button', { name: 'Protect my wallet' }).click(); await p.getByText('Completed').first().waitFor({ timeout: 90000 });
+  await p.getByText('Share these links').waitFor(); const crewHref = await p.getByRole('link', { name: /group=1/ }).getAttribute('href'); const famHref = await p.getByRole('link', { name: /group=0/ }).getAttribute('href');
+  if (!crewHref.includes(`/crew/${o.address}?group=1`) || !famHref.includes('?group=0')) throw new Error('links wrong ' + crewHref + ' ' + famHref);
+  const v = await (await fetch(`${BASE}/api/lookout?lost=${o.address}`)).json(); if (v.groups.length !== 2 || Number(v.groups[0].inheritancePriority) !== 0 || Number(v.groups[1].inheritancePriority) !== 1) throw new Error('groups on chain: ' + JSON.stringify(v.groups.map((g) => g.inheritancePriority)));
+  const b = await actor('J-newphone', wal('lifeboat')); await b.page.goto(`${BASE}/rescue/${o.address}`); await b.page.getByRole('button', { name: 'Connect new phone' }).click(); await b.page.getByTestId('call-phrase').waitFor({ timeout: 30000 }); await shot(b, 'J1-crew-newphone-phrase'); await b.close();
+  await shot(a, 'J1-family-protected'); await a.close(); return '2 groups on chain (Family priority 0, Crew priority 1), links ?group=0 and ?group=1';
+});
 await step('H1 mobile (390 px): connect and protect form usable, no horizontal scroll', async () => {
   const a = await actor('H-mobile', wal('deployer'), { w: 390, h: 844 }); const p = a.page; await p.goto(BASE + '/harbour'); await p.getByRole('button', { name: 'Connect wallet' }).first().click(); await p.getByLabel('Connected wallet').waitFor();
   const sw = await p.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); if (sw > 1) throw new Error('horizontal scroll ' + sw); await shot(a, 'H1-mobile-harbour'); await a.close(); return 'ok';

@@ -17,8 +17,8 @@ export default function Rescue() {
   useEffect(() => { load(); const t = setInterval(load, 6000); return () => clearInterval(t); }, [load]);
   useEffect(() => { if (me && isAddress(lost)) fetch(`/api/survey?lost=${lost}&dest=${me}`).then((r) => r.json()).then(setSv).catch(() => setErr('Could not survey the old wallet.')); }, [me, lost, v?.inheritor?.account]);
   if (!isAddress(lost)) return <Notice tone="refusal">That is not a wallet address.</Notice>;
-  const att = v?.attempts?.[0]; const grp = att ? v.groups[att.groupIndex] : v?.groups?.[0]; const clock = att?.clock; const heir = v?.inheritor;
-  const gi = att?.groupIndex ?? 0; const isNewPhone = !!(me && grp && encodeAddress(twinOf(me), 42) === grp.inheritor);
+  const mineIdx = me && v?.groups ? v.groups.findIndex((x: any) => x.inheritor === encodeAddress(twinOf(me), 42)) : -1; const att = v?.attempts?.find((x: any) => mineIdx < 0 || x.groupIndex === mineIdx) ?? v?.attempts?.[0]; const grp = att ? v.groups[att.groupIndex] : v?.groups?.[mineIdx >= 0 ? mineIdx : 0]; const clock = att?.clock; const heir = v?.inheritor;
+  const gi = att?.groupIndex ?? (mineIdx >= 0 ? mineIdx : 0); const isNewPhone = !!(me && grp && encodeAddress(twinOf(me), 42) === grp.inheritor);
   const phrase = grp && isAddress(lost) ? callPhrase(twinOf(lost), decodeAddress(grp.inheritor), gi) : null;
   const step = heir ? 3 : att ? (clock?.finishable ? 2 : 1) : 0;
   const bring = async () => {

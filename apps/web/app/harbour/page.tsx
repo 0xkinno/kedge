@@ -19,6 +19,7 @@ export default function Harbour() {
   const [heir, setHeir] = useState(''); const [msg, setMsg] = useState<{ tone: 'info' | 'refusal'; text: string } | null>(null);
   const [state, setState] = useState<'protected' | 'not' | 'unknown'>('unknown'); const [view, setView] = useState<any>(null); const [busy, setBusy] = useState(false);
   const [rows, setRows] = useState<any[]>([]); const [chat, setChat] = useState(''); const [act, setAct] = useState('');
+  const [fam, setFam] = useState(false); const [famG, setFamG] = useState(['', '']); const [famHeir, setFamHeir] = useState(''); const [crewIdx, setCrewIdx] = useState(0);
   const [door, setDoor] = useState<Door>({ guardians: [] }); const [done, setDone] = useState(false); const [left, setLeft] = useState(5);
   useEffect(() => {
     const sp = new URLSearchParams(location.search); setAct(sp.get('act') ?? '');
@@ -36,8 +37,14 @@ export default function Harbour() {
       if (!isAddress(heir)) throw new KedgeRefusal('BAD_HEIR', 'Add the new-phone address (make a Lifeboat key above, or paste one).');
       const p = PRESETS[preset]; const lost32 = twinOf(me);
       const spec = { friends: list.map(twinOf), friendsNeeded: need, inheritor32: twinOf(heir), inheritanceDelay: p.delay, priority: 1, cancelDelay: p.cancel };
-      checkGroups(lost32, [spec]); await refuseContractInheritor(twinOf(heir), (a) => rpc('eth_getCode', [a, 'latest']));
-      const hash = await sendCall(me, calls.setGroups([{ friends: list, need, heir, delay: p.delay, priority: 1, cancel: p.cancel }]));
+      const famList = famG.map((x) => x.trim()).filter(Boolean); const famDelay = preset === 'real' ? 432000 : 20; // 30 days, or 20 blocks in a drill
+      if (fam) { if (famList.length < 2 || !famList.every(isAddress)) throw new KedgeRefusal('BAD_FAMILY', 'The Family group needs two valid guardian addresses.'); if (!isAddress(famHeir)) throw new KedgeRefusal('BAD_FAMILY_HEIR', 'Add the wallet that should inherit if you do not come home.'); }
+      const famSpec = { friends: famList.map(twinOf), friendsNeeded: 2, inheritor32: fam && isAddress(famHeir) ? twinOf(famHeir) : twinOf(heir), inheritanceDelay: famDelay, priority: 0, cancelDelay: p.cancel };
+      checkGroups(lost32, fam ? [famSpec, spec] : [spec]); await refuseContractInheritor(twinOf(heir), (a) => rpc('eth_getCode', [a, 'latest'])); if (fam) await refuseContractInheritor(twinOf(famHeir), (a) => rpc('eth_getCode', [a, 'latest']));
+      // Family (priority 0, the strongest) is group 0; Crew is group 1. A8 and A9 on the Proof page show Family outranking Crew.
+      const groups = fam ? [{ friends: famList, need: 2, heir: famHeir, delay: famDelay, priority: 0, cancel: p.cancel }, { friends: list, need, heir, delay: p.delay, priority: 1, cancel: p.cancel }] : [{ friends: list, need, heir, delay: p.delay, priority: 1, cancel: p.cancel }];
+      setCrewIdx(fam ? 1 : 0);
+      const hash = await sendCall(me, calls.setGroups(groups));
       setRows([{ label: 'Crew named (set_friend_groups)', status: 'wait', detail: short(hash) }]);
       const o = await trace(hash);
       setRows([{ label: 'Crew named (set_friend_groups)', status: o.extrinsicFailed ? 'failed' : 'ok', detail: o.errorName ?? `block ${o.block}`, href: o.explorer }]);
@@ -70,7 +77,15 @@ export default function Harbour() {
           <div className="grid gap-4 sm:grid-cols-2"><label><span className="micro block">Approvals needed</span><select value={need} onChange={(e) => setNeed(+e.target.value)} className="mt-1 block min-h-[44px] w-full rounded-xl border border-ink/25 bg-white/85 px-3 shadow-[inset_0_1px_2px_rgba(12,37,54,.06)] focus:border-lifejacket">{[1, 2, 3].map((n) => <option key={n}>{n}</option>)}</select></label>
             <label><span className="micro block">Safety delay</span><select value={preset} onChange={(e) => setPreset(e.target.value as any)} className="mt-1 block min-h-[44px] w-full rounded-xl border border-ink/25 bg-white/85 px-3 shadow-[inset_0_1px_2px_rgba(12,37,54,.06)] focus:border-lifejacket">{Object.entries(PRESETS).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}</select></label></div>
           <label className="block"><span className="micro">New-phone wallet (inheritor)</span><input value={heir} onChange={(e) => setHeir(e.target.value)} placeholder="0x..." className="mt-1 block min-h-[44px] w-full rounded-xl border border-ink/25 bg-white/85 px-3 shadow-[inset_0_1px_2px_rgba(12,37,54,.06)] focus:border-lifejacket mono" /></label>
+          <label className="flex items-start gap-3 rounded-xl border border-fog bg-paper/60 p-3"><input type="checkbox" checked={fam} onChange={(e) => setFam(e.target.checked)} className="mt-1 h-5 w-5 accent-[#FF5A1F]" />
+            <span><span className="font-semibold">If I do not come home</span><span className="mt-0.5 block text-sm text-ink/80">Add a Family group. It outranks Crew: if your family finishes a recovery, it replaces whoever the crew chose. It uses a long delay (30 days; 20 blocks in a drill).</span></span></label>
+          {fam && (<div className="space-y-3 rounded-xl border border-brass/40 bg-white/60 p-3">
+            {famG.map((v, i) => (<label key={i} className="block"><span className="micro">Family guardian {i + 1} wallet address</span><input value={v} onChange={(e) => setFamG(famG.map((x, j) => (j === i ? e.target.value : x)))} placeholder="0x..." className="mt-1 block min-h-[44px] w-full rounded-xl border border-ink/25 bg-white/85 px-3 shadow-[inset_0_1px_2px_rgba(12,37,54,.06)] focus:border-lifejacket max-w-md mono" /></label>))}
+            <label className="block"><span className="micro">Family heir wallet</span><input value={famHeir} onChange={(e) => setFamHeir(e.target.value)} placeholder="0x..." className="mt-1 block min-h-[44px] w-full rounded-xl border border-ink/25 bg-white/85 px-3 shadow-[inset_0_1px_2px_rgba(12,37,54,.06)] focus:border-lifejacket max-w-md mono" /></label></div>)}
           <PrimaryButton onClick={protect} disabled={busy || !me}>{me ? 'Protect my wallet' : 'Connect a wallet first'}</PrimaryButton>
+          {done && me && (<div className="rounded-xl border border-sea-glass/50 bg-sea-glass/10 p-3 text-sm"><p className="font-semibold">Share these links</p>
+            <p className="mt-1">Crew guardians: <a className="mono underline underline-offset-4" href={`/crew/${me}?group=${crewIdx}`}>/crew/{short(me)}?group={crewIdx}</a></p>
+            {fam && <p className="mt-1">Family guardians: <a className="mono underline underline-offset-4" href={`/crew/${me}?group=0`}>/crew/{short(me)}?group=0</a></p>}</div>)}
           {rows.length > 0 && <Receipt rows={rows} />}</Step>
         <Step n={3} id="watch" title="Alerts (optional)">
           <p className="max-w-xl text-sm">One message when someone starts an attempt on your wallet. You sign a short message in your wallet to prove it is yours.</p>
