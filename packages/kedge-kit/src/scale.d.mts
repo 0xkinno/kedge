@@ -1,0 +1,17 @@
+export function compact(n: number | bigint): Uint8Array;
+export const remarkWithEvent: (hex: string) => string;
+export const transferKeepAlive: (dest: string, value: bigint | number) => string;
+export const transferAll: (dest: string, keepAlive: boolean) => string;
+export const assetsTransfer: (id: number, dest: string, amount: bigint | number) => string;
+export const forceBatch: (callHexes: string[]) => string;
+export const controlInheritedAccount: (recovered: string, innerHex: string) => string;
+export const revokeInheritor: () => string;
+export const reviveCall: (dest: string, value: number | bigint, refTime: number | bigint, proofSize: number | bigint, depositLimit: number | bigint, dataHex: string) => string;
+export type FriendGroupInput = { friends: string[]; friendsNeeded: number; inheritor: string; inheritanceDelay: number; inheritancePriority: number; cancelDelay: number };
+export const setFriendGroups: (groups: FriendGroupInput[]) => string;
+export const initiateAttempt: (lost: string, groupIndex: number) => string;
+export const approveAttempt: (lost: string, groupIndex: number) => string;
+export const finishAttempt: (lost: string, groupIndex: number) => string;
+export const cancelAttempt: (lost: string, groupIndex: number) => string;
+export const slashAttempt: (groupIndex: number) => string;
+export const RECOVERY_EVENTS: string[];

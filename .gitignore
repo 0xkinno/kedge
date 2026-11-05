@@ -10,3 +10,4 @@ cache/
 contracts/out/
 contracts/cache/
 ink/**/target/
+packages/*/dist/

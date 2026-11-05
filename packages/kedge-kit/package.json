@@ -1,0 +1,16 @@
+{
+  "name": "kedge-kit",
+  "version": "0.1.0",
+  "description": "Add social recovery to a Portaldot dApp: guardians, safety delay, and a one-signature rescue, signed from MetaMask.",
+  "license": "MIT",
+  "author": "0xkinno",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js", "require": "./dist/index.cjs" } },
+  "files": ["dist", "README.md"],
+  "scripts": { "build": "tsup", "test": "node --test test/*.test.mjs" },
+  "peerDependencies": { "@polkadot/api": ">=16", "@polkadot/util": ">=13", "@polkadot/util-crypto": ">=13", "ethers": "^6" },
+  "devDependencies": { "tsup": "8.5.0", "typescript": "5.9.3" }
+}
