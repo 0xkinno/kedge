@@ -3,7 +3,7 @@ import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import { u8aToHex } from '@polkadot/util';
 import * as S from '../watch/scale.mjs';
-import { api, closeApi, setFriendGroups, initiate, approve, finish, cancel, slash, bringHome, sortFriends, remark, revokeInheritor } from '../apps/web/lib/kedge/purser';
+import { api, closeApi, setFriendGroups, initiate, approve, finish, cancel, slash, bringHome, sortFriends, remark, revokeInheritor } from '../packages/kedge-kit/src/purser';
 
 after(async () => { await closeApi(); });
 const A = (n: number) => new Uint8Array(32).fill(n); const H = (n: number) => u8aToHex(A(n));

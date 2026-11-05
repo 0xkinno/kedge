@@ -5,10 +5,10 @@
 import { JsonRpcProvider, Wallet } from 'ethers';
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
-import { NET } from '../apps/web/lib/kedge/constants';
-import { twinOf } from '../apps/web/lib/kedge/twin';
-import * as P from '../apps/web/lib/kedge/purser';
-import { sendRuntimeCall, resolveOutcome } from '../apps/web/lib/kedge/helm';
+import { NET } from '../packages/kedge-kit/src/constants';
+import { twinOf } from '../packages/kedge-kit/src/twin';
+import * as P from '../packages/kedge-kit/src/purser';
+import { sendRuntimeCall, resolveOutcome } from '../packages/kedge-kit/src/helm';
 import { subscriptionMessage } from '../watch/core.mjs';
 const BASE = process.env.BASE ?? 'http://localhost:3100'; const STORE = '/tmp/kedge-store.json';
 const provider = new JsonRpcProvider(NET.evmRpc, { chainId: NET.chainId, name: 'portaldot-v3' }, { staticNetwork: true }); const rpc = (m: string, p: unknown[]) => provider.send(m, p);

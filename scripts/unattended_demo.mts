@@ -3,10 +3,10 @@
 // Order: the GitHub Actions job must already be running (its cursor exists in Upstash); only then is the attempt started.
 import { JsonRpcProvider, Wallet } from 'ethers';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { NET } from '../apps/web/lib/kedge/constants';
-import { twinOf } from '../apps/web/lib/kedge/twin';
-import * as P from '../apps/web/lib/kedge/purser';
-import { sendRuntimeCall, resolveOutcome } from '../apps/web/lib/kedge/helm';
+import { NET } from '../packages/kedge-kit/src/constants';
+import { twinOf } from '../packages/kedge-kit/src/twin';
+import * as P from '../packages/kedge-kit/src/purser';
+import { sendRuntimeCall, resolveOutcome } from '../packages/kedge-kit/src/helm';
 import { subscriptionMessage } from '../watch/core.mjs';
 const { UPSTASH_REDIS_REST_URL: U, UPSTASH_REDIS_REST_TOKEN: T, CHAT_ID, BASE = 'https://kedge-kinnoskis-projects.vercel.app' } = process.env as Record<string, string>;
 const redis = async (...a: string[]) => (await (await fetch(U, { method: 'POST', headers: { authorization: `Bearer ${T}`, 'content-type': 'application/json' }, body: JSON.stringify(a) })).json()).result;

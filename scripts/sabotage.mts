@@ -3,11 +3,11 @@
 // Usage: KEDGE_SABOTAGE=sort npx tsx scripts/sabotage.mts   -> evidence/campaign/SABOTAGE_sort.json
 import { JsonRpcProvider, Wallet, formatEther } from 'ethers';
 import { writeFileSync, readFileSync } from 'node:fs';
-import { NET } from '../apps/web/lib/kedge/constants';
-import { twinOf } from '../apps/web/lib/kedge/twin';
-import { sendRuntimeCall, resolveOutcome, errorNameFromMessage } from '../apps/web/lib/kedge/helm';
-import { api, closeApi } from '../apps/web/lib/kedge/purser';
-import { checkGroups } from '../apps/web/lib/kedge/mate';
+import { NET } from '../packages/kedge-kit/src/constants';
+import { twinOf } from '../packages/kedge-kit/src/twin';
+import { sendRuntimeCall, resolveOutcome, errorNameFromMessage } from '../packages/kedge-kit/src/helm';
+import { api, closeApi } from '../packages/kedge-kit/src/purser';
+import { checkGroups } from '../packages/kedge-kit/src/mate';
 import * as S from '../watch/scale.mjs';
 if (process.env.KEDGE_SABOTAGE !== 'sort') { console.error('Set KEDGE_SABOTAGE=sort'); process.exit(1); }
 const provider = new JsonRpcProvider(NET.evmRpc, { chainId: NET.chainId, name: 'portaldot-v3' }, { staticNetwork: true });
