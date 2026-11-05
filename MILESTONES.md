@@ -33,5 +33,6 @@ Generated from git history by `node scripts/readme_gen.mjs`. Transaction hashes 
 | 2026-11-05 | `4ee4e92` | feat: Kedge Kit package (ESM, CJS and types via tsup), README with two working examples, tests and a CI job |
 | 2026-11-05 | `e31bc56` | feat: /protect deep link door with https-only return, pre-filled guardians, tests and a live wallet step |
 | 2026-11-05 | `c8d4a61` | feat: inheritance door in Harbour (Family group outranks Crew), shareable guardian links with the right group, rescue page picks the group by wallet |
+| 2026-11-05 | `770291d` | feat: one classification of the 16 scenarios in FACTS, generated badge, tPOT rounding in prose, copy check for long decimals |
 
 Key chain milestones: vault deployed at block 317284; headline mechanism proven at block 317779 (PLATFORM_PROBE part 7); campaign blocks in EVIDENCE.md.

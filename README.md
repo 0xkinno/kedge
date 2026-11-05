@@ -58,7 +58,7 @@ stateDiagram-v2
   Home --> [*]
 ```
 
-1. **Name the crew.** From MetaMask, the owner picks guardians, how many must agree, the safety delay, and the wallet on a new phone. This costs only a fee: V3 holds no deposit for it.
+1. **Name the crew.** From MetaMask, the owner picks guardians, how many must agree, the safety delay, and the wallet on a new phone. This costs only a fee.
 2. **Keep a card.** A wallet-size PDF holds the new key, locked with a passphrase only the owner knows. Alone it cannot move a cent.
 3. **Call, hear, type.** After a loss, a guardian phones the owner. The new phone shows four words derived from (lost wallet, new wallet, group, chain). The guardian types them; **approve stays disabled until they match**. A scam link that names a different new wallet produces different words.
 4. **Wait.** Two approvals start the delay. The owner gets one alert per attempt, and while he still holds his phone he can stop it, or slash the starter.

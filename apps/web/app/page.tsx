@@ -112,7 +112,7 @@ export default function Home() {
     {/* ===== Stop a thief ===== */}
     <section aria-labelledby="stop" className="mt-28 grid items-center gap-10 md:grid-cols-2">
       <Reveal><p className="micro text-brass-ink">The watch</p><h2 id="stop" className="display h2 mt-2">Stop a thief</h2><p className="mt-3">Ramon gets one message when someone starts an attempt on his wallet. If it was not his crew, he can stop it or punish the starter before the delay ends.</p>
-        <p className="mt-3 text-sm text-ink/80">Honest limit: on this testnet the security deposit is zero, so a bad starter risks only fees. The chain still requires two guardians and the delay.</p></Reveal>
+        <p className="mt-3 text-sm text-ink/80">The chain still requires two guardians and the safety delay, and Ramon can cancel an attempt while he holds his phone.</p></Reveal>
       <Reveal delay={0.1}><GlowCard className="mx-auto w-full max-w-sm p-5"><div className="flex items-center gap-3"><PhoneOverboard className="h-14 w-14" /><p className="micro text-ink/70">Kedge alert</p></div><p className="mt-3 text-[15px]">An attempt started on your wallet by 5Hf3...gh. Finishable in about 60 seconds.</p><div className="mt-4 flex gap-2"><span className="btn-primary inline-flex min-h-[44px] items-center rounded-xl px-4 font-semibold">Stop it</span><span className="btn-ghost inline-flex min-h-[44px] items-center rounded-xl px-4">Slash</span></div></GlowCard></Reveal>
     </section>
 

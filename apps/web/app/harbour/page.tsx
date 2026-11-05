@@ -65,7 +65,8 @@ export default function Harbour() {
     {done && door.ret && <Notice><p role="status" aria-live="polite">Protected. Returning to <strong>{door.app ?? new URL(door.ret).hostname}</strong> in {left} s. <a className="underline underline-offset-4" href={door.ret}>Return now</a></p></Notice>}
     {msg && <Notice tone={msg.tone}>{msg.text}</Notice>}
     {act && attempts.length > 0 && (<Notice tone="refusal"><h2 className="display h3">An attempt is open on your wallet</h2><p className="mt-1 text-sm">If this was not your crew, stop it. Started by <span className="mono">{short(attempts[0].initiator)}</span> in group {attempts[0].groupIndex}.</p>
-      <div className="mt-3 flex flex-wrap gap-3"><PrimaryButton disabled={busy || !me} onClick={() => run('cancel', attempts[0].groupIndex)}>Stop this attempt</PrimaryButton><GhostButton disabled={busy || !me} onClick={() => run('slash', attempts[0].groupIndex)}>Slash the starter</GhostButton></div></Notice>)}
+      <div className="mt-3 flex flex-wrap gap-3"><PrimaryButton disabled={busy || !me} onClick={() => run('cancel', attempts[0].groupIndex)}>Stop this attempt</PrimaryButton><GhostButton disabled={busy || !me} onClick={() => run('slash', attempts[0].groupIndex)}>Slash the starter</GhostButton></div>
+      <p className="mt-2 text-xs text-ink/80">On this testnet a slash removes the attempt; the deposit amount is set by the network.</p></Notice>)}
     <div className="grid items-start gap-6 lg:grid-cols-[1fr_360px]">
       <div className="space-y-6">
         <Step n={1} id="boat" title="Lifeboat key and card">
@@ -99,7 +100,7 @@ export default function Harbour() {
           {view?.groups?.length ? <p className="mt-3 text-sm">{view.groups.length} group on chain. {view.inheritor ? 'An inheritor is set.' : 'No inheritor yet.'}</p> : null}</GlowCard>
         <GlowCard className="p-5"><p className="micro text-brass-ink">What it costs</p>
           <dl className="mt-3 grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 text-sm"><dt>Naming the crew</dt><dd className="numeral text-base">{fmtTpot(facts.measured.costPerProtectionTPOT)} tPOT</dd><dt>Deposits held</dt><dd className="numeral text-base">0 tPOT</dd><dt>A rescue, in fees</dt><dd className="numeral text-base">{fmtTpot(facts.measured.costPerRescueTPOT)} tPOT</dd></dl>
-          <p className="mt-3 text-xs text-ink/70">Measured on this testnet: no deposit is held, so nothing is refundable or lost.</p></GlowCard>
+          <p className="mt-3 text-xs text-ink/70">Measured: protecting holds no deposit, so there is nothing to lose or reclaim.</p></GlowCard>
       </aside>
     </div>
   </div>);
