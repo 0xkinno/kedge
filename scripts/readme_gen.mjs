@@ -25,9 +25,7 @@ const ncommits = execSync('git rev-list --count HEAD', { encoding: 'utf8' }).tri
 const drillLine = f.drills.withTiming ? `${f.drills.completed} completed on the public page; approval to home: min ${f.drills.approvalToHomeSeconds.min} s, median ${f.drills.approvalToHomeSeconds.median} s, max ${f.drills.approvalToHomeSeconds.max} s (${f.drills.withTiming} timed)` : `${f.drills.completed} completed on the public page`;
 const rp = f.realPeople ? `${f.realPeople.people} people, see PROOF.md` : 'in preparation (protocol in `docs/REAL_PEOPLE_DRILL.md`)';
 
-const readme = `<p align="center"><img src="docs/brand/kedge-banner.png" alt="Kedge: a rescue brought home on Portaldot" /></p>
-
-<h1 align="center">Kedge</h1>
+const readme = `<h1 align="center">Kedge</h1>
 
 <p align="center">
   <a href="${LIVE}"><img alt="Live app" src="https://img.shields.io/badge/live%20app-testnet-1BB3A2" /></a>
@@ -322,7 +320,7 @@ Free for individuals. Manning agencies and seafarer welfare groups reach crews a
 
 ## Docs
 
-[EVIDENCE](EVIDENCE.md) · [PROOF](PROOF.md) · [FINDINGS](docs/FINDINGS.md) · [PLATFORM_PROBE](PLATFORM_PROBE.md) · [DISCOVERY](DISCOVERY.md) · [SDK_SURFACE](SDK_SURFACE.md) · [RISK](RISK.md) · [THESIS](THESIS.md) · [MOMENT](MOMENT.md) · [DESIGN](DESIGN.md) · [JUDGE](JUDGE.md) · [PROGRESS](PROGRESS.md) · [MILESTONES](MILESTONES.md) · [REDTEAM_LOG](REDTEAM_LOG.md) · [HANDOFF](HANDOFF.md)
+[EVIDENCE](EVIDENCE.md) · [PROOF](PROOF.md) · [FINDINGS](docs/FINDINGS.md) · [PLATFORM_PROBE](PLATFORM_PROBE.md) · [DISCOVERY](DISCOVERY.md) · [SDK_SURFACE](SDK_SURFACE.md) · [RISK](RISK.md) · [THESIS](THESIS.md) · [MOMENT](MOMENT.md) · [DESIGN](DESIGN.md) · [JUDGE](JUDGE.md) · [PROGRESS](PROGRESS.md) · [MILESTONES](MILESTONES.md) · [REDTEAM_LOG](REDTEAM_LOG.md)
 
 ## Disclosures
 

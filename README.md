@@ -1,5 +1,3 @@
-<p align="center"><img src="docs/brand/kedge-banner.png" alt="Kedge: a rescue brought home on Portaldot" /></p>
-
 <h1 align="center">Kedge</h1>
 
 <p align="center">
@@ -312,7 +310,7 @@ Measured on the live testnet before anything was built, with hashes in [PLATFORM
 
 | Criterion (weight) | Exact words | Where to look |
 |---|---|---|
-| Technical Feasibility (30%) | "technical approach, system architecture, code completeness, and actual delivery"; "whether GitHub shows genuine and sustained development activity"; "deployed on Portaldot testnet with verifiable on-chain interactions" | `npm run verify` and [EVIDENCE.md](EVIDENCE.md) (31 transactions); [`/proof`](https://kedge-kinnoskis-projects.vercel.app/proof); the commit history (31 commits, 2026-11-04 to 2026-11-05); [vault deploy block 317284](https://scanner-testnet-v3.portaldot.dev/#/blocks/317284?tab=events) |
+| Technical Feasibility (30%) | "technical approach, system architecture, code completeness, and actual delivery"; "whether GitHub shows genuine and sustained development activity"; "deployed on Portaldot testnet with verifiable on-chain interactions" | `npm run verify` and [EVIDENCE.md](EVIDENCE.md) (31 transactions); [`/proof`](https://kedge-kinnoskis-projects.vercel.app/proof); the commit history (33 commits, 2026-11-04 to 2026-11-05); [vault deploy block 317284](https://scanner-testnet-v3.portaldot.dev/#/blocks/317284?tab=events) |
 | Innovation (30%) | "effective use of Portaldot V3 features such as WASM/EVM compatibility, modular architecture, and multi-chain capabilities"; "real value beyond existing solutions" | [DISCOVERY.md](DISCOVERY.md); [SDK_SURFACE.md](SDK_SURFACE.md): EVM, the Recovery pallet, Utility and native assets in one rescue; [block 317779](https://scanner-testnet-v3.portaldot.dev/#/blocks/317779?tab=events) (`msg.sender` is the lost address) |
 | Ecosystem Contribution (20%) | "contribution to Portaldot infrastructure, developer tools, node ecosystem, application ecosystem, and user growth"; "potential for sustained building, open-source value" | [Kedge Kit](packages/kedge-kit) and the `/protect` deep link other dApps can use; [docs/FINDINGS.md](docs/FINDINGS.md) (first public Recovery measurements on V3); `packages/kedge-kit/src/scale.mjs` (open dependency-free encoder) |
 | Business Potential (20%) | "real market needs"; "target users and use cases are clear"; "business model and growth path are feasible" | the sourced numbers above; [THESIS.md](THESIS.md); *Business and what comes next* below |
@@ -356,11 +354,11 @@ Free for individuals. Manning agencies and seafarer welfare groups reach crews a
 
 ## Docs
 
-[EVIDENCE](EVIDENCE.md) · [PROOF](PROOF.md) · [FINDINGS](docs/FINDINGS.md) · [PLATFORM_PROBE](PLATFORM_PROBE.md) · [DISCOVERY](DISCOVERY.md) · [SDK_SURFACE](SDK_SURFACE.md) · [RISK](RISK.md) · [THESIS](THESIS.md) · [MOMENT](MOMENT.md) · [DESIGN](DESIGN.md) · [JUDGE](JUDGE.md) · [PROGRESS](PROGRESS.md) · [MILESTONES](MILESTONES.md) · [REDTEAM_LOG](REDTEAM_LOG.md) · [HANDOFF](HANDOFF.md)
+[EVIDENCE](EVIDENCE.md) · [PROOF](PROOF.md) · [FINDINGS](docs/FINDINGS.md) · [PLATFORM_PROBE](PLATFORM_PROBE.md) · [DISCOVERY](DISCOVERY.md) · [SDK_SURFACE](SDK_SURFACE.md) · [RISK](RISK.md) · [THESIS](THESIS.md) · [MOMENT](MOMENT.md) · [DESIGN](DESIGN.md) · [JUDGE](JUDGE.md) · [PROGRESS](PROGRESS.md) · [MILESTONES](MILESTONES.md) · [REDTEAM_LOG](REDTEAM_LOG.md)
 
 ## Disclosures
 
-**Build dates.** Research and design happened before Nov 4 2026. Code was written from Nov 4 2026 onward: 31 commits, 72ee7a3 (2026-11-04) to 5a2c35c (2026-11-05), all authored by 0xkinno. **AI assistance:** Claude Code drafted much of the code and docs under the author's direction and review. The hero image is AI-generated. Third-party: ethers, polkadot.js, Next.js, Foundry's forge-std, solc-js, the BIP39 English word list (the call phrase). The persona names and the pitch voice are illustrative.
+**Build dates.** Research and design happened before Nov 4 2026. Code was written from Nov 4 2026 onward: 33 commits, 72ee7a3 (2026-11-04) to adeae3c (2026-11-05), all authored by 0xkinno. **AI assistance:** Claude Code drafted much of the code and docs under the author's direction and review. The hero image is AI-generated. Third-party: ethers, polkadot.js, Next.js, Foundry's forge-std, solc-js, the BIP39 English word list (the call phrase). The persona names and the pitch voice are illustrative.
 
 ## License
 
