@@ -7,6 +7,7 @@ import { twinOf } from '@/lib/kedge/twin';
 import { makeLifeboat, lifeboatPdf } from '@/lib/lifeboat';
 import { PrimaryButton, GhostButton, StatusRing, Notice, GlowCard, Receipt } from '@/components/ui';
 import facts from '@/data/FACTS.json';
+import { cleanDoor, type Door } from '@/lib/deeplink';
 
 const PRESETS = { drill: { delay: 10, cancel: 2, label: 'Drill: 10 blocks (about a minute)' }, real: { delay: 43200, cancel: 7200, label: 'Real: 72 hours (43,200 blocks)' } } as const;
 const Step = ({ n, id, title, children }: { n: number; id: string; title: string; children: React.ReactNode }) => (
@@ -18,7 +19,12 @@ export default function Harbour() {
   const [heir, setHeir] = useState(''); const [msg, setMsg] = useState<{ tone: 'info' | 'refusal'; text: string } | null>(null);
   const [state, setState] = useState<'protected' | 'not' | 'unknown'>('unknown'); const [view, setView] = useState<any>(null); const [busy, setBusy] = useState(false);
   const [rows, setRows] = useState<any[]>([]); const [chat, setChat] = useState(''); const [act, setAct] = useState('');
-  useEffect(() => { setAct(new URLSearchParams(location.search).get('act') ?? ''); }, []);
+  const [door, setDoor] = useState<Door>({ guardians: [] }); const [done, setDone] = useState(false); const [left, setLeft] = useState(5);
+  useEffect(() => {
+    const sp = new URLSearchParams(location.search); setAct(sp.get('act') ?? '');
+    const d = cleanDoor(sp); setDoor(d); if (d.guardians.length) setG([...d.guardians, '', '', ''].slice(0, 3)); if (d.need) setNeed(d.need);
+  }, []);
+  useEffect(() => { if (!done || !door.ret) return; if (left <= 0) { location.href = door.ret; return; } const t = setTimeout(() => setLeft((n) => n - 1), 1000); return () => clearTimeout(t); }, [done, left, door.ret]);
   const refresh = async (a: string) => { try { const v = await (await fetch(`/api/lookout?lost=${a}`)).json(); setView(v); setState(v.groups?.length ? 'protected' : 'not'); } catch { setState('unknown'); } };
   const doConnect = async () => { try { const a = await connect(); setMe(getAddress(a)); refresh(a); } catch (e: any) { setMsg({ tone: 'refusal', text: e.message }); } };
   const makeBoat = async () => { setBusy(true); try { const b = await makeLifeboat(pass); setBoat(b); setHeir(b.address); setMsg({ tone: 'info', text: 'New wallet made in your browser. Download the card now: the key is not stored anywhere else.' }); } catch (e: any) { setMsg({ tone: 'refusal', text: e.message }); } setBusy(false); };
@@ -35,6 +41,7 @@ export default function Harbour() {
       setRows([{ label: 'Crew named (set_friend_groups)', status: 'wait', detail: short(hash) }]);
       const o = await trace(hash);
       setRows([{ label: 'Crew named (set_friend_groups)', status: o.extrinsicFailed ? 'failed' : 'ok', detail: o.errorName ?? `block ${o.block}`, href: o.explorer }]);
+      if (!o.extrinsicFailed) setDone(true);
       refresh(me);
     } catch (e: any) { setMsg({ tone: 'refusal', text: e instanceof KedgeRefusal ? e.message : `The chain or wallet stopped this: ${e.message}` }); }
     setBusy(false);
@@ -46,6 +53,8 @@ export default function Harbour() {
   const attempts = view?.attempts ?? [];
   return (<div className="space-y-8">
     <header><p className="micro text-brass-ink">Owner</p><h1 className="display h1">Harbour</h1><p className="mt-2 max-w-2xl">Name your crew once, print the card, keep your phone. Your own wallet signs everything.</p></header>
+    {door.app && !done && <Notice><p><strong>{door.app}</strong> asked you to protect your wallet with Kedge. You sign with your own wallet. {door.ret ? 'You will be sent back when you are done.' : ''}</p></Notice>}
+    {done && door.ret && <Notice><p role="status" aria-live="polite">Protected. Returning to <strong>{door.app ?? new URL(door.ret).hostname}</strong> in {left} s. <a className="underline underline-offset-4" href={door.ret}>Return now</a></p></Notice>}
     {msg && <Notice tone={msg.tone}>{msg.text}</Notice>}
     {act && attempts.length > 0 && (<Notice tone="refusal"><h2 className="display h3">An attempt is open on your wallet</h2><p className="mt-1 text-sm">If this was not your crew, stop it. Started by <span className="mono">{short(attempts[0].initiator)}</span> in group {attempts[0].groupIndex}.</p>
       <div className="mt-3 flex flex-wrap gap-3"><PrimaryButton disabled={busy || !me} onClick={() => run('cancel', attempts[0].groupIndex)}>Stop this attempt</PrimaryButton><GhostButton disabled={busy || !me} onClick={() => run('slash', attempts[0].groupIndex)}>Slash the starter</GhostButton></div></Notice>)}

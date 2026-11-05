@@ -26,7 +26,7 @@ async function actor(name, wallet, { w = 1280, h = 800, video = true } = {}) {
   const page = await ctx.newPage(); page.on('pageerror', (e) => results.push({ step: `${name} pageerror`, ok: false, detail: String(e).slice(0, 160) }));
   return { ctx, page, name, async close() { const v = page.video(); await ctx.close(); try { const p = await v.path(); renameSync(p, `${OUT}/${name}.webm`); } catch {} } };
 }
-async function step(name, fn) { if (only.size && !only.has(name.split(':')[0])) return null; const t0 = Date.now(); try { const d = await fn(); results.push({ step: name, ok: true, secs: Math.round((Date.now() - t0) / 1000), detail: d ?? '' }); console.log('PASS', name, d ?? ''); return d; } catch (e) { results.push({ step: name, ok: false, secs: Math.round((Date.now() - t0) / 1000), detail: String(e.message).slice(0, 300) }); console.log('FAIL', name, String(e.message).slice(0, 200)); return null; } }
+async function step(name, fn) { if (only.size && !only.has(name.split(' ')[0])) return null; const t0 = Date.now(); try { const d = await fn(); results.push({ step: name, ok: true, secs: Math.round((Date.now() - t0) / 1000), detail: d ?? '' }); console.log('PASS', name, d ?? ''); return d; } catch (e) { results.push({ step: name, ok: false, secs: Math.round((Date.now() - t0) / 1000), detail: String(e.message).slice(0, 300) }); console.log('FAIL', name, String(e.message).slice(0, 200)); return null; } }
 const shot = (a, n) => a.page.screenshot({ path: `${OUT}/${n}.png` });
 const fundNew = async (tpot) => { const w = Wallet.createRandom().connect(provider); const t = await wal('deployer').sendTransaction({ to: w.address, value: BigInt(Math.round(tpot * 1e6)) * 10n ** 12n, gasLimit: 6_000_000_000_000n, gasPrice: (await provider.getFeeData()).gasPrice }); await t.wait(); return w; };
 const addr = (n) => key(n).h160;
@@ -105,6 +105,16 @@ await step('G2 guided tour runs through all 7 steps with the keyboard', async ()
 await step('G3 Muster Drill runs a full rescue from the page', async () => {
   const a = await actor('G-drill', wal('deployer')); const p = a.page; await p.goto(BASE + '/drill'); await p.getByRole('button', { name: 'Start the drill' }).click();
   await p.getByText('moved from the old wallet').waitFor({ timeout: 240000 }); await p.getByText('Done.').waitFor({ timeout: 30000 }); await shot(a, 'G3-drill-done'); await a.close(); return 'drill finished';
+});
+await step('I1 deep link door: a visiting dApp sends the owner to Harbour pre-filled and the owner is returned after signing', async () => {
+  const o = await fundNew(3); const a = await actor('I-door', o); const p = a.page; const back = 'https://example.com/moon-wallet/done';
+  await p.goto(`${BASE}/protect?app=Moon%20Wallet&return=${encodeURIComponent(back)}&guardians=${addr('lorna')},${addr('ben')},${addr('ana')}&need=2`);
+  await p.getByText('asked you to protect').waitFor(); if ((await p.getByLabel('Guardian 3 wallet address').inputValue()).toLowerCase() !== addr('ana').toLowerCase()) throw new Error('guardians not pre-filled');
+  await p.getByRole('button', { name: 'Connect wallet' }).first().click(); await p.getByLabel('Connected wallet').waitFor();
+  await p.getByLabel('New-phone wallet (inheritor)').fill(addr('lifeboat')); await shot(a, 'I1-door-prefilled');
+  await p.getByRole('button', { name: 'Protect my wallet' }).click(); await p.getByText('Completed').first().waitFor({ timeout: 90000 });
+  await p.getByText('Returning to').waitFor({ timeout: 30000 }); const href = await p.getByRole('link', { name: 'Return now' }).getAttribute('href'); if (href !== back) throw new Error('return link wrong: ' + href);
+  await shot(a, 'I1-door-returning'); await a.close(); return `signed, then a return link to ${new URL(back).hostname}`;
 });
 await step('H1 mobile (390 px): connect and protect form usable, no horizontal scroll', async () => {
   const a = await actor('H-mobile', wal('deployer'), { w: 390, h: 844 }); const p = a.page; await p.goto(BASE + '/harbour'); await p.getByRole('button', { name: 'Connect wallet' }).first().click(); await p.getByLabel('Connected wallet').waitFor();
