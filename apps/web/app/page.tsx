@@ -89,7 +89,7 @@ export default function Home() {
     <Section id="home" label="One signature" title="What comes home">
       <div className="relative mt-10 grid gap-5 md:grid-cols-3">
         <svg aria-hidden="true" viewBox="0 0 1000 12" preserveAspectRatio="none" className="pointer-events-none absolute left-[10%] right-[10%] top-[44px] hidden h-3 w-[80%] md:block"><path className="flow" d="M0 6 H1000" stroke="#FF5A1F" strokeWidth="2.4" fill="none" vectorEffect="non-scaling-stroke" /></svg>
-        {[['tPOT', 'Native coin', 'Moved by the balances pallet.'], ['kUSD', 'Native asset', 'Moved by the assets pallet. Kedge\'s own test dollar, asset 20261104.'], ['Allotment savings', 'Solidity contract', 'Paid out by the vault, which sees the old address as the sender.']].map(([t, k, d], i) => (
+        {[['tPOT', 'Native coin', 'Moved by the balances pallet.'], ['kUSD', 'Native asset', 'Moved by the assets pallet. Kedge\'s own test dollar, asset 20261104.'], ['Allotment savings', 'Solidity or ink! contract', 'Paid out by the vault, which sees the old address as the sender. The ink! (WASM) version is live too.']].map(([t, k, d], i) => (
           <Reveal key={t} delay={i * 0.06}><GlowCard className="h-full p-6"><div className="flex h-[88px] w-[88px] items-center justify-center rounded-full border border-fog bg-paper"><Lifebuoy className="h-14 w-14" /></div><h3 className="display h3 mt-4">{t}</h3><p className="micro text-brass-ink">{k}</p><p className="mt-2 text-[15px]">{d}</p></GlowCard></Reveal>))}
       </div>
       <p className="mt-6 text-sm text-ink/80">All three move in one transaction using <code className="mono">utility.force_batch</code>, so one stuck item never blocks the rest.</p>

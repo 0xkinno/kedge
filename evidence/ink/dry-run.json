@@ -1,9 +1,10 @@
 {
-  "at": "2026-11-04T12:08:01.847Z",
-  "wasmBytes": 6349,
-  "storageDepositTPOT": 0,
+  "at": "2026-11-05T16:48:32.642Z",
+  "wasmBytes": 4947,
+  "storageDepositTPOT": 398.734,
   "gasRequired": {
-    "refTime": 0,
-    "proofSize": 0
-  }
+    "refTime": 187382038,
+    "proofSize": 26547
+  },
+  "contract": "5HoLffhmPu5RnLxE6ZxiKQBJzcWNG6EwaVt9mQkSpULrKQBx"
 }

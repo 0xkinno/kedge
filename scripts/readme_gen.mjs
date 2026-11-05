@@ -177,7 +177,7 @@ Portaldot V3 is the hero of this build. Every MetaMask address has a native **tw
 | Exchange custody | the exchange | fees and KYC | one founder, one server: a single point of failure |
 | **Kedge on Portaldot** | **two of your guardians, after a delay you set, and you can still cancel** | **${fmtTpot(m.costPerProtectionTPOT)} tPOT to protect, ${fmtTpot(m.costPerRescueTPOT)} tPOT to rescue** | no new wallet; the Recovery pallet is the chain's own, and the rescue reaches money held in Solidity contracts |
 
-A rescue that only moved native coins would leave a seafarer's savings stranded in contracts. Kedge's sweep also pays out a Solidity vault that only the old address could withdraw from, because the chain lets the rescuer call it **as** that address.
+A rescue that only moved native coins would leave a seafarer's savings stranded in contracts. Kedge's sweep also pays out a Solidity vault that only the old address could withdraw from, because the chain lets the rescuer call it **as** that address. The same holds for the ink! (WASM) version of the vault on \`pallet-contracts\`: in the recorded rescue, ${f.ink.rescue.savedTPOT} tPOT saved inside it, kUSD and the coin moved to the new phone in one signature (${f.ink.rescue.itemsCompleted} of ${f.ink.rescue.itemsTotal} items completed), and a stranger's withdraw call reverts ([evidence/ink/rescue.json](evidence/ink/rescue.json)).
 
 ## Safety model
 
@@ -237,6 +237,7 @@ ${scen}
 | Contract | Address | Deploy tx | Block | Size | Cost |
 |---|---|---|---|---|---|
 | AllotmentVault (Solidity) | \`${dep.address}\` | \`${dep.txHash}\` | ${bl(dep.block)} | 997 bytes runtime | ${fmtTpot(dep.costTPOT)} tPOT |
+| **AllotmentInk (ink! WASM, pallet-contracts)** | \`${f.ink.contract}\` (code hash \`${f.ink.codeHash}\`) | \`${f.ink.deployTx}\` | ${bl(f.ink.block)} | ${f.ink.wasmBytes.toLocaleString('en-US')} bytes WASM | ${fmtTpot(f.ink.costTPOT)} tPOT, of which ${fmtTpot(f.ink.storageDepositHeldTPOT)} is a storage deposit held by the chain |
 | SenderProbe (throwaway probe) | \`${probes.SenderProbe.address}\` | \`${probes.SenderProbe.txHash}\` | ${bl(probes.SenderProbe.block)} | 183 bytes runtime | ${fmtTpot(probes.SenderProbe.costTPOT)} tPOT |
 | Caller (throwaway probe) | \`${probes.Caller.address}\` | \`${probes.Caller.txHash}\` | ${bl(probes.Caller.block)} | 396 bytes runtime | ${fmtTpot(probes.Caller.costTPOT)} tPOT |
 
@@ -277,7 +278,7 @@ Measured on the live testnet before anything was built, with hashes in [PLATFORM
 | Criterion (weight) | Exact words | Where to look |
 |---|---|---|
 | Technical Feasibility (30%) | "technical approach, system architecture, code completeness, and actual delivery"; "whether GitHub shows genuine and sustained development activity"; "deployed on Portaldot testnet with verifiable on-chain interactions" | \`npm run verify\` and [EVIDENCE.md](EVIDENCE.md) (${f.txs.length} transactions); [\`/proof\`](${LIVE}/proof); the commit history (${ncommits} commits, ${first[1]} to ${last[1]}); [vault deploy block ${dep.block}](${E(dep.block)}) |
-| Innovation (30%) | "effective use of Portaldot V3 features such as WASM/EVM compatibility, modular architecture, and multi-chain capabilities"; "real value beyond existing solutions" | [DISCOVERY.md](DISCOVERY.md); [SDK_SURFACE.md](SDK_SURFACE.md): EVM, the Recovery pallet, Utility and native assets in one rescue; [block 317779](${E(317779)}) (\`msg.sender\` is the lost address) |
+| Innovation (30%) | "effective use of Portaldot V3 features such as WASM/EVM compatibility, modular architecture, and multi-chain capabilities"; "real value beyond existing solutions" | [DISCOVERY.md](DISCOVERY.md); [SDK_SURFACE.md](SDK_SURFACE.md): EVM, the Recovery pallet, Utility and native assets in one rescue; [block 317779](${E(317779)}) (\`msg.sender\` is the lost address); the **ink! (WASM) contract** [deployed in block ${f.ink.block}](${E(f.ink.block)}) and swept in a live rescue ([evidence/ink/rescue.json](evidence/ink/rescue.json)) |
 | Ecosystem Contribution (20%) | "contribution to Portaldot infrastructure, developer tools, node ecosystem, application ecosystem, and user growth"; "potential for sustained building, open-source value" | [Kedge Kit](packages/kedge-kit) and the \`/protect\` deep link other dApps can use; [docs/FINDINGS.md](docs/FINDINGS.md) (first public Recovery measurements on V3); \`packages/kedge-kit/src/scale.mjs\` (open dependency-free encoder) |
 | Business Potential (20%) | "real market needs"; "target users and use cases are clear"; "business model and growth path are feasible" | the sourced numbers above; [THESIS.md](THESIS.md); *Business and what comes next* below |
 
@@ -311,7 +312,7 @@ Free for individuals. Manning agencies and seafarer welfare groups reach crews a
 ## Limits, stated plainly
 
 - The security deposit is 0 on this testnet, so slashing is a signal, not a penalty.
-- An ink! (WASM) vault is written and unit-tested (\`ink/allotment_ink\`) but **not deployed**: this chain charges 0.06 tPOT per byte of contract code, about 295 tPOT for 4.9 KB, which the testnet budget did not cover. The "WASM" half of WASM/EVM is therefore not shown on chain.
+- The ink! (WASM) contract is live, but this chain charges 0.06 tPOT per byte of contract code, so even 4.9 KB cost ${fmtTpot(f.ink.costTPOT)} tPOT on the testnet. The contract is deliberately tiny (no events, no error type), and the rescue reaches it through \`contracts.call\`, not through the EVM.
 - The public drill is signed by **house crew keys**, which are testnet-only, capped, and labelled on every screen.
 - The four-word phrase is advisory UI; the chain enforces the approval count and the delay.
 - The demo token is Kedge's own **kUSD** (asset ${dep.tokenAssetId}). The pUSD pool held about 127 pUSD, too thin to demo with.

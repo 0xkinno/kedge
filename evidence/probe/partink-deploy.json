@@ -1,0 +1,30 @@
+{
+  "part": "ink-deploy",
+  "at": "2026-11-05T16:48:39.051Z",
+  "contract": "5HoLffhmPu5RnLxE6ZxiKQBJzcWNG6EwaVt9mQkSpULrKQBx",
+  "ethHash": "0xf00011b10b14322cb1d30be06cef62be631248c2691ba969a4ad2e54827ace56",
+  "block": 337181,
+  "receiptStatus": 1,
+  "events": [
+    "balances.Withdraw",
+    "balances.Withdraw",
+    "balances.Held",
+    "contracts.CodeStored",
+    "system.NewAccount",
+    "balances.Endowed",
+    "balances.Transfer",
+    "contracts.Instantiated",
+    "balances.TransferAndHold",
+    "contracts.StorageDepositTransferredAndHeld",
+    "balances.TransferAndHold",
+    "contracts.StorageDepositTransferredAndHeld",
+    "balances.Deposit",
+    "balances.Deposit",
+    "transactionPayment.TransactionFeePaid",
+    "system.ExtrinsicSuccess"
+  ],
+  "costTPOT": 399.2449609213051,
+  "wasmBytes": 4947,
+  "codeHash": "0xc92e869205791f4c738f9349177a9f3d806f956a708b0e182f7f0290ff79d5be",
+  "deployedAt": "2026-11-05T16:48:39.050Z"
+}

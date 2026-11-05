@@ -33,6 +33,71 @@
     "runUrl": "https://github.com/0xkinno/kedge/actions/runs/41928527039",
     "screenshot": "docs/demo/telegram-alert.png"
   },
+  "ink": {
+    "contract": "5HoLffhmPu5RnLxE6ZxiKQBJzcWNG6EwaVt9mQkSpULrKQBx",
+    "deployTx": "0xf00011b10b14322cb1d30be06cef62be631248c2691ba969a4ad2e54827ace56",
+    "block": 337181,
+    "wasmBytes": 4947,
+    "codeHash": "0xc92e869205791f4c738f9349177a9f3d806f956a708b0e182f7f0290ff79d5be",
+    "costTPOT": 399.24,
+    "storageDepositHeldTPOT": 398.734,
+    "rescue": {
+      "pass": true,
+      "savedTPOT": 3,
+      "strangerWithdrawReverts": true,
+      "itemsCompleted": 3,
+      "itemsTotal": 3,
+      "oldWalletLeft": {
+        "tpot": "0",
+        "kusd": "0",
+        "ink": "0"
+      },
+      "txs": [
+        {
+          "label": "mint 25 kUSD to the old wallet",
+          "hash": "0x0c61e8b5a19b925743d61c6531992df4e325da70fb271f4c9a1d271c29ec55f5",
+          "block": 337223,
+          "signer": "0x9db1ac0Ce3dabD203D23C46fDc064F9FbFe68Eb2"
+        },
+        {
+          "label": "save 3 tPOT into the ink! contract",
+          "hash": "0x7ff49ece11cc6d3bcb2e6c620147680d5a22257708ff3e8e6e5bd84acdc54520",
+          "block": 337224,
+          "signer": "0x6946B19bA7adeeE59C130897beB1a4da80D30f3C"
+        },
+        {
+          "label": "Ramon names his crew",
+          "hash": "0x42f09ba28e7b2ce957e2cfb359ea8a907f259fa1eb383747fa812e9ec0d012a4",
+          "block": 337225,
+          "signer": "0x6946B19bA7adeeE59C130897beB1a4da80D30f3C"
+        },
+        {
+          "label": "Lorna starts the attempt",
+          "hash": "0x80d731462a36ed63791fefe90cbb6c22b8cced30e9b69f8cde5b22e8260e0f2d",
+          "block": 337226,
+          "signer": "0xa6c7b241fDa9Ce8809A8E6e337126D3f6cab710c"
+        },
+        {
+          "label": "Ben approves",
+          "hash": "0x20717637fe7abe1692828a67c8e1c193fb1601897b0a2fca8a5a57472dc3ae31",
+          "block": 337227,
+          "signer": "0xc8f0D700D851572326c554235Fd812B81DDa2849"
+        },
+        {
+          "label": "Finish: the new phone becomes the inheritor",
+          "hash": "0xe4d7fddbdc70e83a2b8c559bd71c27bb657ebffc520a7ea5ba4658d04e3a91d1",
+          "block": 337237,
+          "signer": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8"
+        },
+        {
+          "label": "Bring it home: one signature",
+          "hash": "0x9a6a5ce3f49fb44fa59498a37fd3a04497e6d99ea42eaec8c3b7e40ef367a85b",
+          "block": 337238,
+          "signer": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8"
+        }
+      ]
+    }
+  },
   "drills": {
     "completed": 3,
     "withTiming": 1,

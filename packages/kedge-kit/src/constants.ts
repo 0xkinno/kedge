@@ -19,6 +19,10 @@ export const KUSD_DECIMALS = 6;
 export const assetPrecompile = (id: number) =>
   (`0x${id.toString(16).padStart(8, '0')}${'0'.repeat(24)}00010000`) as `0x${string}`;
 export const VAULT_ADDRESS = '0x92cD058Cb7E4d69476bFc7Cbb7630C50f13B57D4' as const;
+/** AllotmentInk: the same savings vault written in ink! (WASM) on pallet-contracts. Deployed in block 337181. */
+export const INK_CONTRACT_SS58 = '5HoLffhmPu5RnLxE6ZxiKQBJzcWNG6EwaVt9mQkSpULrKQBx' as const;
+export const INK_CONTRACT_ID = '0xfdb1638d758a1563c0f003dd883b55fab88b2e081ae682538fff51fb1e15f4db' as const;
+export const INK_SELECTORS = { save: '0xeccd14ba', savingsOf: '0x12c421cf', withdrawAllTo: '0x78e4f3c2' } as const;
 /** Recovery pallet index on V3 (verified in live metadata, PLATFORM_PROBE part 3). */
 export const RECOVERY_PALLET_INDEX = 30;
 export const explorerBlock = (n: number) => `${NET.explorer}/#/blocks/${n}?tab=events`;

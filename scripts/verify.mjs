@@ -30,4 +30,14 @@ for (const t of facts.txs) {
 }
 const v = (await p.getCode(facts.vault.address)); if (!v || v === '0x') fail('vault has no code');
 console.log(`verified ${n} of ${facts.txs.length} transactions against the public node; vault code present: ${v.length > 2}`);
+// ink! contract: its deployment, the live rescue that swept its savings, and the contract itself on pallet-contracts
+let m = 0; for (const t of [{ label: 'deploy AllotmentInk', hash: facts.ink.deployTx, block: facts.ink.block }, ...facts.ink.rescue.txs]) {
+  const rc = await p.getTransactionReceipt(t.hash); if (!rc) { fail(`ink ${t.label}: receipt not found`); continue; }
+  if (rc.blockNumber !== t.block) fail(`ink ${t.label}: block ${rc.blockNumber} != ${t.block}`);
+  const r = await resolve(api, t.hash, rc); if (r.matchRule.startsWith('FALLBACK')) fail(`ink ${t.label}: extrinsic not matched by hash`);
+  if (r.events.find((e) => e.event === 'system.ExtrinsicFailed' || e.event === 'revive.EthExtrinsicRevert')) fail(`ink ${t.label}: the chain says it failed`); m++;
+}
+const info = await api.query.contracts.contractInfoOf(facts.ink.contract); const inkLive = info.isSome && info.unwrap().codeHash.toHex() === facts.ink.codeHash;
+if (!inkLive) fail('ink! contract missing on pallet-contracts or its code hash changed');
+console.log(`verified ${m} of ${facts.ink.rescue.txs.length + 1} ink! transactions; ink! contract live on pallet-contracts with the recorded code hash: ${inkLive}`);
 await api.disconnect(); console.log(bad ? `${bad} problem(s)` : 'ALL CHECKS PASSED'); process.exit(bad ? 1 : 0);

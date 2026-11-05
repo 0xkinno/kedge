@@ -33,6 +33,11 @@ export function buildFacts() {
   const drills = { completed: drillRecs.filter((d) => d.completed !== false).length, withTiming: timed.length, approvalToHomeSeconds: timed.length ? { min: Math.min(...timed), median: median(timed), max: Math.max(...timed) } : null, dates: drillRecs.map((d) => d.date ?? d.at?.slice(0, 10)) };
   const uw = JSON.parse(readFileSync('evidence/watch/unattended-run.json', 'utf8'));
   const p = (n) => probes[n - 1];
+  // ink! (WASM) contract on pallet-contracts: deployment record plus the live rescue that swept savings held inside it.
+  const inkDep = JSON.parse(readFileSync('deployments/ink.json', 'utf8')); const inkRes = JSON.parse(readFileSync('evidence/ink/rescue.json', 'utf8')); const inkDry = JSON.parse(readFileSync('evidence/ink/dry-run.json', 'utf8'));
+  const ink = { contract: inkDep.contract, deployTx: inkDep.ethHash, block: inkDep.block, wasmBytes: inkDep.wasmBytes, codeHash: inkDep.codeHash, costTPOT: Number(inkDep.costTPOT.toFixed(2)), storageDepositHeldTPOT: Number(inkDry.storageDepositTPOT),
+    rescue: { pass: !!inkRes.pass, savedTPOT: Number(inkRes.saved) / 1e14, strangerWithdrawReverts: !!inkRes.strangerWithdrawReverts, itemsCompleted: inkRes.batchItems.filter((i) => i.status === 'completed').length, itemsTotal: inkRes.batchItems.length,
+      oldWalletLeft: { tpot: inkRes.after.oldTpot, kusd: inkRes.after.oldKusd, ink: inkRes.after.oldInk }, txs: inkRes.steps.map((t) => ({ label: t.label, hash: t.hash, block: t.block, signer: t.signer })) } };
   return {
     network: 'portaldot-v3 testnet', spec: p(1).specVersion, blockTimeSeconds: p(1).blockTimeSeconds,
     vault: { address: dep.address, deployTx: dep.txHash, block: dep.block, costTPOT: Number(dep.costTPOT), tokenAssetId: dep.tokenAssetId },
@@ -45,7 +50,7 @@ export function buildFacts() {
       delayBlocks: 10, delaySecondsMeasured: Math.round(h1.delaySeconds), kusdMoved: Number(h1.delta.heirKusd) / 1e6, tpotMoved: Number(Number(h1.delta.heirTpot).toFixed(2)),
     },
     watch: { unattendedDelivered: !!uw.deliveryConfirmed, trigger: uw.trigger, attemptBlock: uw.attemptBlock, runUrl: uw.workflowRunUrl, screenshot: uw.telegramScreenshot },
-    drills, summary, scenarios, misses: scenarios.filter((s) => !s.pass).map((s) => s.id),
+    ink, drills, summary, scenarios, misses: scenarios.filter((s) => !s.pass).map((s) => s.id),
     probeFindings: { headline_msgSenderIsLostH160: p(7).msgSenderIsLostH160, contractToPalletsAddressIsNoop: !p(8).remarkedEventSeen, receiptStatusOnFailedInner: p(7).failingInner.receiptStatus, hashRuleKeccakPayload: true },
     txs: allTx,
   };

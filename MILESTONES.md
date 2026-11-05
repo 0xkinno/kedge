@@ -37,5 +37,6 @@ Generated from git history by `node scripts/readme_gen.mjs`. Transaction hashes 
 | 2026-11-05 | `5a2c35c` | fix: keep the zero security deposit out of the landing page and early README; neutral line on the slash control |
 | 2026-11-05 | `852f8d2` | docs: README rebuilt in the required order (problem, solution, explore, architecture, flow, why Portaldot, measured, deployment, criteria map, limits); fresh screenshots; drill 3 recorded from the public page |
 | 2026-11-05 | `adeae3c` | fix: reconnect the chain API when a warm serverless instance's websocket has closed; retry reads once (fixes sporadic 500s on /api/lookout) |
+| 2026-11-05 | `26b0066` | docs: drop the duplicate top banner, move handoff notes out of the repo |
 
 Key chain milestones: vault deployed at block 317284; headline mechanism proven at block 317779 (PLATFORM_PROBE part 7); campaign blocks in EVIDENCE.md.

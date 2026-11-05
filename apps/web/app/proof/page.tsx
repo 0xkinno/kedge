@@ -1,15 +1,17 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import facts from '@/data/FACTS.json';
-import { NET } from '@/lib/kedge/constants';
+import { NET, explorerBlock } from '@/lib/kedge/constants';
 import { resolveOutcome } from '@/lib/kedge/helm';
 import { PrimaryButton, GhostButton, GlowCard, Notice } from '@/components/ui';
 
 type R = { state: 'idle' | 'run' | 'done' | 'err'; out?: any; before?: string; after?: string; msg?: string };
+const inkTxs: any[] = [{ scenario: 'INK', label: 'deploy AllotmentInk (ink! WASM contract)', hash: facts.ink.deployTx, ok: true, error: null, signer: undefined }, ...facts.ink.rescue.txs.map((t) => ({ scenario: 'INK', label: t.label, hash: t.hash, ok: true, error: null, signer: t.signer }))];
+const allTxs: any[] = [...facts.txs, ...inkTxs];
 export default function Proof() {
   const [filter, setFilter] = useState('all'); const [res, setRes] = useState<Record<string, R>>({});
-  const txs = useMemo(() => facts.txs.filter((t) => filter === 'all' || t.scenario === filter), [filter]);
-  const ids = useMemo(() => ['all', ...Array.from(new Set(facts.txs.map((t) => t.scenario)))], []);
+  const txs = useMemo(() => allTxs.filter((t) => filter === 'all' || t.scenario === filter), [filter]);
+  const ids = useMemo(() => ['all', ...Array.from(new Set(allTxs.map((t) => t.scenario)))], []);
   const check = async (hash: string, signer?: string) => {
     setRes((r) => ({ ...r, [hash]: { state: 'run' } }));
     try {
@@ -29,6 +31,8 @@ export default function Proof() {
     <header><p className="micro text-brass-ink">Verify it yourself</p><h1 className="display h1">Proof</h1>
       <p className="mt-2 max-w-2xl">Every transaction below was recorded from a real run on the Portaldot V3 testnet. Press Check and this page reads the block from the public node, finds the extrinsic by its hash, and decodes the events here in your browser.</p></header>
     <Notice>Refused attacks are real failed extrinsics with the decoded error name. Open scenario <strong>A3</strong> to see <span className="mono">recovery.NotYetInheritable</span>.</Notice>
+    <GlowCard className="p-5"><p className="micro text-brass-ink">ink! (WASM) on pallet-contracts</p><h2 className="display h3">AllotmentInk holds savings, and Kedge brings them home</h2>
+      <p className="mt-2 max-w-3xl text-sm">The same savings vault, written in ink! and compiled to WASM ({facts.ink.wasmBytes.toLocaleString('en-US')} bytes). It is live at <span className="mono break-all">{facts.ink.contract}</span> (code hash <span className="mono break-all">{facts.ink.codeHash}</span>), deployed in <a className="underline underline-offset-4" href={explorerBlock(facts.ink.block)} target="_blank" rel="noreferrer">block {facts.ink.block}<span className="sr-only"> (opens in a new tab)</span></a>. In the recorded rescue below, {facts.ink.rescue.savedTPOT} tPOT saved inside it moved to the new phone in one signature together with tPOT and kUSD ({facts.ink.rescue.itemsCompleted} of {facts.ink.rescue.itemsTotal} items completed), and a stranger&apos;s withdraw call reverts. Filter by <strong>INK</strong> and press Check on any row.</p></GlowCard>
     <div role="group" aria-label="Filter by scenario" className="flex flex-wrap gap-2">{ids.map((i) => <GhostButton key={i} aria-pressed={filter === i} className={filter === i ? '!bg-ink !text-paper' : ''} onClick={() => setFilter(i)}>{i === 'all' ? 'All' : i}</GhostButton>)}</div>
     <ul className="space-y-3">{txs.map((t) => { const r = res[t.hash]; return (<li key={t.hash}><GlowCard className="p-4">
       <div className="flex flex-wrap items-center justify-between gap-3"><div><p className="micro text-brass-ink">{t.scenario}</p><p className="font-semibold">{t.label}</p><p className="mono text-ink/70">{t.hash}</p></div>

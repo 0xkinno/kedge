@@ -1,0 +1,182 @@
+{
+  "at": "2026-11-05T16:54:23.325Z",
+  "network": "portaldot-v3 testnet",
+  "contract": "5HoLffhmPu5RnLxE6ZxiKQBJzcWNG6EwaVt9mQkSpULrKQBx",
+  "lost": "0x6946B19bA7adeeE59C130897beB1a4da80D30f3C",
+  "newPhone": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8",
+  "saved": "300000000000000",
+  "strangerWithdrawReverts": true,
+  "plan": [
+    {
+      "label": "Allotment vault savings",
+      "willMove": false,
+      "reason": "Nothing saved in the vault."
+    },
+    {
+      "label": "Allotment savings (ink! contract)",
+      "willMove": true,
+      "amount": "300000000000000"
+    },
+    {
+      "label": "kUSD (native asset)",
+      "willMove": true,
+      "amount": "25000000"
+    },
+    {
+      "label": "tPOT (native)",
+      "willMove": true,
+      "amount": "394858527938814"
+    }
+  ],
+  "batchItems": [
+    {
+      "status": "completed"
+    },
+    {
+      "status": "completed"
+    },
+    {
+      "status": "completed"
+    }
+  ],
+  "inkCalledEvent": true,
+  "after": {
+    "oldTpot": "0",
+    "oldKusd": "0",
+    "oldInk": "0",
+    "newKusd": "25000000",
+    "newTpotGain": "802587205173895"
+  },
+  "steps": [
+    {
+      "label": "mint 25 kUSD to the old wallet",
+      "signer": "0x9db1ac0Ce3dabD203D23C46fDc064F9FbFe68Eb2",
+      "hash": "0x0c61e8b5a19b925743d61c6531992df4e325da70fb271f4c9a1d271c29ec55f5",
+      "block": 337223,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/337223?tab=events",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "assets.Issued",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "save 3 tPOT into the ink! contract",
+      "signer": "0x6946B19bA7adeeE59C130897beB1a4da80D30f3C",
+      "hash": "0x7ff49ece11cc6d3bcb2e6c620147680d5a22257708ff3e8e6e5bd84acdc54520",
+      "block": 337224,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/337224?tab=events",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Transfer",
+        "contracts.Called",
+        "balances.TransferAndHold",
+        "contracts.StorageDepositTransferredAndHeld",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "Ramon names his crew",
+      "signer": "0x6946B19bA7adeeE59C130897beB1a4da80D30f3C",
+      "hash": "0x42f09ba28e7b2ce957e2cfb359ea8a907f259fa1eb383747fa812e9ec0d012a4",
+      "block": 337225,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/337225?tab=events",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.FriendGroupsChanged",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "Lorna starts the attempt",
+      "signer": "0xa6c7b241fDa9Ce8809A8E6e337126D3f6cab710c",
+      "hash": "0x80d731462a36ed63791fefe90cbb6c22b8cced30e9b69f8cde5b22e8260e0f2d",
+      "block": 337226,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/337226?tab=events",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Held",
+        "recovery.AttemptInitiated",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "Ben approves",
+      "signer": "0xc8f0D700D851572326c554235Fd812B81DDa2849",
+      "hash": "0x20717637fe7abe1692828a67c8e1c193fb1601897b0a2fca8a5a57472dc3ae31",
+      "block": 337227,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/337227?tab=events",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "recovery.AttemptApproved",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "Finish: the new phone becomes the inheritor",
+      "signer": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8",
+      "hash": "0xe4d7fddbdc70e83a2b8c559bd71c27bb657ebffc520a7ea5ba4658d04e3a91d1",
+      "block": 337237,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/337237?tab=events",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Released",
+        "recovery.AttemptFinished",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    },
+    {
+      "label": "Bring it home: one signature",
+      "signer": "0x88AE9116ccEf441E226c07fd5ABb9eb0D3EaBDA8",
+      "hash": "0x9a6a5ce3f49fb44fa59498a37fd3a04497e6d99ea42eaec8c3b7e40ef367a85b",
+      "block": 337238,
+      "explorer": "https://scanner-testnet-v3.portaldot.dev/#/blocks/337238?tab=events",
+      "events": [
+        "balances.Withdraw",
+        "balances.Withdraw",
+        "balances.Transfer",
+        "contracts.Called",
+        "balances.TransferOnHold",
+        "contracts.StorageDepositTransferredAndReleased",
+        "utility.ItemCompleted",
+        "assets.Transferred",
+        "utility.ItemCompleted",
+        "system.KilledAccount",
+        "balances.Transfer",
+        "utility.ItemCompleted",
+        "utility.BatchCompleted",
+        "recovery.RecoveredAccountControlled",
+        "balances.Deposit",
+        "balances.Deposit",
+        "transactionPayment.TransactionFeePaid",
+        "system.ExtrinsicSuccess"
+      ]
+    }
+  ],
+  "pass": true
+}

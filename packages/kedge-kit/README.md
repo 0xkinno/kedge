@@ -53,7 +53,7 @@ console.log(out.errorName);            // e.g. 'recovery.NotYetInheritable' when
 | `scale` | the same calls with no dependencies, byte-equal to polkadot.js |
 | `sendRuntimeCall`, `resolveOutcome` | send from the user's wallet and read the real result |
 | `checkGroups`, `refuseContractInheritor`, `KedgeRefusal` | pre-flight refusals, including the contract-inheritor trap |
-| `inventory`, `plan` | what the old account holds and which sweep items will move |
+| `inventory`, `plan`, `inkSavingsOf` | what the old account holds (including savings inside an ink! contract) and which sweep items will move; items can be `native`, `asset`, `revive` (Solidity) or `contract` (ink!) |
 | `friendGroups`, `attempts`, `inheritor`, `delayClock` | read recovery state and the delay clock |
 
 ## Things worth knowing

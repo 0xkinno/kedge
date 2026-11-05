@@ -155,7 +155,7 @@ Portaldot V3 is the hero of this build. Every MetaMask address has a native **tw
 | Exchange custody | the exchange | fees and KYC | one founder, one server: a single point of failure |
 | **Kedge on Portaldot** | **two of your guardians, after a delay you set, and you can still cancel** | **0.027 tPOT to protect, 0.063 tPOT to rescue** | no new wallet; the Recovery pallet is the chain's own, and the rescue reaches money held in Solidity contracts |
 
-A rescue that only moved native coins would leave a seafarer's savings stranded in contracts. Kedge's sweep also pays out a Solidity vault that only the old address could withdraw from, because the chain lets the rescuer call it **as** that address.
+A rescue that only moved native coins would leave a seafarer's savings stranded in contracts. Kedge's sweep also pays out a Solidity vault that only the old address could withdraw from, because the chain lets the rescuer call it **as** that address. The same holds for the ink! (WASM) version of the vault on `pallet-contracts`: in the recorded rescue, 3 tPOT saved inside it, kUSD and the coin moved to the new phone in one signature (3 of 3 items completed), and a stranger's withdraw call reverts ([evidence/ink/rescue.json](evidence/ink/rescue.json)).
 
 ## Safety model
 
@@ -230,6 +230,7 @@ Both directions are reported, **and the second number is the one that matters.**
 | Contract | Address | Deploy tx | Block | Size | Cost |
 |---|---|---|---|---|---|
 | AllotmentVault (Solidity) | `0x92cD058Cb7E4d69476bFc7Cbb7630C50f13B57D4` | `0x5d20d9a0c4be0cda48c3602ca60e8246cf38f691c6f53373f87d982643118ce8` | [317284](https://scanner-testnet-v3.portaldot.dev/#/blocks/317284?tab=events) | 997 bytes runtime | 91.004 tPOT |
+| **AllotmentInk (ink! WASM, pallet-contracts)** | `5HoLffhmPu5RnLxE6ZxiKQBJzcWNG6EwaVt9mQkSpULrKQBx` (code hash `0xc92e869205791f4c738f9349177a9f3d806f956a708b0e182f7f0290ff79d5be`) | `0xf00011b10b14322cb1d30be06cef62be631248c2691ba969a4ad2e54827ace56` | [337181](https://scanner-testnet-v3.portaldot.dev/#/blocks/337181?tab=events) | 4,947 bytes WASM | 399.24 tPOT, of which 398.734 is a storage deposit held by the chain |
 | SenderProbe (throwaway probe) | `0x4DE1eaD45E10bf7158aee2eB945F095272744Adb` | `0x81bb4ac9a6405278a3ff1840861eb2975c93590329a676fcfc027c43ae61b763` | [316773](https://scanner-testnet-v3.portaldot.dev/#/blocks/316773?tab=events) | 183 bytes runtime | 27.416 tPOT |
 | Caller (throwaway probe) | `0x470CF1b1449Ec2580177045f63AB5BF7e0dBA0f4` | `0xc2bebefa9b878a5338ebf1d9ab21530b37dce6581b2a010061b4631a4e2e516c` | [316774](https://scanner-testnet-v3.portaldot.dev/#/blocks/316774?tab=events) | 396 bytes runtime | 44.051 tPOT |
 
@@ -310,8 +311,8 @@ Measured on the live testnet before anything was built, with hashes in [PLATFORM
 
 | Criterion (weight) | Exact words | Where to look |
 |---|---|---|
-| Technical Feasibility (30%) | "technical approach, system architecture, code completeness, and actual delivery"; "whether GitHub shows genuine and sustained development activity"; "deployed on Portaldot testnet with verifiable on-chain interactions" | `npm run verify` and [EVIDENCE.md](EVIDENCE.md) (31 transactions); [`/proof`](https://kedge-kinnoskis-projects.vercel.app/proof); the commit history (33 commits, 2026-11-04 to 2026-11-05); [vault deploy block 317284](https://scanner-testnet-v3.portaldot.dev/#/blocks/317284?tab=events) |
-| Innovation (30%) | "effective use of Portaldot V3 features such as WASM/EVM compatibility, modular architecture, and multi-chain capabilities"; "real value beyond existing solutions" | [DISCOVERY.md](DISCOVERY.md); [SDK_SURFACE.md](SDK_SURFACE.md): EVM, the Recovery pallet, Utility and native assets in one rescue; [block 317779](https://scanner-testnet-v3.portaldot.dev/#/blocks/317779?tab=events) (`msg.sender` is the lost address) |
+| Technical Feasibility (30%) | "technical approach, system architecture, code completeness, and actual delivery"; "whether GitHub shows genuine and sustained development activity"; "deployed on Portaldot testnet with verifiable on-chain interactions" | `npm run verify` and [EVIDENCE.md](EVIDENCE.md) (31 transactions); [`/proof`](https://kedge-kinnoskis-projects.vercel.app/proof); the commit history (34 commits, 2026-11-04 to 2026-11-05); [vault deploy block 317284](https://scanner-testnet-v3.portaldot.dev/#/blocks/317284?tab=events) |
+| Innovation (30%) | "effective use of Portaldot V3 features such as WASM/EVM compatibility, modular architecture, and multi-chain capabilities"; "real value beyond existing solutions" | [DISCOVERY.md](DISCOVERY.md); [SDK_SURFACE.md](SDK_SURFACE.md): EVM, the Recovery pallet, Utility and native assets in one rescue; [block 317779](https://scanner-testnet-v3.portaldot.dev/#/blocks/317779?tab=events) (`msg.sender` is the lost address); the **ink! (WASM) contract** [deployed in block 337181](https://scanner-testnet-v3.portaldot.dev/#/blocks/337181?tab=events) and swept in a live rescue ([evidence/ink/rescue.json](evidence/ink/rescue.json)) |
 | Ecosystem Contribution (20%) | "contribution to Portaldot infrastructure, developer tools, node ecosystem, application ecosystem, and user growth"; "potential for sustained building, open-source value" | [Kedge Kit](packages/kedge-kit) and the `/protect` deep link other dApps can use; [docs/FINDINGS.md](docs/FINDINGS.md) (first public Recovery measurements on V3); `packages/kedge-kit/src/scale.mjs` (open dependency-free encoder) |
 | Business Potential (20%) | "real market needs"; "target users and use cases are clear"; "business model and growth path are feasible" | the sourced numbers above; [THESIS.md](THESIS.md); *Business and what comes next* below |
 
@@ -345,7 +346,7 @@ Free for individuals. Manning agencies and seafarer welfare groups reach crews a
 ## Limits, stated plainly
 
 - The security deposit is 0 on this testnet, so slashing is a signal, not a penalty.
-- An ink! (WASM) vault is written and unit-tested (`ink/allotment_ink`) but **not deployed**: this chain charges 0.06 tPOT per byte of contract code, about 295 tPOT for 4.9 KB, which the testnet budget did not cover. The "WASM" half of WASM/EVM is therefore not shown on chain.
+- The ink! (WASM) contract is live, but this chain charges 0.06 tPOT per byte of contract code, so even 4.9 KB cost 399.24 tPOT on the testnet. The contract is deliberately tiny (no events, no error type), and the rescue reaches it through `contracts.call`, not through the EVM.
 - The public drill is signed by **house crew keys**, which are testnet-only, capped, and labelled on every screen.
 - The four-word phrase is advisory UI; the chain enforces the approval count and the delay.
 - The demo token is Kedge's own **kUSD** (asset 20261104). The pUSD pool held about 127 pUSD, too thin to demo with.
@@ -358,7 +359,7 @@ Free for individuals. Manning agencies and seafarer welfare groups reach crews a
 
 ## Disclosures
 
-**Build dates.** Research and design happened before Nov 4 2026. Code was written from Nov 4 2026 onward: 33 commits, 72ee7a3 (2026-11-04) to adeae3c (2026-11-05), all authored by 0xkinno. **AI assistance:** Claude Code drafted much of the code and docs under the author's direction and review. The hero image is AI-generated. Third-party: ethers, polkadot.js, Next.js, Foundry's forge-std, solc-js, the BIP39 English word list (the call phrase). The persona names and the pitch voice are illustrative.
+**Build dates.** Research and design happened before Nov 4 2026. Code was written from Nov 4 2026 onward: 34 commits, 72ee7a3 (2026-11-04) to 26b0066 (2026-11-05), all authored by 0xkinno. **AI assistance:** Claude Code drafted much of the code and docs under the author's direction and review. The hero image is AI-generated. Third-party: ethers, polkadot.js, Next.js, Foundry's forge-std, solc-js, the BIP39 English word list (the call phrase). The persona names and the pitch voice are illustrative.
 
 ## License
 

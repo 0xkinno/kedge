@@ -74,7 +74,7 @@ Ethereum hash to extrinsic matching rule (part 9).
 | ERC-20 precompile for assets | address formula from the instruction; to be proven in Phase 5 |
 | `revive.call` inside `control_inherited_account` | headline mechanism, probe part 7 |
 | `ReviveApi_call` dry run | probe part 7 and Survey |
-| `pallet-contracts` ink! | stretch only |
+| `pallet-contracts` ink! | deployed (block 337181) and swept in a live rescue, see EVIDENCE.md |
 
 ## 5. Depth ladder
 

@@ -28,6 +28,7 @@ export type GroupSpec = {
 export type SweepItem =
   | { kind: 'native'; keepAlive: boolean }
   | { kind: 'asset'; assetId: number; amount: bigint }
+  | { kind: 'contract'; dest: string; weightLimit: { refTime: bigint; proofSize: bigint }; depositLimit: bigint; data: string }
   | { kind: 'revive'; dest: string; weightLimit: { refTime: bigint; proofSize: bigint }; depositLimit: bigint; data: string };
 
 /** Friends MUST be sorted bytewise and unique (pallet rule FriendsNotSortedOrUnique). */
@@ -63,11 +64,12 @@ export const revokeInheritor = async () => (await api()).tx.recovery.revokeInher
  *  Order matters: contract items first (they may need tPOT for storage deposits), assets next, native last. */
 export async function bringHome(lost32: Uint8Array, dest32: Uint8Array, items: SweepItem[]) {
   const a = await api();
-  const rank = { revive: 0, asset: 1, native: 2 } as const;
+  const rank = { revive: 0, contract: 0, asset: 1, native: 2 } as const;
   const inner = [...items].sort((x, y) => rank[x.kind] - rank[y.kind]).map((it) => {
     switch (it.kind) {
       case 'native': return a.tx.balances.transferAll(id(dest32), it.keepAlive);
       case 'asset': return a.tx.assets.transfer(it.assetId, id(dest32), it.amount);
+      case 'contract': return a.tx.contracts.call(it.dest, 0, it.weightLimit, it.depositLimit, it.data);
       case 'revive': return a.tx.revive.call(it.dest, 0, it.weightLimit, it.depositLimit, it.data);
     }
   });

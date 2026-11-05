@@ -21,4 +21,4 @@ Live: https://kedge-kinnoskis-projects.vercel.app
 `BASE=<url> node e2e/wallet.mjs` runs connect, sign, protect, phrase, approve, wait, bring home, stop, slash, proof, tour and drill in headless Chromium with real signatures on the testnet. Recordings: `docs/demo/test-run/`.
 
 ## Please check us on
-Both directions of the safety claim: attacks stopped, and legitimate rescues blocked (measured 0). And the honest limits: no ink! contract, a zero security deposit on this testnet, no real-people drill yet, no public deployment yet.
+Both directions of the safety claim: attacks stopped, and legitimate rescues blocked (measured 0). And the honest limits: a tiny ink! contract (the chain charges 0.06 tPOT per byte of code), a zero security deposit on this testnet, no real-people drill yet, no public deployment yet.
