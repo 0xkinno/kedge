@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Logkeeper: writes docs/FACTS.json from real receipts in evidence/. Every headline number in README and UI comes from here.
 import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
+const median = (a) => { const s = [...a].sort((x, y) => x - y); const m = Math.floor(s.length / 2); return s.length ? (s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2) : null; };
 export function buildFacts() {
   const dir = 'evidence/campaign'; const ev = {};
   for (const f of readdirSync(dir).filter((x) => /^[A-Z]\d+\.json$/.test(x))) { const j = JSON.parse(readFileSync(`${dir}/${f}`, 'utf8')); ev[j.id] = j; }
@@ -25,6 +26,11 @@ export function buildFacts() {
   const rescueFee = ['initiate', 'approve', 'finish', 'control'].reduce((s, l) => s + fee(l), 0);
   const allTx = [];
   for (const [id, e] of Object.entries(ev)) for (const t of (e.txs ?? (e.tx ? [e.tx] : []))) if (t.hash && /^0x[0-9a-f]{64}$/.test(t.hash) && t.block && !allTx.some((x) => x.hash === t.hash)) allTx.push({ scenario: id, label: t.label, hash: t.hash, block: t.block, ok: t.ok, error: t.error ?? null, signer: t.signer });
+  // Public-page drills: docs/drills/*.json. Newer records carry timings read from the page; the first two are stream captures without timings.
+  const drillFiles = existsSync('docs/drills') ? readdirSync('docs/drills').filter((x) => /drill-\d+\.json$/.test(x)).sort() : [];
+  const drillRecs = drillFiles.map((x) => JSON.parse(readFileSync(`docs/drills/${x}`, 'utf8')));
+  const timed = drillRecs.map((d) => d.approvalToHomeSeconds).filter((x) => typeof x === 'number');
+  const drills = { completed: drillRecs.filter((d) => d.completed !== false).length, withTiming: timed.length, approvalToHomeSeconds: timed.length ? { min: Math.min(...timed), median: median(timed), max: Math.max(...timed) } : null, dates: drillRecs.map((d) => d.date ?? d.at?.slice(0, 10)) };
   const uw = JSON.parse(readFileSync('evidence/watch/unattended-run.json', 'utf8'));
   const p = (n) => probes[n - 1];
   return {
@@ -39,7 +45,7 @@ export function buildFacts() {
       delayBlocks: 10, delaySecondsMeasured: Math.round(h1.delaySeconds), kusdMoved: Number(h1.delta.heirKusd) / 1e6, tpotMoved: Number(Number(h1.delta.heirTpot).toFixed(2)),
     },
     watch: { unattendedDelivered: !!uw.deliveryConfirmed, trigger: uw.trigger, attemptBlock: uw.attemptBlock, runUrl: uw.workflowRunUrl, screenshot: uw.telegramScreenshot },
-    summary, scenarios, misses: scenarios.filter((s) => !s.pass).map((s) => s.id),
+    drills, summary, scenarios, misses: scenarios.filter((s) => !s.pass).map((s) => s.id),
     probeFindings: { headline_msgSenderIsLostH160: p(7).msgSenderIsLostH160, contractToPalletsAddressIsNoop: !p(8).remarkedEventSeen, receiptStatusOnFailedInner: p(7).failingInner.receiptStatus, hashRuleKeccakPayload: true },
     txs: allTx,
   };

@@ -8,6 +8,7 @@ import { sendRuntimeCall, resolveOutcome } from '@/lib/kedge/helm';
 import { attempts, delayClock } from '@/lib/kedge/lookout';
 import { callPhrase } from '@/lib/kedge/phrase';
 import { evmProvider, evmRpc, chainApi, store } from '@/lib/server';
+import { fmtTpot } from '@/lib/fmt';
 export const dynamic = 'force-dynamic'; export const maxDuration = 300;
 
 const KEYS = ['DRILL_RAMON_PK', 'DRILL_LORNA_PK', 'DRILL_BEN_PK', 'DRILL_LIFEBOAT_PK'] as const;
@@ -58,7 +59,7 @@ export async function GET(req: Request) {
         step(6, 'Bring it home: one signature moves everything', 'run');
         const o6 = await send(crew.boat, await P.bringHome(lost32, twinOf(crew.boat.address), [{ kind: 'native', keepAlive: false }]));
         step(6, 'Brought home', 'ok', { explorer: o6.explorer, items: o6.items, controlResult: o6.controlResult });
-        step(7, 'Receipt', 'ok', { moved: `${formatEther(before * 10_000n)} tPOT moved from the old wallet to the new phone, in one signature`, txBlocks: [o1.block, o2.block, o3.block, o5.block, o6.block] });
+        step(7, 'Receipt', 'ok', { moved: `${fmtTpot(formatEther(before * 10_000n))} tPOT moved from the old wallet to the new phone, in one signature`, txBlocks: [o1.block, o2.block, o3.block, o5.block, o6.block] });
         emit({ done: true });
       } catch (e: any) { emit({ error: String(e?.message ?? e), honest: 'This is a real failure from a live drill. It is shown, not hidden.' }); }
       finally { await store.set('kedge:drill:lock', '0'); ctl.close(); }

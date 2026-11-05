@@ -18,7 +18,7 @@ const rows = [
   ['Decode revive.EthExtrinsicRevert, ExtrinsicFailed, ItemFailed', 'packages/kedge-kit/src/helm.ts', /EthExtrinsicRevert/, 'events', 'live'],
   ['Hash to extrinsic rule keccak256(eth_transact payload)', 'packages/kedge-kit/src/helm.ts', /keccak256\(xt\.method/, 'revive.eth_transact', 'live'],
   ['Recovery storage reads (friend groups, attempts, inheritor)', 'packages/kedge-kit/src/lookout.ts', /recovery\.friendGroups/, 'storage', 'live'],
-  ['Dependency-free SCALE encoder', 'watch/scale.mjs', /export const setFriendGroups/, 'byte-equal to polkadot.js', 'live'],
+  ['Dependency-free SCALE encoder', 'packages/kedge-kit/src/scale.mjs', /export const setFriendGroups/, 'byte-equal to polkadot.js', 'live'],
   ['Native sr25519 guardian approve (SubWallet style)', 'scripts/campaign.mts', /sendNative\(txs, 'approve_attempt/, 'native extrinsic', 'live'],
   ['AllotmentVault (Solidity on revive)', 'contracts/src/AllotmentVault.sol', /contract AllotmentVault/, 'solc 0.8.28, paris', 'live'],
 ];

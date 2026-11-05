@@ -33,6 +33,20 @@
     "runUrl": "https://github.com/0xkinno/kedge/actions/runs/41928527039",
     "screenshot": "docs/demo/telegram-alert.png"
   },
+  "drills": {
+    "completed": 3,
+    "withTiming": 1,
+    "approvalToHomeSeconds": {
+      "min": 68,
+      "median": 68,
+      "max": 68
+    },
+    "dates": [
+      "2026-11-04",
+      "2026-11-04",
+      "2026-11-05"
+    ]
+  },
   "summary": {
     "total": 16,
     "asExpected": 16,

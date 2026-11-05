@@ -1,0 +1,27 @@
+{
+  "drill": 3,
+  "date": "2026-11-05",
+  "at": "2026-11-05T04:22:21.933Z",
+  "url": "https://kedge-kinnoskis-projects.vercel.app/drill",
+  "completed": true,
+  "error": null,
+  "secondsFromStart": {
+    "named": 19,
+    "started": 24,
+    "approved": 30,
+    "delayPassed": 82,
+    "finished": 92,
+    "broughtHome": 98
+  },
+  "approvalToHomeSeconds": 68,
+  "totalSeconds": 98,
+  "explorerLinks": [
+    "https://scanner-testnet-v3.portaldot.dev/#/blocks/329756?tab=events",
+    "https://scanner-testnet-v3.portaldot.dev/#/blocks/329757?tab=events",
+    "https://scanner-testnet-v3.portaldot.dev/#/blocks/329758?tab=events",
+    "https://scanner-testnet-v3.portaldot.dev/#/blocks/329768?tab=events",
+    "https://scanner-testnet-v3.portaldot.dev/#/blocks/329769?tab=events"
+  ],
+  "receipt": "1.57629441590067 tPOT moved from the old wallet to the new phone, in one signature",
+  "note": "Started by pressing Start on the public /drill page; house crew keys sign. Timings are read from the page once a second."
+}

@@ -31,7 +31,7 @@ test('summary classification: totals come from one block and match the scenarios
   assert.equal(f.measured.attacksStopped, s.classes.onChainRefused.asExpected + s.classes.uiRefused.asExpected);
   assert.equal(f.measured.attacksTried, s.classes.onChainRefused.of + s.classes.uiRefused.of);
   const badge = JSON.parse(read('docs/badge.json')); assert.equal(badge.message, `${s.asExpected} of ${s.total} as expected`);
-  assert.ok(read('README.md').includes(`scenarios-${s.asExpected}%20of%20${s.total}%20as%20expected`), 'README badge is generated from FACTS');
+  assert.ok(read('README.md').includes(`${s.asExpected} of ${s.total} scenarios as expected`), 'README states the generated scenario total');
 });
 test('prose rounds tPOT to three decimals', async () => {
   const { fmtTpot } = await import('../packages/kedge-kit/src/fmt.mjs');
