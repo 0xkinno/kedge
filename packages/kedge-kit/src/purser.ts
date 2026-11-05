@@ -3,9 +3,21 @@ import { u8aToHex } from '@polkadot/util';
 import { NET } from './constants';
 
 let apiP: Promise<ApiPromise> | null = null;
-export function api(): Promise<ApiPromise> {
-  apiP ??= ApiPromise.create({ provider: new WsProvider(NET.substrateWs), noInitWarn: true });
+/** One shared connection. A serverless instance can be frozen while its websocket closes, so every use checks the link
+ *  and builds a new connection when the old one is gone. */
+export async function api(): Promise<ApiPromise> {
+  if (apiP) {
+    try { const a = await apiP; if (a.isConnected) return a; await a.disconnect().catch(() => {}); } catch { /* fall through and reconnect */ }
+    apiP = null;
+  }
+  apiP = ApiPromise.create({ provider: new WsProvider(NET.substrateWs), noInitWarn: true });
+  apiP.catch(() => { apiP = null; });
   return apiP;
+}
+/** Run a chain read; if the connection died mid-flight, reconnect and retry once. */
+export async function withApi<T>(fn: (a: ApiPromise) => Promise<T>): Promise<T> {
+  try { return await fn(await api()); }
+  catch (e) { await closeApi().catch(() => {}); return await fn(await api()); }
 }
 export async function closeApi() { if (apiP) { const a = await apiP; await a.disconnect(); apiP = null; } }
 

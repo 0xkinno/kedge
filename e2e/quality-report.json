@@ -1,6 +1,11 @@
 {
-  "base": "http://localhost:3100",
-  "at": "2026-11-04T10:16:59.575Z",
+  "base": "https://kedge-kinnoskis-projects.vercel.app",
+  "at": "2026-11-05T04:36:01.365Z",
   "checks": 63,
-  "failures": []
+  "failures": [
+    "1440x900 /crew/0x85fbBA0fD74dAd192A277DCF5e8B83DA96FCA816: console errors: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "1440x900 /rescue/0x85fbBA0fD74dAd192A277DCF5e8B83DA96FCA816: console errors: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "1920x1080 /crew/0x85fbBA0fD74dAd192A277DCF5e8B83DA96FCA816: console errors: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "1920x1080 /rescue/0x85fbBA0fD74dAd192A277DCF5e8B83DA96FCA816: console errors: Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ]
 }
