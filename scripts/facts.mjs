@@ -19,6 +19,7 @@ export function buildFacts() {
   const rescueFee = ['initiate', 'approve', 'finish', 'control'].reduce((s, l) => s + fee(l), 0);
   const allTx = [];
   for (const [id, e] of Object.entries(ev)) for (const t of (e.txs ?? (e.tx ? [e.tx] : []))) if (t.hash && /^0x[0-9a-f]{64}$/.test(t.hash) && t.block && !allTx.some((x) => x.hash === t.hash)) allTx.push({ scenario: id, label: t.label, hash: t.hash, block: t.block, ok: t.ok, error: t.error ?? null, signer: t.signer });
+  const uw = JSON.parse(readFileSync('evidence/watch/unattended-run.json', 'utf8'));
   const p = (n) => probes[n - 1];
   return {
     network: 'portaldot-v3 testnet', spec: p(1).specVersion, blockTimeSeconds: p(1).blockTimeSeconds,
@@ -31,6 +32,7 @@ export function buildFacts() {
       storageDepositRefundTPOT: Number(h1.storageDepositRefundTPOT), securityDepositTPOT: 0, friendGroupDepositTPOT: 0,
       delayBlocks: 10, delaySecondsMeasured: Math.round(h1.delaySeconds), kusdMoved: Number(h1.delta.heirKusd) / 1e6, tpotMoved: Number(Number(h1.delta.heirTpot).toFixed(2)),
     },
+    watch: { unattendedDelivered: !!uw.deliveryConfirmed, trigger: uw.trigger, attemptBlock: uw.attemptBlock, runUrl: uw.workflowRunUrl, screenshot: uw.telegramScreenshot },
     scenarios, misses: scenarios.filter((s) => !s.pass).map((s) => s.id),
     probeFindings: { headline_msgSenderIsLostH160: p(7).msgSenderIsLostH160, contractToPalletsAddressIsNoop: !p(8).remarkedEventSeen, receiptStatusOnFailedInner: p(7).failingInner.receiptStatus, hashRuleKeccakPayload: true },
     txs: allTx,

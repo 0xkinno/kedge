@@ -26,6 +26,13 @@
     "kusdMoved": 150,
     "tpotMoved": 13.99
   },
+  "watch": {
+    "unattendedDelivered": true,
+    "trigger": "workflow_dispatch (not the hourly schedule)",
+    "attemptBlock": 326458,
+    "runUrl": "https://github.com/0xkinno/kedge/actions/runs/41928527039",
+    "screenshot": "docs/demo/telegram-alert.png"
+  },
   "scenarios": [
     {
       "id": "H1",

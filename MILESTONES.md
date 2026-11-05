@@ -23,5 +23,10 @@ Generated from git history by `node scripts/readme_gen.mjs`. Transaction hashes 
 | 2026-11-04 | `e46e423` | feat: ink! allotment contract source with unit tests (pallet-contracts vault, mirrors the Solidity vault) |
 | 2026-11-04 | `85dc284` | fix: resolve shared watch code dependencies from apps/web so the Vercel build finds them |
 | 2026-11-04 | `8877216` | fix: upgrade Next.js to 15.5.29 and React to 19.1.10 (patched releases); pin the ink contract toolchain to Rust 1.81 |
+| 2026-11-04 | `a60ab64` | feat: deployed on Vercel, wallet journey passes against the live URL; ink contract built and tested; status and docs updated |
+| 2026-11-04 | `65927a1` | fix: chain the next Watchkeeper run only after success, so a failing run cannot loop |
+| 2026-11-04 | `4bfab93` | fix: Watchkeeper strips quotes from pasted secrets (the Actions secrets were stored with quotes) |
+| 2026-11-04 | `eda9910` | docs: handoff for the next agent; evidence: unattended Watchkeeper alert dedupe key |
+| 2026-11-05 | `a5a8044` | feat: keys_restore script rebuilds the gitignored keys from .env.local; handoff updated |
 
 Key chain milestones: vault deployed at block 317284; headline mechanism proven at block 317779 (PLATFORM_PROBE part 7); campaign blocks in EVIDENCE.md.

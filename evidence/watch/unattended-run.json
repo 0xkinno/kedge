@@ -11,5 +11,11 @@
   ],
   "jobDispatch": "workflow_dispatch of .github/workflows/watchkeeper.yml (HTTP 204)",
   "delivered": true,
-  "note": "The dedupe key is written just before the Telegram call. Delivery itself is confirmed by the screenshot docs/demo/telegram-alert.png from the receiving phone."
+  "note": "The dedupe key is written just before the Telegram call. Delivery itself is confirmed by the screenshot docs/demo/telegram-alert.png from the receiving phone.",
+  "workflowRunUrl": "https://github.com/0xkinno/kedge/actions/runs/41928527039",
+  "trigger": "workflow_dispatch (not the hourly schedule)",
+  "deliveryConfirmed": true,
+  "telegramScreenshot": "docs/demo/telegram-alert.png",
+  "telegramMessageTime": "23:50 (receiver's local time, Nov 4)",
+  "receivedText": "Kedge: a recovery attempt started on your wallet ... block 326458 ... finishable at block 326468, about 36 seconds from now ... stop and slash links"
 }
