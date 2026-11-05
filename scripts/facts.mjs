@@ -11,7 +11,13 @@ export function buildFacts() {
     const txs = (e.txs ?? (e.tx ? [e.tx] : [])).filter((t) => t.hash); const key = e.tx ?? txs[txs.length - 1];
     return { id, title: e.title, expected: e.expected, pass: !!e.pass, observed: e.observedError ?? e.controlResult ?? null, proofTx: key ? { hash: key.hash, block: key.block, explorer: key.explorer } : null }; });
   const rescues = ['H1', 'H2'].filter((id) => ev[id]);
-  const attackIds = ['A1', 'A2', 'A3', 'A4', 'A6', 'A9', 'A7', 'A11', 'A12'].filter((id) => ev[id]);
+  // One classification. Every total below comes from it and from nothing else.
+  const CLASSES = { onChainHappy: ['H1', 'H2'], onChainRefused: ['A1', 'A2', 'A3', 'A4', 'A6', 'A9'], onChainBehaviour: ['A5', 'A7', 'A8', 'A10'], uiRefused: ['A11', 'A12'], counterfactual: ['C1', 'C2'] };
+  const passOf = (ids) => ids.filter((id) => ev[id]?.pass).length; const haveOf = (ids) => ids.filter((id) => ev[id]).length;
+  const attackIds = [...CLASSES.onChainRefused, ...CLASSES.uiRefused].filter((id) => ev[id]);
+  const summary = { total: scenarios.length, asExpected: scenarios.filter((s) => s.pass).length,
+    classes: Object.fromEntries(Object.entries(CLASSES).map(([k, ids]) => [k, { ids: ids.filter((id) => ev[id]), asExpected: passOf(ids), of: haveOf(ids) }])),
+    attacksStopped: passOf(attackIds), attacksTried: attackIds.length, note: 'Attacks stopped counts onChainRefused (decoded error on chain) plus uiRefused (a pre-flight or phrase guard). A5, A7, A8 and A10 are on-chain behaviours; C1 and C2 are counterfactuals.' };
   const legitFailed = [];
   for (const id of rescues) for (const t of ev[id].txs) if (!t.ok) legitFailed.push({ scenario: id, label: t.label, error: t.error });
   for (const f of ['ATTACK_RUN', 'PRIORITY_RUN']) if (existsSync(`${dir}/${f}.json`)) for (const t of JSON.parse(readFileSync(`${dir}/${f}.json`, 'utf8')).txs) if (!/^A\d/.test(t.label) && /legitimate|crew (initiate|approve|finish)|family (initiate|approve|finish)|set_friend_groups|^(lorna|ben) /.test(t.label) && !t.ok) legitFailed.push({ scenario: f, label: t.label, error: t.error });
@@ -26,16 +32,16 @@ export function buildFacts() {
     vault: { address: dep.address, deployTx: dep.txHash, block: dep.block, costTPOT: Number(dep.costTPOT), tokenAssetId: dep.tokenAssetId },
     measured: {
       rescuesCompleted: rescues.filter((id) => ev[id].pass).length, rescuesAttempted: rescues.length,
-      attacksStopped: attackIds.filter((id) => ev[id].pass).length, attacksTried: attackIds.length,
+      attacksStopped: summary.attacksStopped, attacksTried: summary.attacksTried,
       legitimateRescuesWronglyBlocked: legitFailed.length, wronglyBlockedCases: legitFailed,
       costPerProtectionTPOT: fee('set_friend_groups'), costPerRescueTPOT: Number(rescueFee.toFixed(6)),
       storageDepositRefundTPOT: Number(h1.storageDepositRefundTPOT), securityDepositTPOT: 0, friendGroupDepositTPOT: 0,
       delayBlocks: 10, delaySecondsMeasured: Math.round(h1.delaySeconds), kusdMoved: Number(h1.delta.heirKusd) / 1e6, tpotMoved: Number(Number(h1.delta.heirTpot).toFixed(2)),
     },
     watch: { unattendedDelivered: !!uw.deliveryConfirmed, trigger: uw.trigger, attemptBlock: uw.attemptBlock, runUrl: uw.workflowRunUrl, screenshot: uw.telegramScreenshot },
-    scenarios, misses: scenarios.filter((s) => !s.pass).map((s) => s.id),
+    summary, scenarios, misses: scenarios.filter((s) => !s.pass).map((s) => s.id),
     probeFindings: { headline_msgSenderIsLostH160: p(7).msgSenderIsLostH160, contractToPalletsAddressIsNoop: !p(8).remarkedEventSeen, receiptStatusOnFailedInner: p(7).failingInner.receiptStatus, hashRuleKeccakPayload: true },
     txs: allTx,
   };
 }
-if (process.argv[1].endsWith('facts.mjs')) { const f = buildFacts(); writeFileSync('docs/FACTS.json', JSON.stringify(f, null, 2) + '\n'); console.log(JSON.stringify(f.measured, null, 1), 'misses:', f.misses); }
+if (process.argv[1].endsWith('facts.mjs')) { const f = buildFacts(); writeFileSync('docs/FACTS.json', JSON.stringify(f, null, 2) + '\n'); writeFileSync('docs/badge.json', JSON.stringify({ schemaVersion: 1, label: 'scenarios', message: `${f.summary.asExpected} of ${f.summary.total} as expected`, color: f.summary.asExpected === f.summary.total ? 'brightgreen' : 'orange' }) + '\n'); console.log(JSON.stringify(f.measured, null, 1), 'misses:', f.misses); }

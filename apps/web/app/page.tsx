@@ -4,13 +4,14 @@ import Link from 'next/link';
 import { LifeboatCard, SignalFlagK, HourglassAnchor, AnchorRope, CompassRose, Lifebuoy, PhoneOverboard, RopeDivider, SeamansBook } from '@/components/art';
 import { GlowCard, Reveal, LinkButton } from '@/components/ui';
 import ChainPulse from '@/components/ChainPulse';
+import { fmtTpot } from '@/lib/fmt';
 
 const m = facts.measured;
 const stats = [
   [`${m.rescuesCompleted} of ${m.rescuesAttempted}`, 'rescues completed on testnet'],
-  [`${m.attacksStopped} of ${m.attacksTried}`, 'attacks stopped, each with a decoded refusal'],
+  [`${m.attacksStopped} of ${m.attacksTried}`, 'attacks stopped, on chain or by the checks'],
   [String(m.legitimateRescuesWronglyBlocked), 'honest rescues wrongly blocked'],
-  [`${m.costPerRescueTPOT}`, 'tPOT in fees per rescue'],
+  [fmtTpot(m.costPerRescueTPOT), 'tPOT in fees per rescue'],
 ];
 const Section = ({ id, label, title, children, className = '' }: { id: string; label: string; title: string; children: React.ReactNode; className?: string }) => (
   <section aria-labelledby={id} className={`mt-28 ${className}`}><Reveal><p className="micro text-brass-ink">{label}</p><h2 id={id} className="display h2 mt-2 max-w-3xl">{title}</h2></Reveal>{children}</section>

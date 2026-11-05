@@ -7,15 +7,24 @@ Generated from `docs/FACTS.json` (testnet receipts) by `node scripts/docs_gen.mj
 | | |
 |---|---|
 | Rescues completed / attempted (curated campaign) | 2 of 2 |
-| Attacks stopped | 9 of 9, each with a decoded on-chain refusal or a recorded guard |
+| Attacks stopped | 8 of 8 (refused on chain with a decoded error, or stopped by a pre-flight guard) |
 | Legitimate rescues wrongly blocked | **0** |
-| Cost to protect a wallet | 0.02700572815675 tPOT in fees, deposits 0 |
-| Cost per rescue (initiate, approve, finish, control) | 0.06293 tPOT in fees |
+| Cost to protect a wallet | 0.027 tPOT in fees, deposits 0 |
+| Cost per rescue (initiate, approve, finish, control) | 0.063 tPOT in fees |
 | Security deposit on this testnet | 0 tPOT |
-| Contract storage deposit refunded during the sweep | 3.79868674820199 tPOT |
+| Contract storage deposit refunded during the sweep | 3.799 tPOT |
 | Safety delay | 10 blocks, measured 55 s |
 | Moved to the new key in H1 | 13.99 tPOT, 150 kUSD (including the vault position) |
 | Real-people drill | not yet run, see README |
+
+## Exact values (to the planck, from FACTS)
+
+| | exact |
+|---|---|
+| Cost to protect (tPOT) | 0.02700572815675 |
+| Cost per rescue (tPOT) | 0.06293 |
+| Storage deposit refunded (tPOT) | 3.79868674820199 |
+| tPOT moved in H1 | 13.99 |
 
 ## Scenarios
 

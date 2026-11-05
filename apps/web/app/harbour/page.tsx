@@ -8,6 +8,7 @@ import { makeLifeboat, lifeboatPdf } from '@/lib/lifeboat';
 import { PrimaryButton, GhostButton, StatusRing, Notice, GlowCard, Receipt } from '@/components/ui';
 import facts from '@/data/FACTS.json';
 import { cleanDoor, type Door } from '@/lib/deeplink';
+import { fmtTpot } from '@/lib/fmt';
 
 const PRESETS = { drill: { delay: 10, cancel: 2, label: 'Drill: 10 blocks (about a minute)' }, real: { delay: 43200, cancel: 7200, label: 'Real: 72 hours (43,200 blocks)' } } as const;
 const Step = ({ n, id, title, children }: { n: number; id: string; title: string; children: React.ReactNode }) => (
@@ -97,7 +98,7 @@ export default function Harbour() {
           <div className="mt-4">{me ? <p className="mono text-[13px]" aria-label="Connected wallet">{me}</p> : <PrimaryButton onClick={doConnect}>Connect wallet</PrimaryButton>}</div>
           {view?.groups?.length ? <p className="mt-3 text-sm">{view.groups.length} group on chain. {view.inheritor ? 'An inheritor is set.' : 'No inheritor yet.'}</p> : null}</GlowCard>
         <GlowCard className="p-5"><p className="micro text-brass-ink">What it costs</p>
-          <dl className="mt-3 grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 text-sm"><dt>Naming the crew</dt><dd className="numeral text-base">{facts.measured.costPerProtectionTPOT.toFixed(4)} tPOT</dd><dt>Deposits held</dt><dd className="numeral text-base">0 tPOT</dd><dt>A rescue, in fees</dt><dd className="numeral text-base">{facts.measured.costPerRescueTPOT.toFixed(4)} tPOT</dd></dl>
+          <dl className="mt-3 grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 text-sm"><dt>Naming the crew</dt><dd className="numeral text-base">{fmtTpot(facts.measured.costPerProtectionTPOT)} tPOT</dd><dt>Deposits held</dt><dd className="numeral text-base">0 tPOT</dd><dt>A rescue, in fees</dt><dd className="numeral text-base">{fmtTpot(facts.measured.costPerRescueTPOT)} tPOT</dd></dl>
           <p className="mt-3 text-xs text-ink/70">Measured on this testnet: no deposit is held, so nothing is refundable or lost.</p></GlowCard>
       </aside>
     </div>

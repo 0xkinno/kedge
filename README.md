@@ -7,7 +7,7 @@
 <p align="center">
   <img alt="CI" src="https://github.com/0xkinno/kedge/actions/workflows/ci.yml/badge.svg" />
   <img alt="Network" src="https://img.shields.io/badge/Portaldot-V3%20testnet-1BB3A2" />
-  <img alt="Verified" src="https://img.shields.io/badge/on--chain%20scenarios-11%2F11%20as%20expected-FF5A1F" />
+  <img alt="Verified" src="https://img.shields.io/badge/scenarios-16%20of%2016%20as%20expected-FF5A1F" />
   <img alt="License" src="https://img.shields.io/badge/license-MIT-blue" />
 </p>
 
@@ -20,7 +20,7 @@ At 03:40 off Singapore, Ramon's phone slips over the side. His wages were on it.
 | **Live app** | **https://kedge-kinnoskis-projects.vercel.app** (Vercel, no login). The 12-step wallet journey below passed against this URL |
 | **See it work in 2 minutes** | `/drill`: a full rescue on the live testnet, streamed step by step |
 | **Check our claims** | `npm run verify` re-reads 31 recorded transactions from the public node with no key. `/proof` decodes them in your browser |
-| **Measured** | 2 of 2 rescues completed, 9 of 9 attacks stopped, **0** honest rescues wrongly blocked, 0.06293 tPOT in fees per rescue |
+| **Measured** | 2 of 2 rescues completed, 8 of 8 attacks stopped, **0** honest rescues wrongly blocked, 0.063 tPOT in fees per rescue |
 | **Built on** | Portaldot V3: Recovery, Utility, Assets with the ERC-20 precompile, Revive, the pallets address |
 | **Track** | Ecosystem DApps |
 | **Pitch deck** | [docs/kedge-deck.pdf](docs/kedge-deck.pdf) |
@@ -40,7 +40,7 @@ At 03:40 off Singapore, Ramon's phone slips over the side. His wages were on it.
 | Company-held seed backup | the company, a court order, a breach | a subscription and an identity check | custody by another name, and it needs a signal and a camera |
 | Smart-contract wallet with guardians | guardians, through a contract | a new wallet and a migration | you must change wallets **before** the loss, and each chain needs its own |
 | Exchange custody | the exchange | fees and KYC | one founder, one server: a single point of failure |
-| **Kedge on Portaldot** | **two of your guardians, after a delay you set, and you can still cancel** | **0.02700572815675 tPOT to protect, 0.06293 tPOT to rescue, no deposit** | no new wallet; the Recovery pallet is the chain's own, and the rescue even reaches money held in Solidity contracts |
+| **Kedge on Portaldot** | **two of your guardians, after a delay you set, and you can still cancel** | **0.027 tPOT to protect, 0.063 tPOT to rescue, no deposit** | no new wallet; the Recovery pallet is the chain's own, and the rescue even reaches money held in Solidity contracts |
 
 What nobody else here does is the last part. A rescue that only moved native coins would leave a seafarer's savings stranded in contracts. Kedge's sweep also pays out a Solidity vault that only the old address could withdraw from, because the chain lets the rescuer call it **as** that address.
 
@@ -72,7 +72,7 @@ These came from probes on the live testnet before we built anything, and are wri
 - **`msg.sender` is the lost address.** Inside `control_inherited_account`, a `revive.call` runs the contract with the old address as the caller. That is the whole trick behind the vault payout (probe part 7, block 317779).
 - **A contract cannot be the rescuer.** A Solidity contract calling the pallets address does nothing: it returns success with no effect. So Kedge refuses a contract as the inheritor, and the refusal is backed by a probe, not a guess.
 - **Receipts lie in two different ways.** A refused Recovery call is an *extrinsic success* plus `revive.EthExtrinsicRevert` with receipt status 0. A failed inner call inside `control_inherited_account` leaves receipt status **1** and only shows up in `RecoveredAccountControlled.call_result`. Kedge's Helmsman never trusts the receipt: it matches the extrinsic by `keccak256(payload) == eth tx hash` (9 of 9 hashes) and reads the events.
-- **The vault gives its deposit back.** The sweep returned 3.79868674820199 tPOT of contract storage deposit, because withdrawing zeroes the slot.
+- **The vault gives its deposit back.** The sweep returned 3.799 tPOT of contract storage deposit, because withdrawing zeroes the slot.
 - **This testnet's security deposit is 0.** Slashing a bad attempt burns nothing, so the real deterrent is two guardians, the delay, and the owner's cancel. We say so in the UI.
 
 ## Safety model
@@ -94,15 +94,16 @@ The four-word phrase is **advisory UI**: it helps a human catch a scam. The chai
 
 ## Measured
 
-Both directions are reported, **and the second number is the one that matters.**
+Both directions are reported, **and the second number is the one that matters.** Money figures are rounded here; exact values are in `docs/FACTS.json`.
 
 | | |
 |---|---|
 | Rescues completed / attempted | 2 of 2 (one with a guardian on a native sr25519 wallet) |
-| Attacks stopped | 9 of 9 |
+| Attacks stopped | 8 of 8: 6 refused on chain with a decoded error (A1, A2, A3, A4, A6, A9) and 2 stopped by pre-flight guards (A11, A12) |
+| All scenarios | 16 of 16 as expected: 2 on-chain happy paths, 6 on-chain refusals, 4 on-chain behaviours (A5, A7, A8, A10), 2 guard refusals, 2 counterfactuals |
 | Honest rescues wrongly blocked | 0 |
-| Cost to protect | 0.02700572815675 tPOT fee, 0 deposit |
-| Cost per rescue | 0.06293 tPOT in fees |
+| Cost to protect | 0.027 tPOT fee, 0 deposit |
+| Cost per rescue | 0.063 tPOT in fees |
 | Safety delay | 10 blocks, measured 55 s |
 | Browser end-to-end | 12 of 12 end-to-end steps passed in headless Chromium (details below) |
 | Public drills | 2 live runs, recorded in `docs/drills/`; a second request during a run is refused (HTTP 409) |

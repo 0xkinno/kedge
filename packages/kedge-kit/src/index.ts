@@ -9,3 +9,4 @@ export * from './lookout';
 export * from './survey';
 /** Dependency-free SCALE encoder for the same calls (no polkadot.js needed; byte-equal on live metadata). */
 export * as scale from './scale.mjs';
+export * from './fmt.mjs';

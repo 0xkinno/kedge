@@ -28,5 +28,10 @@ Generated from git history by `node scripts/readme_gen.mjs`. Transaction hashes 
 | 2026-11-04 | `4bfab93` | fix: Watchkeeper strips quotes from pasted secrets (the Actions secrets were stored with quotes) |
 | 2026-11-04 | `eda9910` | docs: handoff for the next agent; evidence: unattended Watchkeeper alert dedupe key |
 | 2026-11-05 | `a5a8044` | feat: keys_restore script rebuilds the gitignored keys from .env.local; handoff updated |
+| 2026-11-05 | `452d561` | evidence: Telegram alert delivered by the Actions Watchkeeper (screenshot, run URL), recorded in FACTS |
+| 2026-11-05 | `275ce54` | refactor: move the engine modules and the dependency-free encoder into packages/kedge-kit; the web app re-exports them (one copy) |
+| 2026-11-05 | `4ee4e92` | feat: Kedge Kit package (ESM, CJS and types via tsup), README with two working examples, tests and a CI job |
+| 2026-11-05 | `e31bc56` | feat: /protect deep link door with https-only return, pre-filled guardians, tests and a live wallet step |
+| 2026-11-05 | `c8d4a61` | feat: inheritance door in Harbour (Family group outranks Crew), shareable guardian links with the right group, rescue page picks the group by wallet |
 
 Key chain milestones: vault deployed at block 317284; headline mechanism proven at block 317779 (PLATFORM_PROBE part 7); campaign blocks in EVIDENCE.md.

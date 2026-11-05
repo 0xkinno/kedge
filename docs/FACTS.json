@@ -12,8 +12,8 @@
   "measured": {
     "rescuesCompleted": 2,
     "rescuesAttempted": 2,
-    "attacksStopped": 9,
-    "attacksTried": 9,
+    "attacksStopped": 8,
+    "attacksTried": 8,
     "legitimateRescuesWronglyBlocked": 0,
     "wronglyBlockedCases": [],
     "costPerProtectionTPOT": 0.02700572815675,
@@ -32,6 +32,61 @@
     "attemptBlock": 326458,
     "runUrl": "https://github.com/0xkinno/kedge/actions/runs/41928527039",
     "screenshot": "docs/demo/telegram-alert.png"
+  },
+  "summary": {
+    "total": 16,
+    "asExpected": 16,
+    "classes": {
+      "onChainHappy": {
+        "ids": [
+          "H1",
+          "H2"
+        ],
+        "asExpected": 2,
+        "of": 2
+      },
+      "onChainRefused": {
+        "ids": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A6",
+          "A9"
+        ],
+        "asExpected": 6,
+        "of": 6
+      },
+      "onChainBehaviour": {
+        "ids": [
+          "A5",
+          "A7",
+          "A8",
+          "A10"
+        ],
+        "asExpected": 4,
+        "of": 4
+      },
+      "uiRefused": {
+        "ids": [
+          "A11",
+          "A12"
+        ],
+        "asExpected": 2,
+        "of": 2
+      },
+      "counterfactual": {
+        "ids": [
+          "C1",
+          "C2"
+        ],
+        "asExpected": 2,
+        "of": 2
+      }
+    },
+    "attacksStopped": 8,
+    "attacksTried": 8,
+    "note": "Attacks stopped counts onChainRefused (decoded error on chain) plus uiRefused (a pre-flight or phrase guard). A5, A7, A8 and A10 are on-chain behaviours; C1 and C2 are counterfactuals."
   },
   "scenarios": [
     {

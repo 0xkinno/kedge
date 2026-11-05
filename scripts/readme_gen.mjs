@@ -2,6 +2,7 @@
 // Generates README.md (Section 12 order) and MILESTONES.md. Every number comes from docs/FACTS.json or git.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
+import { fmtTpot } from '../packages/kedge-kit/src/fmt.mjs';
 const f = JSON.parse(readFileSync('docs/FACTS.json', 'utf8')); const m = f.measured; const fig = JSON.parse(readFileSync('docs/landing_figures.json', 'utf8')).money;
 const src = JSON.parse(readFileSync('docs/sources.json', 'utf8')).sources; const dep = JSON.parse(readFileSync('deployments/testnet.json', 'utf8')).AllotmentVault;
 const E = (n) => `https://scanner-testnet-v3.portaldot.dev/#/blocks/${n}?tab=events`;
@@ -19,7 +20,7 @@ const readme = `<p align="center"><img src="docs/brand/kedge-banner.png" alt="Ke
 <p align="center">
   <img alt="CI" src="https://github.com/0xkinno/kedge/actions/workflows/ci.yml/badge.svg" />
   <img alt="Network" src="https://img.shields.io/badge/Portaldot-V3%20testnet-1BB3A2" />
-  <img alt="Verified" src="https://img.shields.io/badge/on--chain%20scenarios-${m.attacksStopped + m.rescuesCompleted}%2F${m.attacksTried + m.rescuesAttempted}%20as%20expected-FF5A1F" />
+  <img alt="Verified" src="https://img.shields.io/badge/scenarios-${f.summary.asExpected}%20of%20${f.summary.total}%20as%20expected-FF5A1F" />
   <img alt="License" src="https://img.shields.io/badge/license-MIT-blue" />
 </p>
 
@@ -32,7 +33,7 @@ At 03:40 off Singapore, Ramon's phone slips over the side. His wages were on it.
 | **Live app** | **https://kedge-kinnoskis-projects.vercel.app** (Vercel, no login). The 12-step wallet journey below passed against this URL |
 | **See it work in 2 minutes** | \`/drill\`: a full rescue on the live testnet, streamed step by step |
 | **Check our claims** | \`npm run verify\` re-reads ${f.txs.length} recorded transactions from the public node with no key. \`/proof\` decodes them in your browser |
-| **Measured** | ${m.rescuesCompleted} of ${m.rescuesAttempted} rescues completed, ${m.attacksStopped} of ${m.attacksTried} attacks stopped, **${m.legitimateRescuesWronglyBlocked}** honest rescues wrongly blocked, ${m.costPerRescueTPOT} tPOT in fees per rescue |
+| **Measured** | ${m.rescuesCompleted} of ${m.rescuesAttempted} rescues completed, ${m.attacksStopped} of ${m.attacksTried} attacks stopped, **${m.legitimateRescuesWronglyBlocked}** honest rescues wrongly blocked, ${fmtTpot(m.costPerRescueTPOT)} tPOT in fees per rescue |
 | **Built on** | Portaldot V3: Recovery, Utility, Assets with the ERC-20 precompile, Revive, the pallets address |
 | **Track** | Ecosystem DApps |
 | **Pitch deck** | [docs/kedge-deck.pdf](docs/kedge-deck.pdf) |
@@ -52,7 +53,7 @@ At 03:40 off Singapore, Ramon's phone slips over the side. His wages were on it.
 | Company-held seed backup | the company, a court order, a breach | a subscription and an identity check | custody by another name, and it needs a signal and a camera |
 | Smart-contract wallet with guardians | guardians, through a contract | a new wallet and a migration | you must change wallets **before** the loss, and each chain needs its own |
 | Exchange custody | the exchange | fees and KYC | one founder, one server: a single point of failure |
-| **Kedge on Portaldot** | **two of your guardians, after a delay you set, and you can still cancel** | **${m.costPerProtectionTPOT} tPOT to protect, ${m.costPerRescueTPOT} tPOT to rescue, no deposit** | no new wallet; the Recovery pallet is the chain's own, and the rescue even reaches money held in Solidity contracts |
+| **Kedge on Portaldot** | **two of your guardians, after a delay you set, and you can still cancel** | **${fmtTpot(m.costPerProtectionTPOT)} tPOT to protect, ${fmtTpot(m.costPerRescueTPOT)} tPOT to rescue, no deposit** | no new wallet; the Recovery pallet is the chain's own, and the rescue even reaches money held in Solidity contracts |
 
 What nobody else here does is the last part. A rescue that only moved native coins would leave a seafarer's savings stranded in contracts. Kedge's sweep also pays out a Solidity vault that only the old address could withdraw from, because the chain lets the rescuer call it **as** that address.
 
@@ -84,7 +85,7 @@ These came from probes on the live testnet before we built anything, and are wri
 - **\`msg.sender\` is the lost address.** Inside \`control_inherited_account\`, a \`revive.call\` runs the contract with the old address as the caller. That is the whole trick behind the vault payout (probe part 7, block 317779).
 - **A contract cannot be the rescuer.** A Solidity contract calling the pallets address does nothing: it returns success with no effect. So Kedge refuses a contract as the inheritor, and the refusal is backed by a probe, not a guess.
 - **Receipts lie in two different ways.** A refused Recovery call is an *extrinsic success* plus \`revive.EthExtrinsicRevert\` with receipt status 0. A failed inner call inside \`control_inherited_account\` leaves receipt status **1** and only shows up in \`RecoveredAccountControlled.call_result\`. Kedge's Helmsman never trusts the receipt: it matches the extrinsic by \`keccak256(payload) == eth tx hash\` (9 of 9 hashes) and reads the events.
-- **The vault gives its deposit back.** The sweep returned ${m.storageDepositRefundTPOT} tPOT of contract storage deposit, because withdrawing zeroes the slot.
+- **The vault gives its deposit back.** The sweep returned ${fmtTpot(m.storageDepositRefundTPOT)} tPOT of contract storage deposit, because withdrawing zeroes the slot.
 - **This testnet's security deposit is 0.** Slashing a bad attempt burns nothing, so the real deterrent is two guardians, the delay, and the owner's cancel. We say so in the UI.
 
 ## Safety model
@@ -106,15 +107,16 @@ The four-word phrase is **advisory UI**: it helps a human catch a scam. The chai
 
 ## Measured
 
-Both directions are reported, **and the second number is the one that matters.**
+Both directions are reported, **and the second number is the one that matters.** Money figures are rounded here; exact values are in \`docs/FACTS.json\`.
 
 | | |
 |---|---|
 | Rescues completed / attempted | ${m.rescuesCompleted} of ${m.rescuesAttempted} (one with a guardian on a native sr25519 wallet) |
-| Attacks stopped | ${m.attacksStopped} of ${m.attacksTried} |
+| Attacks stopped | ${m.attacksStopped} of ${m.attacksTried}: ${f.summary.classes.onChainRefused.asExpected} refused on chain with a decoded error (${f.summary.classes.onChainRefused.ids.join(', ')}) and ${f.summary.classes.uiRefused.asExpected} stopped by pre-flight guards (${f.summary.classes.uiRefused.ids.join(', ')}) |
+| All scenarios | ${f.summary.asExpected} of ${f.summary.total} as expected: ${f.summary.classes.onChainHappy.of} on-chain happy paths, ${f.summary.classes.onChainRefused.of} on-chain refusals, ${f.summary.classes.onChainBehaviour.of} on-chain behaviours (${f.summary.classes.onChainBehaviour.ids.join(', ')}), ${f.summary.classes.uiRefused.of} guard refusals, ${f.summary.classes.counterfactual.of} counterfactuals |
 | Honest rescues wrongly blocked | ${m.legitimateRescuesWronglyBlocked} |
-| Cost to protect | ${m.costPerProtectionTPOT} tPOT fee, ${m.friendGroupDepositTPOT} deposit |
-| Cost per rescue | ${m.costPerRescueTPOT} tPOT in fees |
+| Cost to protect | ${fmtTpot(m.costPerProtectionTPOT)} tPOT fee, ${m.friendGroupDepositTPOT} deposit |
+| Cost per rescue | ${fmtTpot(m.costPerRescueTPOT)} tPOT in fees |
 | Safety delay | ${m.delayBlocks} blocks, measured ${m.delaySecondsMeasured} s |
 | Browser end-to-end | ${trLine} (details below) |
 | Public drills | 2 live runs, recorded in \`docs/drills/\`; a second request during a run is refused (HTTP 409) |

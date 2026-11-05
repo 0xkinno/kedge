@@ -52,6 +52,9 @@ const HYPE = [/revolution[a]ry/i, /seam[l]ess/i, /cutting[- ]edge/i, /game[- ]ch
 const EMOJI = new RegExp('\\p{Extended_Pictographic}|' + String.fromCharCode(0xfe0f) + '|' + String.fromCharCode(0x200d), 'u');
 const DASH = new RegExp('[' + String.fromCharCode(0x2013) + String.fromCharCode(0x2014) + ']');
 const SELF = 'scripts/check_copy.mjs';
+// Numbers with more than six decimals read as machine output. They belong in generated data, evidence, or a section headed "exact".
+const LONG_DECIMAL = /\b\d+\.\d{7,}\b/;
+const DECIMAL_OK = /^(docs\/(FACTS|landing_figures|sources|badge)\.json|docs\/drills\/|evidence\/|deployments\/|apps\/web\/data\/|e2e\/(lighthouse|quality-report)|packages\/[^/]+\/(package-lock|dist))/;
 const SKIP = /(^|\/)(node_modules|reference|contracts\/lib|contracts\/out|contracts\/cache|\.next|out|cache|keys|evidence\/raw\/private)\//;
 const SKIP_FILES = /(words\.json|package-lock\.json|\.(png|jpe?g|webp|gif|pdf|woff2?|ico|mp3|mp4|webm)$)/i;
 
@@ -63,8 +66,10 @@ const fail = (f, n, why) => { console.error(`FAIL ${f}:${n} ${why}`); bad++; };
 
 for (const f of tracked) {
   if (SKIP.test(f) || SKIP_FILES.test(f)) continue;
-  const lines = readFileSync(f, 'utf8').split('\n');
+  const lines = readFileSync(f, 'utf8').split('\n'); let inExact = false;
   lines.forEach((line, i) => {
+    if (/^#{1,6} /.test(line)) inExact = /exact/i.test(line);
+    if (f !== SELF && !DECIMAL_OK.test(f) && !inExact && !/exact/i.test(line) && LONG_DECIMAL.test(line)) fail(f, i + 1, 'number with more than 6 decimals outside generated data');
     const n = i + 1;
     if (EMOJI.test(line)) fail(f, n, 'emoji');
     if (f !== SELF && DASH.test(line)) fail(f, n, 'em or en dash');
