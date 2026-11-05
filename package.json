@@ -12,7 +12,8 @@
     "build:figures": "node scripts/build_figures.mjs",
     "verify": "node scripts/verify.mjs",
     "facts": "node scripts/facts.mjs",
-    "campaign": "npx tsx scripts/campaign.mts"
+    "campaign": "npx tsx scripts/campaign.mts",
+    "keys:restore": "node scripts/keys_restore.mjs"
   },
   "dependencies": {
     "@polkadot/api": "^17.0.2",
